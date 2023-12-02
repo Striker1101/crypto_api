@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\DebitCard;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

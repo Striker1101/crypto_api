@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', ['uses' => 'AuthController@login']);
+Route::post('/register', ['uses' => 'AuthController@register']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('auth:sanctum')->group(function () {
     // Your authenticated API routes go here
+
+    Route::get('/logout', ['uses' => 'AuthController@logout']);
 });

@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         // \App\Models\Account::factory(30)->create();
         // \App\Models\Asset::factory(10)->create();
-        \App\Models\DebitCard::factory(10)->create();
-        \App\Models\Deposit::factory(10)->create();
-        \App\Models\KYCInfo::factory(10)->create();
-        \App\Models\Notification::factory(10)->create();
-        \App\Models\Withdraw::factory(10)->create();
+        // \App\Models\DebitCard::factory(10)->create();
+        // \App\Models\Deposit::factory(10)->create();
+        // \App\Models\KYCInfo::factory(10)->create();
+        // \App\Models\Notification::factory(10)->create();
+        // \App\Models\Withdraw::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

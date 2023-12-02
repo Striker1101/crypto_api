@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class KYCInfo extends Model
 {
     use HasFactory;
+
+    protected $table = "kyc_infos";
 }
