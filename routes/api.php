@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\API\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +16,33 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+    //auth
+    Route::post('login', 'App\Http\Controllers\API\AuthController@login');
+    Route::post('register', 'App\Http\Controllers\API\AuthController@register');
+});
+
+Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
 
 
 Route::middleware('auth:sanctum')->group(function () {
     // Your authenticated API routes go here
 
-    Route::get('/logout', ['uses' => 'AuthController@logout']);
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    //auth
+    Route::post('sendPasswordResetLink', 'App\Http\Controllers\API\PasswordResetRequestController@sendEmail');
+    Route::post('resetPassword', 'App\Http\Controllers\API\ChangePasswordController@passwordResetProcess');
+    Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
+    Route::get('user-profile', 'App\Http\Controllers\API\AuthController@userProfile');
+    Route::get('/sendEmailVerificationLink', [AuthController::class, 'sendEmailVerificationLink']);
+    Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
+
+
+    //resouces
+    
 });

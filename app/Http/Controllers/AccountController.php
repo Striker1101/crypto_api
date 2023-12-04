@@ -8,6 +8,11 @@ use App\Http\Requests\UpdateAccoutRequest;
 
 class AccountController extends Controller
 {
+    // Apply the 'auth' middleware to all methods in this controller
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
