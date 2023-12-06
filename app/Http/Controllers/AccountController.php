@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accout;
-use App\Http\Requests\StoreAccoutRequest;
-use App\Http\Requests\UpdateAccoutRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAccountRequest;
+use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Resources\AccountResource;
+use App\Models\Account;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -13,59 +16,40 @@ class AccountController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10); // You can customize the default per page value
+        $accounts = Account::paginate($perPage);
+
+        return AccountResource::collection($accounts);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(Account $account)
     {
-        //
+        return new AccountResource($account);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAccoutRequest $request)
+    public function store(StoreAccountRequest $request)
     {
-        //
+
+        $account = Account::create($request->all());
+
+        return new AccountResource($account);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Accout $accout)
+    public function update(UpdateAccountRequest $request, Account $account)
     {
-        //
+
+        $account->update($request->all());
+
+        return new AccountResource($account);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Accout $accout)
+    public function destroy(Account $account)
     {
-        //
-    }
+        $account->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAccoutRequest $request, Accout $accout)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Accout $accout)
-    {
-        //
+        return response()->json(['message' => 'Account deleted successfully']);
     }
 }

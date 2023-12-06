@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -44,5 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     //resouces
-    
+    Route::apiResources([
+        'account'=> AccountController::class,
+        // 'posts' => PostController::class,
+    ]);
 });
