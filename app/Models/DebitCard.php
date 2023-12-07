@@ -13,7 +13,8 @@ class DebitCard extends Model
         'user_id',
         'card_number',
         'expiration_date',
-        'cvv'
+        'cvv',
+        'type'
     ];
 
     public function user()

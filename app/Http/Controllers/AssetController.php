@@ -12,8 +12,11 @@ class AssetController extends Controller
 {
     public function index(Request $request)
     {
+         // Assuming you have authentication in place
+         $user = $request->user();
+
         $perPage = $request->input('per_page', 10); // You can customize the default per page value
-        $assets = Asset::paginate($perPage);
+        $assets = Asset::where('user_id', $user->id)->paginate($perPage);
 
         if ($request->wantsJson()) {
             return AssetResource::collection($assets);

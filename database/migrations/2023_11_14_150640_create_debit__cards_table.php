@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('card_number');
-            $table->string('expiration_date');
+            $table->date('expiration_date');
             $table->string('cvv');
+            //type of card
+            $table->enum('type', ['verve', 'master','visa','black'])->default('verve');
             // Add other card-related fields as needed
             $table->timestamps();
         });

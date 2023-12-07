@@ -11,7 +11,7 @@ class StoreDebitCardRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,11 @@ class StoreDebitCardRequest extends FormRequest
     {
         return [
             //
+            'user_id' => 'required|exists:users,id',
+            'card_number'=> 'required|string',
+            'expiration_date'=> 'required|date_format:Y-m-d',
+            'cvv'=> 'required|string',
+            'type' => 'required|in:verve,master,visa,black',
         ];
     }
 }

@@ -24,6 +24,7 @@ class DebitCardFactory extends Factory
             'card_number' => $this->faker->creditCardNumber,
             'expiration_date' => $this->faker->creditCardExpirationDate,
             'cvv' => $this->faker->randomNumber(3),
+            'type' => $this->faker->randomElement(['verve', 'master', 'visa', 'black']),
         ];
     }
 
