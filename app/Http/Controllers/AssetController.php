@@ -2,65 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Asset;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
+use App\Http\Resources\AssetResource;
+use App\Models\Asset;
+use Illuminate\Http\Request;
 
 class AssetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10); // You can customize the default per page value
+        $assets = Asset::paginate($perPage);
+
+        if ($request->wantsJson()) {
+            return AssetResource::collection($assets);
+        }
+
+        return view('assets.index', ['assets' => $assets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show(Request $request, Asset $asset)
+    {
+        if ($request->wantsJson()) {
+            return new AssetResource($asset);
+        }
+
+        return view('assets.show', ['asset' => $asset]);
+    }
+
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreAssetRequest $request)
     {
-        //
+
+        $asset = Asset::create($request->all());
+
+        if ($request->wantsJson()) {
+            return new AssetResource($asset);
+        }
+
+        return redirect()->route('assets.index')->with('success', 'Asset created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Asset $asset)
+    public function edit(Request $request, Asset $asset)
     {
-        //
+        if ($request->wantsJson()) {
+            return new AssetResource($asset);
+        }
+
+        return view('assets.edit', ['asset' => $asset]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Asset $asset)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateAssetRequest $request, Asset $asset)
     {
-        //
+
+        $asset->update($request->all());
+
+        if ($request->wantsJson()) {
+            return new AssetResource($asset);
+        }
+
+        return redirect()->route('assets.index')->with('success', 'Asset updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Asset $asset)
+    public function destroy(Request $request, Asset $asset)
     {
-        //
+        $asset->delete();
+
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Asset deleted successfully']);
+        }
+
+        return redirect()->route('assets.index')->with('success', 'Asset deleted successfully!');
     }
 }

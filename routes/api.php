@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\DebitCardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -47,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //resouces
     Route::apiResources([
         'account'=> AccountController::class,
-        // 'posts' => PostController::class,
+        'asset' => AssetController::class,
+        'debit_card' => DebitCardController::class,
     ]);
 });

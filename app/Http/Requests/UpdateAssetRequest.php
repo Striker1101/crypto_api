@@ -11,7 +11,7 @@ class UpdateAssetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,24 @@ class UpdateAssetRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->method();
+        if($method == 'PUT'){
+            return [
+            'name' => 'required',
+            'type' => 'required|in:stock,cryptocurrency,commodity',
+            'user_id' => 'required|exists:users,id',
+            'image_url'=> '',
+            'image_id'=> '',
+        ];
+    }else{
         return [
-            //
+            'name' => 'sometimes',
+            'type' => 'sometimes|in:stock,cryptocurrency,commodity',
+            'user_id' => 'sometimes|exists:users,id',
+            'image_url'=> '',
+            'image_id'=> '',
         ];
     }
+}
+
 }

@@ -11,7 +11,7 @@ class StoreAssetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreAssetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'name' => 'required',
+            'type' => 'required|in:stock,cryptocurrency,commodity',
+            'user_id' => 'required|exists:users,id',
+            'image_url'=> '',
+            'image_id'=> '',
+
         ];
     }
 }
