@@ -12,7 +12,7 @@ class CreateDepositsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('wallet_address')->unique(); // Unique wallet address for each deposit
+            $table->string('wallet_address');
             $table->decimal('amount', 10, 2);
             $table->string('currency');
             $table->enum('status', ['pending', 'completed'])->default('pending');

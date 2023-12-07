@@ -61,7 +61,12 @@ class User extends Authenticatable
 
     public function debit_card()
     {
-        return $this->hasMany(Asset::class);
+        return $this->hasMany(DebitCard::class);
+    }
+
+    public function deposit()
+    {
+        return $this->hasMany(Deposit::class);
     }
 
     public function getJWTIdentifier()

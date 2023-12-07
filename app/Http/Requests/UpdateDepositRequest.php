@@ -11,7 +11,7 @@ class UpdateDepositRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,23 @@ class UpdateDepositRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT') {
+            return [
+                'user_id' => 'required|exists:users,id',
+                'wallet_address' => 'required', // Unique wallet address for each deposit
+                'amount' => 'required|numeric|min:0.01', // Example validation for deposit amount
+                'currency' => 'required|string|max:255',
+                'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+            ];
+        } else {
+            return [
+                'user_id' => 'sometimes|exists:users,id',
+                'wallet_address' => 'sometimes', // Unique wallet address for each deposit
+                'amount' => 'sometimes|numeric|min:0.01', // Example validation for deposit amount
+                'currency' => 'sometimes|string|max:255',
+                'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+            ];
+        }
     }
 }

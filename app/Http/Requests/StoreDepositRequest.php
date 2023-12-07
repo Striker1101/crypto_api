@@ -11,7 +11,7 @@ class StoreDepositRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,12 @@ class StoreDepositRequest extends FormRequest
     {
         return [
             //
+            'user_id' => 'required|exists:users,id',
+            'wallet_address' => 'required', // Unique wallet address for each deposit
+            'amount' => 'required|numeric|min:0.01', // Example validation for deposit amount
+            'currency' => 'required|string|max:255',
+            'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+            // Add more validation rules as needed
         ];
     }
 }

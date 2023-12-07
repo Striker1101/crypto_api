@@ -2,65 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deposit;
 use App\Http\Requests\StoreDepositRequest;
 use App\Http\Requests\UpdateDepositRequest;
+use App\Http\Resources\DebitCardResource;
+use App\Http\Resources\DepositResource;
+use App\Models\Deposit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepositController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10);
+        $user = Auth::user();
+
+        // Retrieve deposits only for the current user
+        $deposits = $user->deposit()->paginate($perPage);
+
+        if ($request->wantsJson()) {
+            return DepositResource::collection($deposits);
+        }
+
+        return view('deposits.index', ['deposits' => $deposits]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show(Request $request, Deposit $deposit)
+    {
+
+        if ($request->wantsJson()) {
+            return new DebitCardResource($deposit);
+        }
+
+        return view('deposits.show', ['deposits' => $deposit]);
+    }
+
     public function create()
     {
-        //
+        return view('deposits.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreDepositRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        // Associate the deposit with the current user
+        $deposit = $user->deposit()->create($request->all());
+
+        return new DepositResource($deposit);
+
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Deposit $deposit)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Deposit $deposit)
     {
-        //
+        $this->authorize('update', $deposit); // Check authorization to edit the deposit
+
+        return view('deposits.edit', ['deposit' => $deposit]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateDepositRequest $request, Deposit $deposit)
     {
-        //
+        $deposit->update($request->all());
+
+        if ($request->wantsJson()) {
+            return new DepositResource($deposit);
+        }
+
+        return redirect()->route('deposit.index')->with('success', 'deposit updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Deposit $deposit)
     {
-        //
+        $deposit->delete();
+
+        return response()->json(['message' => 'Deposit deleted successfully']);
     }
 }

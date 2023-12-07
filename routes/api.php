@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DebitCardController;
+use App\Http\Controllers\DepositController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -51,5 +52,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'account'=> AccountController::class,
         'asset' => AssetController::class,
         'debit_card' => DebitCardController::class,
+        'deposit' => DepositController::class,
     ]);
 });
