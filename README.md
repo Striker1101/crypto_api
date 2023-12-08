@@ -11,16 +11,15 @@
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/striker1101/crypto_api.git
+     git clone https://github.com/striker1101/crypto_api.git
 
     ```
 
 2. Install dependencies:
 
     ```bash
-    cd crypto_api
-    composer install
-
+     cd crypto_api
+     composer install
     ```
 
 3. Configure environment variables:
@@ -32,9 +31,9 @@
 
 4.Run migrations and seed the database:
 
-     ```bash
+    ```bash
      php artisan migrate --seed
-     ```
+    ```
 
 5. php artisan serve
 
@@ -138,7 +137,7 @@
 -   _Define dashboard-related endpoints here._
 
 
-# Laravel Project Deployment Guide
+# Crypto_app Project Deployment Guide
 
 ## 1. Configure Environment Variables:
 
@@ -245,7 +244,7 @@ Implement additional security measures, such as setting up firewalls, securing s
 
 These steps provide a general guideline, and you may need to adapt them based on your specific hosting environment and requirements. Always refer to the documentation of your web server and hosting provider for specific details.
 
-   ``bash
+   ``
      You can save this content in a file with a `.md` extension, such as `deployment_guide.md`. Feel free to customize it further based on your project's specific details and requirements.
    ``
 
