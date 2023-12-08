@@ -32,13 +32,15 @@
 
 4.Run migrations and seed the database:
 
-````bash
-php artisan migrate --seed
+     ```bash
+      php artisan migrate --seed
+     ```
 
 5. php artisan serve
 
- ```bash
+   ```bash
     php artisan serve
+   ```
 
 
 
