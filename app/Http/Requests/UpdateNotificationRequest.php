@@ -11,7 +11,7 @@ class UpdateNotificationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,17 @@ class UpdateNotificationRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT') {
+            return [
+                //
+                'content' => 'required|string',
+            ];
+        } else {
+            return [
+                //
+                'content' => 'sometimes|string',
+            ];
+        }
     }
 }

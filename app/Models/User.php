@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasMany(Deposit::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     public function kycInfo()
     {
         return $this->hasOne(KYCInfo::class);
