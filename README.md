@@ -10,25 +10,25 @@
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/striker1101/crypto_api.git
+    ```bash
+    git clone https://github.com/striker1101/crypto_api.git
 
-   ```
+    ```
 
 2. Install dependencies:
 
-   ```bash
-   cd crypto_api
-   composer install
+    ```bash
+    cd crypto_api
+    composer install
 
-   ```
+    ```
 
 3. Configure environment variables:
    Update `.env` with your database credentials, API keys, and other configuration settings.
 
-   ```bash
-    cp .env.example .env
-   ```
+    ```bash
+     cp .env.example .env
+    ```
 
 4.Run migrations and seed the database:
 
@@ -38,109 +38,105 @@
 
 5. php artisan serve
 
-   ```bash
-    php artisan serve
-   ```
-
-
+    ```bash
+     php artisan serve
+    ```
 
 ## Features
 
-- **User Management**: Create, update, and delete user accounts. Secure authentication and authorization.
+-   **User Management**: Create, update, and delete user accounts. Secure authentication and authorization.
 
-- **Trading Functionality**: Implement trading features such as buying and selling of assets.
+-   **Trading Functionality**: Implement trading features such as buying and selling of assets.
 
-- **Assets Management**: Manage various types of assets, including stocks, cryptocurrencies, and commodities.
+-   **Assets Management**: Manage various types of assets, including stocks, cryptocurrencies, and commodities.
 
-- **Deposit and Withdrawal**: Allow users to deposit funds into their accounts and withdraw funds through cryptocurrency or bank transfer.
+-   **Deposit and Withdrawal**: Allow users to deposit funds into their accounts and withdraw funds through cryptocurrency or bank transfer.
 
-- **KYC (Know Your Customer)**: Collect and manage user information, including social security numbers, for compliance and security.
+-   **KYC (Know Your Customer)**: Collect and manage user information, including social security numbers, for compliance and security.
 
-- **Notifications**: Send notifications to users for important events or updates.
-
+-   **Notifications**: Send notifications to users for important events or updates.
 
 ## API Endpoints
 
 ### Authentication
 
-- `POST /api/auth/login`: Login users.
-- `POST /api/auth/logout`: Logout users.
-- `POST /api/auth/register`: Register a new user.
-- `POST /api/auth/forgot-password`: Request a password reset link.
-- `POST /api/auth/reset-password`: Reset user password.
+-   `POST /api/auth/login`: Login users.
+-   `POST /api/logout`: Logout users.
+-   `POST /api/auth/register`: Register a new user.
+-   `POST /api/sendPasswordResetLink`: send email to user to reset password.
+-   `POST /api/resetPassword`: Reset user password.
+-   `GET /api/user-profile`: see user profile.
+-   `GET /api/sendEmailVerificationLink`: send email for verification.
+-   `POST /api/verifyEmail`: verify user email
+-   `POST /api/sendEmail`: send user email
 
 ### User Management:
 
-- `GET /api/users`: Get all users.
-- `GET /api/users/{id}`: Get a specific user.
-- `POST /api/users`: Create a new user.
-- `PUT /api/users/{id}`: Update a user.
-- `DELETE /api/users/{id}`: Delete a user.
+-   `GET /api/auth/user`: Get all users.
+-   `GET /api/auth/user/{id}`: Get a specific user.
+-   `POST /api/auth/user`: Create a new user.
+-   `PUT /api/auth/user/{id}`: Update a user.
+-   `DELETE /api/auth/user/{id}`: Delete a user.
 
 ### Account:
 
-- `GET /api/accounts`: Get all user accounts.
-- `GET /api/accounts/{id}`: Get details of a specific account.
-- `POST /api/accounts`: Create a new account.
-- `PUT /api/accounts/{id}`: Update account details.
-- `DELETE /api/accounts/{id}`: Close an account.
+-   `GET /api/account`: Get all user accounts.
+-   `GET /api/account/{id}`: Get details of a specific account.
+-   `POST /api/account`: Create a new account.
+-   `PUT /api/account/{id}`: Update account details.
+-   `DELETE /api/account/{id}`: Close an account.
 
 ### Assets Management:
 
-- `GET /api/assets`: Get all assets.
-- `GET /api/assets/{id}`: Get details of a specific asset.
-- `POST /api/assets`: Add a new asset.
-- `PUT /api/assets/{id}`: Update asset information.
-- `DELETE /api/assets/{id}`: Remove an asset.
+-   `GET /api/asset`: Get all assets.
+-   `GET /api/asset/{id}`: Get details of a specific asset.
+-   `POST /api/asset`: Add a new asset.
+-   `PUT /api/asset/{id}`: Update asset information.
+-   `DELETE /api/asset/{id}`: Remove an asset.
 
 ### Deposits:
 
-- `GET /api/deposits`: Get all deposit transactions.
-- `GET /api/deposits/{id}`: Get details of a specific deposit.
-- `POST /api/deposits`: Initiate a new deposit.
-- `PUT /api/deposits/{id}`: Update deposit status.
-- `DELETE /api/deposits/{id}`: Cancel a deposit.
+-   `GET /api/deposit`: Get all deposit transactions.
+-   `GET /api/deposit/{id}`: Get details of a specific deposit.
+-   `POST /api/deposit`: Initiate a new deposit.
+-   `PUT /api/deposit/{id}`: Update deposit status.
+-   `DELETE /api/deposit/{id}`: Cancel a deposit.
 
 ### Withdrawals:
 
-- `GET /api/withdrawals`: Get all withdrawal transactions.
-- `GET /api/withdrawals/{id}`: Get details of a specific withdrawal.
-- `POST /api/withdrawals`: Initiate a new withdrawal.
-- `PUT /api/withdrawals/{id}`: Update withdrawal status.
-- `DELETE /api/withdrawals/{id}`: Cancel a withdrawal.
-
-### Notification:
-
-- `GET /api/notifications`: Get all notifications.
-- `GET /api/notifications/{id}`: Get details of a specific notification.
-- `POST /api/notifications`: Send a new notification.
-- `PUT /api/notifications/{id}`: Mark a notification as read.
-- `DELETE /api/notifications/{id}`: Delete a notification.
+-   `GET /api/withdrawal`: Get all withdrawal transactions.
+-   `GET /api/withdrawal/{id}`: Get details of a specific withdrawal.
+-   `POST /api/withdrawal`: Initiate a new withdrawal.
+-   `PUT /api/withdrawal/{id}`: Update withdrawal status.
+-   `DELETE /api/withdrawal/{id}`: Cancel a withdrawal.
 
 ### Debit Card:
 
-- `GET /api/debit-cards`: Get all user debit cards.
-- `GET /api/debit-cards/{id}`: Get details of a specific debit card.
-- `POST /api/debit-cards`: Add a new debit card.
-- `PUT /api/debit-cards/{id}`: Update debit card information.
-- `DELETE /api/debit-cards/{id}`: Remove a debit card.
+-   `GET /api/debit-card`: Get all user debit cards.
+-   `GET /api/debit-card/{id}`: Get details of a specific debit card.
+-   `POST /api/debit-card`: Add a new debit card.
+-   `PUT /api/debit-card/{id}`: Update debit card information.
+-   `DELETE /api/debit-card/{id}`: Remove a debit card.
 
 ### Dashboard:
 
-- *Define dashboard-related endpoints here.*
+-   _Define dashboard-related endpoints here._
 
 ### KYC (Know Your Customer):
 
-- `GET /api/kyc-info`: Get KYC information for the current user.
-- `POST /api/kyc-info`: Submit new KYC information.
-- `PUT /api/kyc-info`: Update existing KYC information.
-- `DELETE /api/kyc-info`: Delete KYC information.
+-   `GET /api/kyc-info`: Get KYC information for the current user.
+-   `POST /api/kyc-info`: Submit new KYC information.
+-   `PUT /api/kyc-info`: Update existing KYC information.
+-   `DELETE /api/kyc-info`: Delete KYC information.
 
 ### Notifications:
 
-- `GET /api/notifications`: Get all notifications.
-- `GET /api/notifications/{id}`: Get details of a specific notification.
-- `POST /api/notifications`: Send a new notification.
-- `PUT /api/notifications/{id}`: Mark a notification as read.
-- `DELETE /api/notifications/{id}`: Delete a notification.
-````
+-   `GET /api/notification`: Get all notifications.
+-   `GET /api/notification/{id}`: Get details of a specific notification.
+-   `POST /api/notification`: Send a new notification.
+-   `PUT /api/notification/{id}`: Mark a notification as read.
+-   `DELETE /api/notification/{id}`: Delete a notification.
+
+```
+
+```
