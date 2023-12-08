@@ -1,6 +1,6 @@
 # crypto_api
 
-![crypto_api Logo](public/logo.png)
+![crypto_api Logo](public/defaultLogo.svg)
 
 ## About
 
