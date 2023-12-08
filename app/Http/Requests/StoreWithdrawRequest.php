@@ -11,7 +11,7 @@ class StoreWithdrawRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,12 @@ class StoreWithdrawRequest extends FormRequest
     {
         return [
             //
+            'user_id' => 'required|exists:users,id',
+            'withdrawal_type' => 'required|in:crypto,bank_transfer',
+            'amount' => 'required|numeric|min:0.01',
+            'name' => 'nullable|string',
+            'currency' => 'required|string',
+            'destination' => 'required|string',
         ];
     }
 }

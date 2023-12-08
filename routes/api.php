@@ -5,6 +5,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DebitCardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\KYCInfoController;
+use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,5 +58,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'deposit' => DepositController::class,
         'kyc_info' => KYCInfoController::class,
         'notification' => NotificationController::class,
+        'withdraw' => WithdrawController::class,
     ]);
 });

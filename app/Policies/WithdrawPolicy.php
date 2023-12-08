@@ -22,6 +22,7 @@ class WithdrawPolicy
     public function view(User $user, Withdraw $withdraw): bool
     {
         //
+        return $user->id === $withdraw->user_id;
     }
 
     /**
@@ -38,6 +39,7 @@ class WithdrawPolicy
     public function update(User $user, Withdraw $withdraw): bool
     {
         //
+        return $user->id === $withdraw->user_id;
     }
 
     /**
@@ -46,6 +48,7 @@ class WithdrawPolicy
     public function delete(User $user, Withdraw $withdraw): bool
     {
         //
+        return $user->id === $withdraw->user_id;
     }
 
     /**

@@ -11,7 +11,7 @@ class UpdateWithdrawRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,27 @@ class UpdateWithdrawRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT') {
+            return [
+                //
+                'user_id' => 'required|exists:users,id',
+                'withdrawal_type' => 'required|in:crypto,bank_transfer',
+                'amount' => 'required|numeric|min:0.01',
+                'name' => 'nullable|string',
+                'currency' => 'required|string',
+                'destination' => 'required|string',
+            ];
+        } else {
+            return [
+                //
+                'user_id' => 'required|exists:users,id',
+                'withdrawal_type' => 'required|in:crypto,bank_transfer',
+                'amount' => 'required|numeric|min:0.01',
+                'name' => 'nullable|string',
+                'currency' => 'required|string',
+                'destination' => 'required|string',
+            ];
+        }
     }
 }

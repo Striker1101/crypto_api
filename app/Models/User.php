@@ -74,6 +74,12 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
+    public function withdraws()
+    {
+        return $this->hasMany(Withdraw::class);
+    }
+
+
     public function kycInfo()
     {
         return $this->hasOne(KYCInfo::class);
