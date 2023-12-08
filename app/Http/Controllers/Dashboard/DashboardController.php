@@ -25,6 +25,16 @@ class DashboardController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function edit($userId)
+    {
+        // Fetch user data and pass it to the view
+        $user = User::find($userId);
+
+        return Inertia::render('EditUser', [
+            'user' => $user,
+        ]);
+    }
 }
 
 

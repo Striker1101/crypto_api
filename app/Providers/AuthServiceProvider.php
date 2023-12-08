@@ -14,7 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
             //
-        KYCInfo::class => KYCInfoPolicy::class
+        KYCInfo::class => KYCInfoPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**

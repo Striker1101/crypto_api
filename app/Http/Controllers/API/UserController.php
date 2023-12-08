@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', User::class);
+        // $this->authorize('viewAny', User::class);
 
         $users = User::all();
 
@@ -22,7 +22,6 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $this->authorize('view', $user);
 
         return new UserResource($user);
     }
@@ -47,7 +46,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
 
         $user->delete();
 

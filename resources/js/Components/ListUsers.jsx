@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const ListUsers = ({ users }) => {
     // Function to format the timestamp
@@ -25,19 +26,38 @@ const ListUsers = ({ users }) => {
 
     const deleteUser = (userId, userName) => {
         if (confirm(`Are you sure you want to delete ${userName}?`)) {
-            Inertia.delete(`/api/users/${userId}`)
-                .then(() => {
-                    setModalMessage(
-                        `${userName} has been deleted successfully.`
-                    );
-                    console.log("delete");
+            fetch(`/api/auth/user/${userId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Add any other headers if needed
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        setModalMessage(
+                            `${userName} has been deleted successfully.`
+                        );
+
+                        Inertia.reload();
+
+                        // Hide the message after 3 seconds
+                        setTimeout(() => {
+                            setModalMessage("");
+                        }, 2000);
+                    } else {
+                        throw new Error(`Error deleting ${userName}.`);
+                    }
                 })
-                .catch(() => {
-                    setModalMessage(`Error deleting ${userName}.`);
-                    console.log("eror");
+                .catch((error) => {
+                    setModalMessage(error.message);
+                    setTimeout(() => {
+                        setModalMessage("");
+                    }, 2000);
                 });
         }
     };
+
     return (
         <div>
             <h1 className="text-lg font-bold">User Details</h1>
@@ -66,13 +86,28 @@ const ListUsers = ({ users }) => {
                                 Delete
                             </button>
                             <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-                                Edit
+                                <InertiaLink
+                                    href={`/dashboard/${user.id}`}
+                                    method="get"
+                                >
+                                    Edit
+                                </InertiaLink>
                             </button>
                         </div>
                     </li>
                 ))}
             </ul>
-            {modalMessage && <div className="modal">{modalMessage}</div>}
+            {modalMessage && (
+                <div
+                    className={`fixed bottom-0 right-0 p-4 ${
+                        modalMessage.includes("successfully")
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                    } text-white`}
+                >
+                    {modalMessage}
+                </div>
+            )}
         </div>
     );
 };
