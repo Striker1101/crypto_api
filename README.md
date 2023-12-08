@@ -6,7 +6,6 @@
 
 `crypto_api` is a backend API for a cryptocurrency trading platform built using the Laravel framework. It provides a robust backend infrastructure to support trading functionalities, user accounts, assets, deposits, withdrawals, and more.
 
-
 ### Setup
 
 1. Clone the repository:
@@ -14,27 +13,32 @@
    ```bash
    git clone https://github.com/striker1101/crypto_api.git
 
+   ```
+
 2. Install dependencies:
 
    ```bash
    cd crypto_api
    composer install
 
+   ```
+
 3. Configure environment variables:
- Update `.env` with your database credentials, API keys, and other configuration settings.
+   Update `.env` with your database credentials, API keys, and other configuration settings.
 
    ```bash
     cp .env.example .env
+   ```
 
-4. Run migrations and seed the database:
+4.Run migrations and seed the database:
 
-  ```bash
-       php artisan migrate --seed
+````bash
+php artisan migrate --seed
 
-5.  php artisan serve
-   
-   ```bash
-      php artisan serve
+5. php artisan serve
+
+ ```bash
+    php artisan serve
 
 
 
@@ -137,3 +141,4 @@
 - `POST /api/notifications`: Send a new notification.
 - `PUT /api/notifications/{id}`: Mark a notification as read.
 - `DELETE /api/notifications/{id}`: Delete a notification.
+````
