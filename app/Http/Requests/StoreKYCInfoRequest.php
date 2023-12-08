@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreKYCInfoRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreKYCInfoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,13 @@ class StoreKYCInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+                'user_id' => [
+                    'required',
+                    'exists:users,id',
+                    Rule::unique('kyc_infos', 'user_id'), // Ensure a user has only one kyc info
+                ],
+                'ssn' => 'required|string|unique:kyc_infos,ssn,' . $this->route('kyc_info'), // Ensure uniqueness, excluding the current KYC record
+
         ];
     }
 }

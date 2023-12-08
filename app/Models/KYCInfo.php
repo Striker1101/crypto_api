@@ -10,4 +10,14 @@ class KYCInfo extends Model
     use HasFactory;
 
     protected $table = "kyc_infos";
+
+    protected $fillable = [
+        'ssn',
+        'user_id'
+    ] ;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -19,9 +19,10 @@ class KYCInfoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, KYCInfo $kYCInfo): bool
+    public function view(User $user, KYCInfo $kycInfo)
     {
-        //
+        // Logic to determine if the user can view the KYCInfo
+        return $user->id === $kycInfo->user_id; // Example: Only the owner can view
     }
 
     /**
@@ -35,17 +36,19 @@ class KYCInfoPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, KYCInfo $kYCInfo): bool
+    public function update(User $user, KYCInfo $kycInfo): bool
     {
         //
+        return $user->id === $kycInfo->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, KYCInfo $kYCInfo): bool
+    public function delete(User $user, KYCInfo $kycInfo): bool
     {
         //
+        return $user->id === $kycInfo->user_id;
     }
 
     /**

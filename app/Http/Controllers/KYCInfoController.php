@@ -2,65 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KYCInfo;
 use App\Http\Requests\StoreKYCInfoRequest;
 use App\Http\Requests\UpdateKYCInfoRequest;
+use App\Http\Resources\KYCInfoResource;
+use App\Models\KYCInfo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KYCInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = Auth::user();
+        $kycInfo = $user->kycInfo()->paginate($request->input('per_page', 10));
+
+        if ($request->wantsJson()) {
+            return KYCInfoResource::collection($kycInfo);
+        }
+
+        return view('kyc_info.index', ['kycInfo' => $kycInfo]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show(KYCInfo $kycInfo)
+    {
+        $this->authorize('view', $kycInfo); // Check authorization to view the KYCInfo data
+
+        return new KYCInfoResource($kycInfo);
+    }
+
     public function create()
     {
-        //
+        return view('kyc_info.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreKYCInfoRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        // Associate the KYCInfo data with the current user
+        $kycInfo = $user->kycInfo()->create($request->all());
+
+        return new KYCInfoResource($kycInfo);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(KYCInfo $kYCInfo)
+    public function edit(KYCInfo $kycInfo)
     {
-        //
+        $this->authorize('update', $kycInfo); // Check authorization to edit the KYCInfo data
+
+        return view('kyc_info.edit', ['kycInfo' => $kycInfo]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(KYCInfo $kYCInfo)
+    public function update(UpdateKYCInfoRequest $request, KYCInfo $kycInfo)
     {
-        //
+        $this->authorize('update', $kycInfo); // Check authorization to update the KYCInfo data
+
+        $kycInfo->update($request->all());
+
+        return new KYCInfoResource($kycInfo);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateKYCInfoRequest $request, KYCInfo $kYCInfo)
+    public function destroy(KYCInfo $kycInfo)
     {
-        //
-    }
+        $this->authorize('delete', $kycInfo); // Check authorization to delete the KYCInfo data
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(KYCInfo $kYCInfo)
-    {
-        //
+        $kycInfo->delete();
+
+        return response()->json(['message' => 'KYCInfo data deleted successfully']);
     }
 }
