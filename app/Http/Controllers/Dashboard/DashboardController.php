@@ -12,7 +12,9 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         // Get all users except the currently authenticated user with pagination
-        $users = User::where('id', '!=', auth()->id())->paginate(10); // Adjust the pagination as needed
+        $users = User::where('id', '!=', auth()->id())
+            ->orderBy('created_at', 'desc') // Order by creation date in descending order
+            ->paginate(10); // Adjust the pagination as needed
 
         // Check if the request is from an API
         if ($request->wantsJson()) {

@@ -9,13 +9,12 @@ export default defineConfig({
             refresh: true,
         }),
         react(),
+        // resolve: {
+        //     alias: {
+        //         "@inertiajs/inertia-react": require.resolve(
+        //             "@inertiajs/inertia-react"
+        //         ),
+        //     },
+        // },
     ],
-    plugins: [react()],
-    resolve: {
-        alias: {
-            "@inertiajs/inertia-react": require.resolve(
-                "@inertiajs/inertia-react"
-            ),
-        },
-    },
 });
