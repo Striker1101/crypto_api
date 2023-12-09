@@ -3,7 +3,13 @@ import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 export default function UserDetails({ user }) {
     if (user === null) {
-        return <div>No user for this user</div>;
+        return (
+            <div className="container mx-auto mt-8">
+                <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
+                    No User Found
+                </div>
+            </div>
+        );
     }
 
     const [modalMessage, setModalMessage] = useState("");
@@ -90,7 +96,8 @@ export default function UserDetails({ user }) {
                 <form onSubmit={handleSubmit}>
                     <div className="flex items-center">
                         <span className="mr-2">Active:</span>
-                        <label className="switch">
+
+                  <label className="switch">
                             <input
                                 type="checkbox"
                                 checked={formData.active === 1}
@@ -98,8 +105,7 @@ export default function UserDetails({ user }) {
                                 className="hidden"
                             />
                             <span className="slider round"></span>
-                        </label>
-                    </div>
+                        </label>   </div>
 
                     <div className="mb-4">
                         <label

@@ -1,10 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState, useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
 import UserDetails from "@/Components/Edit/UserDetails";
 import Account from "@/Components/Edit/Account";
+import KYCInfo from "@/Components/Edit/KYCInfo";
+import Deposit from "@/Components/Edit/Deposit";
+import Withdraw from "@/Components/Edit/Withdraw";
+import Notification from "@/Components/Edit/Notification";
 
-export default function EditUser({ auth, user, account }) {
+export default function EditUser({ auth, user }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,6 +20,10 @@ export default function EditUser({ auth, user, account }) {
             <div>
                 <UserDetails user={user} />
                 <Account account={user.account} />
+                <KYCInfo kyc_info={user.kyc_info} />
+                <Deposit deposit={user.deposit} />
+                <Withdraw withdraw={user.withdraws} />
+                <Notification notification={user.notifications} />
             </div>
         </AuthenticatedLayout>
     );

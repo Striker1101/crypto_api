@@ -3,7 +3,13 @@ import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 export default function Account({ account }) {
     if (account === null) {
-        return <div>No Account for this user</div>;
+        return (
+            <div className="container mx-auto mt-8">
+                <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
+                    No Account Found For this User
+                </div>
+            </div>
+        );
     }
 
     const [modalMessage, setModalMessage] = useState("");
