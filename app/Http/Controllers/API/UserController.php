@@ -28,8 +28,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $this->authorize('create', User::class);
-
         $user = User::create($request->all());
 
         return new UserResource($user);
@@ -37,7 +35,6 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->authorize('update', $user);
 
         $user->update($request->all());
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Account;
+use App\Models\KYCInfo;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -28,9 +30,11 @@ class DashboardController extends Controller
 
     public function edit($userId)
     {
-        // Fetch user data and pass it to the view
-        $user = User::find($userId);
-
+        // Fetch user details with all associated relationships
+        $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
+            ->find($userId);
+            
+        // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
         ]);

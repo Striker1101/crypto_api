@@ -27,6 +27,9 @@ class User extends Authenticatable
         'state',
         'zip_code',
         'password',
+        'active',
+        'type',
+        'phone_number'
     ];
 
     /**
@@ -51,7 +54,12 @@ class User extends Authenticatable
 
     public function account()
     {
-        return $this->hasOne(Account::class);
+        return $this->hasOne(Account::class, 'user_id', 'id');
+    }
+
+    public function kycInfo()
+    {
+        return $this->hasOne(KYCInfo::class, 'user_id', 'id');
     }
 
     public function assets()
@@ -79,12 +87,6 @@ class User extends Authenticatable
         return $this->hasMany(Withdraw::class);
     }
 
-
-    public function kycInfo()
-    {
-        return $this->hasOne(KYCInfo::class);
-    }
-
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -97,7 +99,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-        if ( $password !== null & $password !== "" ) {
+        if ($password !== null & $password !== "") {
             $this->attributes['password'] = bcrypt($password);
         }
     }

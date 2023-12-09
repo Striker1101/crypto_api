@@ -34,7 +34,7 @@ Route::group([
     //auth
     Route::post('login', 'App\Http\Controllers\API\AuthController@login');
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
-    Route::resource('user', UserController::class);
+
 });
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
@@ -63,6 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'notification' => NotificationController::class,
         'withdraw' => WithdrawController::class,
         'dashboard' => DashboardController::class,
+        'user' => UserController::class,
 
     ]);
 });
