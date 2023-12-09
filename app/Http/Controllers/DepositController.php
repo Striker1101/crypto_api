@@ -50,8 +50,6 @@ class DepositController extends Controller
         $deposit = $user->deposit()->create($request->all());
 
         return new DepositResource($deposit);
-
-
     }
 
     public function edit(Deposit $deposit)

@@ -33,6 +33,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/dashboard/{userId}', [DashboardController::class, 'edit'])
     ->name('dashboard.edit');
 
+Route::get('/dashboard/{userId}/deposit', [DashboardController::class, 'createDeposit'])
+    ->name('dashboard.createDeposit');
+
+Route::get('/dashboard/{userId}/withdraw', [DashboardController::class, 'createWithdraw'])
+    ->name('dashboard.createWithdraw');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

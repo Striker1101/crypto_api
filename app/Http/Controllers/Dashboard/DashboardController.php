@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDepositRequest;
+use App\Http\Requests\StoreWithdrawRequest;
+use App\Http\Resources\DepositResource;
+use App\Http\Resources\WithdrawResource;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Account;
 use App\Models\KYCInfo;
 use Inertia\Inertia;
+use App\Models\Deposit;
 
 class DashboardController extends Controller
 {
@@ -33,11 +39,39 @@ class DashboardController extends Controller
         // Fetch user details with all associated relationships
         $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
             ->find($userId);
-            
+
         // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
         ]);
+    }
+
+    public function createDeposit($userId)
+    {
+        return Inertia::render('CreateDeposit', [
+            'user_id' => $userId
+        ]);
+    }
+
+    public function createWithdraw($userId)
+    {
+        return Inertia::render('CreateWithdraw', [
+            'user_id' => $userId,
+        ]);
+    }
+
+    public function storeDeposit(StoreDepositRequest $request)
+    {
+        $deposit = Deposit::create($request->all());
+
+        return new DepositResource($deposit);
+    }
+
+    public function storeWithdraw(StoreWithdrawRequest $request)
+    {
+        $withdraw = Withdraw::create($request->all());
+
+        return new WithdrawResource($withdraw);
     }
 }
 

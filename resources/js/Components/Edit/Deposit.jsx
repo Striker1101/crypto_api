@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-export default function Deposit({ deposit }) {
+export default function Deposit({ deposit, user_id }) {
     if (deposit === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -44,7 +46,6 @@ export default function Deposit({ deposit }) {
                 },
             })
             .then((res) => {
-                console.log(res);
 
                 setModalMessage("deposit was updated successfully");
                 // Redirect to deposit details page after successful update
@@ -94,11 +95,17 @@ export default function Deposit({ deposit }) {
 
     return (
         <div className="container mx-auto mt-8">
-            <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">
-                        Edit Deposit
-                    </h2>
+            <div className="max-w-xl mx-auto bg-white p-8 border shadow-md rounded-md">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-2xl font-semibold">Edit Deposit</h2>
+                    <Link
+                        className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+                        href={`/dashboard/${user_id}/deposit`}
+                        method="get"
+                        as="button"
+                    >
+                        Add Deposit
+                    </Link>
                 </div>
                 <table className="table table-striped table-bordered">
                     <thead>

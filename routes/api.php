@@ -51,6 +51,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user-profile', 'App\Http\Controllers\API\AuthController@userProfile');
     Route::get('/sendEmailVerificationLink', [AuthController::class, 'sendEmailVerificationLink']);
     Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
+    Route::Post('/storeDeposit', 'App\Http\Controllers\Dashboard\DashboardController@storeDeposit');
+    Route::Post('/storeWithdraw', 'App\Http\Controllers\Dashboard\DashboardController@storeWithdraw');
 
 
     //resouces

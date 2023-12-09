@@ -21,8 +21,8 @@ export default function EditUser({ auth, user }) {
                 <UserDetails user={user} />
                 <Account account={user.account} />
                 <KYCInfo kyc_info={user.kyc_info} />
-                <Deposit deposit={user.deposit} />
-                <Withdraw withdraw={user.withdraws} />
+                <Deposit deposit={user.deposit} user_id={user.id} />
+                <Withdraw withdraw={user.withdraws} user_id={user.id} />
                 <Notification notification={user.notifications} />
             </div>
         </AuthenticatedLayout>
