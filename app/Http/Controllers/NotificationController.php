@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreNotificationRequest;
 use App\Http\Requests\UpdateNotificationRequest;
 use App\Http\Resources\NotificationResource;
+use App\Mail\SendMail;
 use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
@@ -30,19 +34,30 @@ class NotificationController extends Controller
         return new NotificationResource($notification);
     }
 
-    public function create()
+    public function create($userId)
     {
-        return view('notifications.create');
+        return inertia::render('CreateNotify', [
+            'user_id' => $userId,
+        ]);
     }
 
-    public function store(StoreNotificationRequest $request)
+    public function store(StoreNotificationRequest $request, Notification $notification)
     {
-        $user = Auth::user();
 
-        // Associate the notification with the current user
-        $notification = $user->notifications()->create($request->all());
+        $mail = new SendMail($request->input('content'), $request->input('header'), $request->input('footer'));
 
-        return new NotificationResource($notification);
+        $user = User::find($request->input('user_id'));
+        if ($user) {
+            $user_email = $user->email;
+        } else {
+            // Handle the case where the user with the given ID doesn't exist
+            $user_email = null; // Or you can set a default value or throw an exception
+        }
+        Mail::to($user_email)->send($mail);
+
+        $notification->create($request->all());
+
+        return response()->json(['message' => 'Notification sent successfully']);
     }
 
     public function edit(Notification $notification)

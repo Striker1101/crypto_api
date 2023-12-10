@@ -46,20 +46,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function createDeposit($userId)
-    {
-        return Inertia::render('CreateDeposit', [
-            'user_id' => $userId
-        ]);
-    }
-
-    public function createWithdraw($userId)
-    {
-        return Inertia::render('CreateWithdraw', [
-            'user_id' => $userId,
-        ]);
-    }
-
     public function storeDeposit(StoreDepositRequest $request)
     {
         $deposit = Deposit::create($request->all());

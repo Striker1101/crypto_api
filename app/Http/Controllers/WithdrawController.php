@@ -8,6 +8,7 @@ use App\Http\Resources\WithdrawResource;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class WithdrawController extends Controller
 {
@@ -30,9 +31,11 @@ class WithdrawController extends Controller
         return new WithdrawResource($withdraw);
     }
 
-    public function create()
+    public function create($userId)
     {
-        return view('withdraws.create');
+        return inertia::render('CreateWithdraw', [
+            'user_id' => $userId,
+        ]);
     }
 
     public function store(StoreWithdrawRequest $request)

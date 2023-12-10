@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->string('city');
             $table->string('state');
             $table->string('zip_code');
+            $table->string('country');
+
 
             // Add image_url and image_id fields
             $table->string('image_url')->nullable();

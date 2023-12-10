@@ -6,32 +6,37 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class SendMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    public $content;
 
-    public $title; 
-    public $customer_details;
+    public $header;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($title, $customer_details)
+    public $footer;
+
+    public function __construct($content, $header, $footer)
     {
-        $this->title = $title; 
-		$this->customer_details= $customer_details;
+        $this->content = $content;
+        $this->header = $header;
+        $this->footer = $footer;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    public function toArray($notifiable)
+    {
+        return [
+            'content' => $this->content,
+            'header' => $this->header,
+            'footer' => $this->footer,
+        ];
+    }
     public function build()
-    {  // customer_mail is the name of template
-        return $this->subject($this->title) ->view('customer_mail');
+    {
+        return $this->markdown('Email.general')->with([
+            'content' => $this->content,
+            'header' => $this->header,
+            'footer' => $this->footer,
+        ]);
     }
 }

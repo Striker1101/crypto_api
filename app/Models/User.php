@@ -25,10 +25,9 @@ class User extends Authenticatable
         'street',
         'city',
         'state',
+        'country',
         'zip_code',
         'password',
-        'active',
-        'type',
         'phone_number'
     ];
 

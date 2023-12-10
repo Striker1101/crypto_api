@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DepositController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,10 +36,13 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/dashboard/{userId}', [DashboardController::class, 'edit'])
     ->name('dashboard.edit');
 
-Route::get('/dashboard/{userId}/deposit', [DashboardController::class, 'createDeposit'])
+Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
     ->name('dashboard.createDeposit');
 
-Route::get('/dashboard/{userId}/withdraw', [DashboardController::class, 'createWithdraw'])
+Route::get('/dashboard/{userId}/withdraw', [WithdrawController::class, 'create'])
+    ->name('dashboard.createWithdraw');
+
+Route::get('/dashboard/{userId}/notification', [NotificationController::class, 'create'])
     ->name('dashboard.createWithdraw');
 
 

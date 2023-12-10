@@ -29,15 +29,12 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->user,
             'password' => 'required|string|min:8',
-            'active' => 'boolean',
-            'type' => 'in:user,admin',
             'phone_number' => 'nullable|string',
             'street' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
             'zip_code' => 'required|string',
-            'image_url' => 'nullable|string',
-            'image_id' => 'nullable|integer',
+            'country' => 'required|string',
         ];
     }
 }

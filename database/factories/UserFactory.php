@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'street' => $this->faker->streetAddress,
             'city' => $this->faker->city,
             'state' => $this->faker->state,
+            'country' => $this->faker->country,
             'zip_code' => $this->faker->postcode,
             'type' => $this->faker->randomElement(['user', 'admin']),
             'image_url' => $this->faker->imageUrl(),

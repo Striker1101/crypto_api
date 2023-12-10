@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
+use App\Models\Account;
+use App\Models\KYCInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Models\User;
+use Faker\Factory as Faker;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\HttpResponses;
 
@@ -15,9 +18,32 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
+
+
     public function register(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
+        $faker = Faker::create();
+
+        // Create a new KYCInfo instance with the generated SSN
+        $kyc_info = new KYCInfo([
+            'ssn' => $faker->numerify('####-###-#####-####-####'),
+        ]);
+
+
+        // Save the related record to the user
+        $user->kycInfo()->save($kyc_info);
+        // Create a related record in the Profile table
+        $account = new Account([
+            'user_id' => $user->id, // Replace with actual data
+            'balance' => '0',
+            'earning' => '0',
+            'bonus' => '0',
+            // Add other fields as needed
+        ]);
+
+        // Save the related record to the user
+        $user->account()->save($account);
 
         return response()->json([
             'message' => 'User successfully registered',
@@ -72,7 +98,7 @@ class AuthController extends Controller
             'user' => auth()->user()
         ]);
     }
-    
+
     //Controller Method for Sending Verification Link:
 
     public function sendEmailVerificationLink(Request $request)

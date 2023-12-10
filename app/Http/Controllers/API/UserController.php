@@ -22,7 +22,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-
+        $user = User::with(['account', 'assets',
+            'deposit', 'debit_card', 'kycInfo',
+            'withdraws', 'notifications']);
         return new UserResource($user);
     }
 

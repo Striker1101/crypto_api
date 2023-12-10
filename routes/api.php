@@ -9,6 +9,7 @@ use App\Http\Controllers\KYCInfoController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\API\UserController;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
@@ -62,9 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'debit_card' => DebitCardController::class,
         'deposit' => DepositController::class,
         'kyc_info' => KYCInfoController::class,
-        'notification' => NotificationController::class,
+        'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,
-        'dashboard' => DashboardController::class,
         'user' => UserController::class,
 
     ]);

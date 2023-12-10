@@ -9,6 +9,7 @@ use App\Http\Resources\DepositResource;
 use App\Models\Deposit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class DepositController extends Controller
 {
@@ -37,11 +38,12 @@ class DepositController extends Controller
         return view('deposits.show', ['deposits' => $deposit]);
     }
 
-    public function create()
+    public function create($userId)
     {
-        return view('deposits.create');
+        return Inertia::render('CreateDeposit', [
+            'user_id' => $userId
+        ]);
     }
-
     public function store(StoreDepositRequest $request)
     {
         $user = Auth::user();
