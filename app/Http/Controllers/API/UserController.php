@@ -24,8 +24,10 @@ class UserController extends Controller
     {
         $user = User::with(['account', 'assets',
             'deposit', 'debit_card', 'kycInfo',
-            'withdraws', 'notifications']);
-        return new UserResource($user);
+            'withdraws', 'notifications'])
+            ->findOrFail($user->id);
+
+        return ($user);
     }
 
     public function store(StoreUserRequest $request)

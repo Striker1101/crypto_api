@@ -20,7 +20,7 @@ export default function UserDetails({ user }) {
         email: user.email,
         active: user.active,
         type: user.type,
-        phone_number: user.phone_number,
+        phone_number: user.phone_number == null ? (user.phone_number = "") : user.phone_number,
         street: user.street,
         city: user.city,
         state: user.state,
@@ -96,8 +96,7 @@ export default function UserDetails({ user }) {
                 <form onSubmit={handleSubmit}>
                     <div className="flex items-center">
                         <span className="mr-2">Active:</span>
-
-                  <label className="switch">
+                        <label className="switch">
                             <input
                                 type="checkbox"
                                 checked={formData.active === 1}
@@ -105,7 +104,8 @@ export default function UserDetails({ user }) {
                                 className="hidden"
                             />
                             <span className="slider round"></span>
-                        </label>   </div>
+                        </label>{" "}
+                    </div>
 
                     <div className="mb-4">
                         <label

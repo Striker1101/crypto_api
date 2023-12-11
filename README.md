@@ -1,5 +1,4 @@
 # dev task
--   add increment to amount based on account type per min
 -   create all tables on registration
 - if amount to withdraw is higer than balance -error
 

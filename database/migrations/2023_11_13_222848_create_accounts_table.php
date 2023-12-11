@@ -15,6 +15,7 @@ class CreateAccountsTable extends Migration
             $table->decimal('balance', 15, 2)->default(0);
             $table->decimal('earning', 15, 2)->default(0);
             $table->decimal('bonus', 10, 2)->default(10);
+            $table->boolean('trade')->default(false);
             $table->enum('account_stage', ['bronze', 'silver','gold','premium'])->default('bronze');
             $table->enum('account_type', ['trading', 'margin'])->default('trading');
             $table->timestamps();

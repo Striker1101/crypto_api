@@ -40,7 +40,7 @@ Route::group([
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
-
+Route::resource('user', UserController::class, ); 
 
 Route::middleware('auth:sanctum')->group(function () {
     // Your authenticated API routes go here
@@ -65,7 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'kyc_info' => KYCInfoController::class,
         'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,
-        'user' => UserController::class,
+
 
     ]);
 });
