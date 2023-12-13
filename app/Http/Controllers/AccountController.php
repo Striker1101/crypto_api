@@ -47,19 +47,20 @@ class AccountController extends Controller
         return new AccountResource($account);
     }
 
-    public function edit(Account $account){
-    if (request()->wantsJson()) {
-        // Return JSON response for API requests
-        return response()->json(['message' => 'API edit method']);
-    }
+    public function edit(Account $account)
+    {
+        if (request()->wantsJson()) {
+            // Return JSON response for API requests
+            return response()->json(['message' => 'API edit method']);
+        }
 
-    // Return the web view for editing an existing account
-    return view('accounts.edit', ['account' => $account]);
-}
+        // Return the web view for editing an existing account
+        return view('accounts.edit', ['account' => $account]);
+    }
 
     public function update(UpdateAccountRequest $request, Account $account)
     {
-        $account->update($request->all());
+        $account->update($request->validated());
 
         return new AccountResource($account);
     }

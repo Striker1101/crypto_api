@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function auth(Request $request)
+    {
+        // Check if the user is authenticated
+        if ($request->user()) {
+            return response()->json(['authenticated' => true]);
+        } else {
+            return response()->json(['authenticated' => false]);
+        }
+    }
     public function index()
     {
         // $this->authorize('viewAny', User::class);
@@ -39,8 +49,6 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        \Log::info('Authenticated User:', ['user' => auth()->user()]);
-
         $user->update($request->all());
 
         return new UserResource($user);

@@ -50,12 +50,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('resetPassword', 'App\Http\Controllers\API\ChangePasswordController@passwordResetProcess');
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
     Route::get('user-profile', 'App\Http\Controllers\API\AuthController@userProfile');
+    Route::get('user/auth', 'App\Http\Controllers\API\UserController@auth');
     Route::get('/sendEmailVerificationLink', [AuthController::class, 'sendEmailVerificationLink']);
     Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
     Route::Post('/storeDeposit', 'App\Http\Controllers\Dashboard\DashboardController@storeDeposit');
     Route::Post('/storeWithdraw', 'App\Http\Controllers\Dashboard\DashboardController@storeWithdraw');
-    Route::resource('user', UserController::class, );
-    Route::resource('account', AccountController::class, );
 
     //resouces
     Route::apiResources([
@@ -65,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'kyc_info' => KYCInfoController::class,
         'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,
-
-
+        'account' => AccountController::class,
+        'user' => UserController::class,
     ]);
 });

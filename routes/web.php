@@ -42,8 +42,8 @@ Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
 Route::get('/dashboard/{userId}/withdraw', [WithdrawController::class, 'create'])
     ->name('dashboard.createWithdraw');
 
-Route::get('/dashboard/{userId}/notification', [NotificationController::class, 'create'])
-    ->name('dashboard.createWithdraw');
+Route::get('/dashboard/{userId}/notifiy', [NotificationController::class, 'create'])
+    ->name('dashboard.createNotify');
 
 
 Route::middleware('auth')->group(function () {

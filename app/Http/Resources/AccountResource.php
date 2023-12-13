@@ -14,9 +14,9 @@ class AccountResource extends JsonResource
             'balance' => $this->balance,
             'earning' => $this->earning,
             'bonus' => $this->bonus,
+            'trade' => $this->trade,
             'account_type' => $this->account_type,
             'account_stage' => $this->account_stage,
-            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }

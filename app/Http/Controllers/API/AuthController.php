@@ -56,8 +56,8 @@ class AuthController extends Controller
     public function login(LoginUserRequest $request)
     {
         if (Auth::attempt($request->validated())) {
-            // Authentication passed...
-            $user = Auth::user();
+           // Authentication passed...
+        $user = Auth::user()->load('account'); // Load the 'account' relationship
 
             return response()->json([
                 'message' => 'Login successful',
