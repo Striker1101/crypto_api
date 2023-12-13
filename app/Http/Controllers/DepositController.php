@@ -47,12 +47,26 @@ class DepositController extends Controller
     public function store(StoreDepositRequest $request)
     {
         $user = Auth::user();
+        $account = $user->account;
 
         // Associate the deposit with the current user
         $deposit = $user->deposit()->create($request->all());
 
+        // Update the account balance
+        $this->updateAccountBalance($account, $request->input('amount'));
+
         return new DepositResource($deposit);
     }
+
+    private function updateAccountBalance($account, $depositAmount)
+    {
+        // Update the account balance by adding the deposit amount
+        $account->balance += $depositAmount;
+
+        // Save the updated account model
+        $account->save();
+    }
+
 
     public function edit(Deposit $deposit)
     {

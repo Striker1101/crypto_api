@@ -7,7 +7,7 @@ import Deposit from "@/Components/Edit/Deposit";
 import Withdraw from "@/Components/Edit/Withdraw";
 import Notification from "@/Components/Edit/Notification";
 
-export default function EditUser({ auth, user }) {
+export default function EditUser({ auth, user, apiToken }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -18,15 +18,23 @@ export default function EditUser({ auth, user }) {
             }
         >
             <div>
-                <UserDetails user={user} />
-                <Account account={user.account} />
-                <KYCInfo kyc_info={user.kyc_info} />
-                <Deposit deposit={user.deposit} user_id={user.id} />
-                <Withdraw withdraw={user.withdraws} user_id={user.id} />
+                <UserDetails user={user} apiToken={apiToken} />
+                <Account account={user.account} apiToken={apiToken} />
+                <KYCInfo kyc_info={user.kyc_info} apiToken={apiToken} />
+                <Deposit
+                    deposit={user.deposit}
+                    apiToken={apiToken}
+                    user_id={user.id}
+                />
+                <Withdraw
+                    withdraw={user.withdraws}
+                    apiToken={apiToken}
+                    user_id={user.id}
+                />
                 <Notification
                     notification={user.notifications}
-                    user_id={user.id} 
-                    email={user.email}
+                    user_id={user.id}
+                    apiToken={apiToken}
                 />
             </div>
         </AuthenticatedLayout>

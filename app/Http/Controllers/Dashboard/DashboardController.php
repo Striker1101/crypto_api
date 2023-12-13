@@ -36,6 +36,7 @@ class DashboardController extends Controller
 
     public function edit($userId)
     {
+        $apiToken = config('services.myapi.token');
         // Fetch user details with all associated relationships
         $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
             ->find($userId);
@@ -43,6 +44,7 @@ class DashboardController extends Controller
         // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
+            'apiToken' => $apiToken
         ]);
     }
 

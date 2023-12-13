@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
-export default function UserDetails({ user }) {
+export default function UserDetails({ user, apiToken }) {
+
+    const imagePath = "/dummy.png";
+
     if (user === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -20,7 +23,10 @@ export default function UserDetails({ user }) {
         email: user.email,
         active: user.active,
         type: user.type,
-        phone_number: user.phone_number == null ? (user.phone_number = "") : user.phone_number,
+        phone_number:
+            user.phone_number == null
+                ? (user.phone_number = "")
+                : user.phone_number,
         street: user.street,
         city: user.city,
         state: user.state,
@@ -43,12 +49,10 @@ export default function UserDetails({ user }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer 1|${apiToken}`,
                 },
             })
             .then((res) => {
-                console.log(res);
 
                 setModalMessage("user was updated successfully");
                 // Redirect to user details page after successful update
@@ -59,7 +63,6 @@ export default function UserDetails({ user }) {
                 }, 2000);
             })
             .catch((error) => {
-                console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -82,15 +85,30 @@ export default function UserDetails({ user }) {
         minute: "numeric",
         hour12: true,
     });
-
+    console.log(formData);
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">
-                        User Details
-                    </h2>
-                    <p className="text-sm text-gray-600">{formattedDate}</p>
+                <div className="content flex justify-between items-center">
+                    <div className="intro">
+                        <h2 className="text-2xl font-semibold mb-4">
+                            User Details
+                        </h2>
+                        <p className="text-sm text-gray-600">{formattedDate}</p>
+                    </div>
+                    <div className="image">
+                        <img
+                            src={
+                                user.image_url === null
+                                    ? imagePath
+                                    : user.image_url
+                            }
+                            alt={`${user.name} profile image`}
+                            className="border-4 border-black rounded-full"
+                            // the user's image_url as a srcSet
+                            srcSet={user.image_url}
+                        />
+                    </div>
                 </div>
 
                 <form onSubmit={handleSubmit}>

@@ -38,7 +38,7 @@ class AuthController extends Controller
             'user_id' => $user->id, // Replace with actual data
             'balance' => '0',
             'earning' => '0',
-            'bonus' => '0',
+            'bonus' => '10',
             // Add other fields as needed
         ]);
 

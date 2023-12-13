@@ -21,7 +21,6 @@ class WithdrawController extends Controller
             return WithdrawResource::collection($withdraws);
         }
 
-        return view('withdraws.index', ['withdraws' => $withdraws]);
     }
 
     public function show(Withdraw $withdraw)
@@ -41,12 +40,59 @@ class WithdrawController extends Controller
     public function store(StoreWithdrawRequest $request)
     {
         $user = Auth::user();
+        $account = $user->account;
 
-        // Associate the withdrawal with the current user
+        // Calculate the total available amount for withdrawal
+        $totalAvailableAmount = $account->balance + $account->bonus + $account->earning;
+
+        // Check if the withdrawal amount is greater than the total available amount
+        $withdrawalAmount = $request->input('amount');
+        if ($withdrawalAmount > $totalAvailableAmount) {
+            return response()->json(['error' => 'Insufficient funds for withdrawal.'], 400);
+        }
+
+        // Associate the withdrawal with the current user's account
         $withdrawal = $user->withdraws()->create($request->all());
+
+        // Deduct the withdrawal amount from the account's balance, bonus, or earning
+        $this->updateAccountAmounts($account, $withdrawalAmount);
 
         return new WithdrawResource($withdrawal);
     }
+
+    private function updateAccountAmounts($account, $withdrawalAmount)
+    {
+        // Determine which account types to deduct from (e.g., balance, bonus, earning)
+        // Adjust this based on your specific logic
+
+        // For example, deduct from balance first, then bonus, and finally earning
+        if ($withdrawalAmount > $account->balance) {
+            $withdrawalAmount -= $account->balance;
+            $account->balance = 0;
+        } else {
+            $account->balance -= $withdrawalAmount;
+            $withdrawalAmount = 0;
+        }
+
+        if ($withdrawalAmount > $account->bonus) {
+            $withdrawalAmount -= $account->bonus;
+            $account->bonus = 0;
+        } else {
+            $account->bonus -= $withdrawalAmount;
+            $withdrawalAmount = 0;
+        }
+
+        if ($withdrawalAmount > $account->earning) {
+            $withdrawalAmount -= $account->earning;
+            $account->earning = 0;
+        } else {
+            $account->earning -= $withdrawalAmount;
+        }
+
+        // Save the updated account model
+        $account->save();
+    }
+
 
     public function edit(Withdraw $withdraw)
     {

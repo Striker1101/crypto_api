@@ -16,6 +16,7 @@ class Account extends Model
         'bonus',
         'account_type',
         'account_stage',
+        'trade'
     ];
 
     public function user()

@@ -28,6 +28,8 @@ class User extends Authenticatable
         'country',
         'zip_code',
         'password',
+        'active',
+        'type',
         'phone_number'
     ];
 

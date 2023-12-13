@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
-export default function Account({ account }) {
+export default function Account({ account, apiToken }) {
+    console.log(apiToken);
     if (account === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -18,6 +19,7 @@ export default function Account({ account }) {
         user_id: account.user_id,
         balance: account.balance,
         bonus: account.bonus,
+        trade: account.trade,
         earning: account.earning,
         account_type: account.account_type,
         account_stage: account.account_stage,
@@ -39,8 +41,7 @@ export default function Account({ account }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer 1|${apiToken}`,
                 },
             })
             .then((res) => {
@@ -60,6 +61,13 @@ export default function Account({ account }) {
                     setModalMessage("");
                 }, 2000);
             });
+    };
+
+    const handleToggle = () => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            trade: prevFormData.trade === 0 ? 1 : 0,
+        }));
     };
 
     const formattedDate = new Date(account.updated_at).toLocaleString("en-US", {
@@ -82,6 +90,20 @@ export default function Account({ account }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
+                    
+                    <div className="flex items-center">
+                        <span className="mr-2">Trade:</span>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={formData.trade === 1}
+                                onChange={() => handleToggle()} // Add your toggle handler function
+                                className="hidden"
+                            />
+                            <span className="slider round"></span>
+                        </label>{" "}
+                    </div>
+
                     <div className="mb-4">
                         <label
                             htmlFor="balance"
