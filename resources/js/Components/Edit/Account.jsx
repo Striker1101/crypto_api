@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 export default function Account({ account, apiToken }) {
-    console.log(apiToken);
     if (account === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -14,7 +13,8 @@ export default function Account({ account, apiToken }) {
     }
 
     const [modalMessage, setModalMessage] = useState("");
-
+    const token = localStorage.getItem("token");
+    // console.log(token);
     const [formData, setFormData] = useState({
         user_id: account.user_id,
         balance: account.balance,
@@ -25,7 +25,6 @@ export default function Account({ account, apiToken }) {
         account_stage: account.account_stage,
         // Add other user fields as needed
     });
-
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -36,17 +35,17 @@ export default function Account({ account, apiToken }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // console.log(formData);
+
         axios
             .put(`/api/account/${account.id}`, formData, {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer 1|${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
-                console.log(res);
-
                 setModalMessage("Account was updated successfully");
                 // Redirect to account details page after successful update
                 Inertia.visit(`/dashboard/${account.user_id}`);
@@ -56,6 +55,7 @@ export default function Account({ account, apiToken }) {
                 }, 2000);
             })
             .catch((error) => {
+                // console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -66,8 +66,9 @@ export default function Account({ account, apiToken }) {
     const handleToggle = () => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            trade: prevFormData.trade === 0 ? 1 : 0,
+            trade: prevFormData.trade == 1 ? 0 : 1,
         }));
+        console.log(formData.trade);
     };
 
     const formattedDate = new Date(account.updated_at).toLocaleString("en-US", {
@@ -78,7 +79,7 @@ export default function Account({ account, apiToken }) {
         minute: "numeric",
         hour12: true,
     });
-
+    // console.log(account);
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
@@ -90,14 +91,13 @@ export default function Account({ account, apiToken }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    
                     <div className="flex items-center">
                         <span className="mr-2">Trade:</span>
                         <label className="switch">
                             <input
                                 type="checkbox"
-                                checked={formData.trade === 1}
-                                onChange={() => handleToggle()} // Add your toggle handler function
+                                checked={formData.trade == 1}
+                                onChange={() => handleToggle()}
                                 className="hidden"
                             />
                             <span className="slider round"></span>

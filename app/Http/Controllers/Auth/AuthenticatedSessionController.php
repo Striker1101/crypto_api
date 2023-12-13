@@ -28,13 +28,28 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     return redirect()->intended(RouteServiceProvider::HOME);
+    // }
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Retrieve the authenticated user
+        $user = $request->user();
+
+        // Generate a new token for the user
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        // Return the token in the Inertia response
+        return response()->json(['token' => $token]);
     }
 
     /**

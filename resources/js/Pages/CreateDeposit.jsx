@@ -3,7 +3,7 @@ import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 export default function CreateDeposit({ user_id }) {
     const [modalMessage, setModalMessage] = useState("");
-
+    const token = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         user_id: user_id,
         amount: "",
@@ -31,8 +31,7 @@ export default function CreateDeposit({ user_id }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {

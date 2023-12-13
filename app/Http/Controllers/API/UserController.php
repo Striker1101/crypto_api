@@ -39,6 +39,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        \Log::info('Authenticated User:', ['user' => auth()->user()]);
 
         $user->update($request->all());
 

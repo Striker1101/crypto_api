@@ -40,7 +40,7 @@ Route::group([
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
-Route::resource('user', UserController::class, ); 
+
 
 Route::middleware('auth:sanctum')->group(function () {
     // Your authenticated API routes go here
@@ -54,11 +54,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
     Route::Post('/storeDeposit', 'App\Http\Controllers\Dashboard\DashboardController@storeDeposit');
     Route::Post('/storeWithdraw', 'App\Http\Controllers\Dashboard\DashboardController@storeWithdraw');
-
+    Route::resource('user', UserController::class, );
+    Route::resource('account', AccountController::class, );
 
     //resouces
     Route::apiResources([
-        'account' => AccountController::class,
         'asset' => AssetController::class,
         'debit_card' => DebitCardController::class,
         'deposit' => DepositController::class,

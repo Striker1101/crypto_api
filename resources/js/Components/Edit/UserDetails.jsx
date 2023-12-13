@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 export default function UserDetails({ user, apiToken }) {
-
     const imagePath = "/dummy.png";
+
+    const token = localStorage.getItem("token");
 
     if (user === null) {
         return (
@@ -35,6 +36,8 @@ export default function UserDetails({ user, apiToken }) {
         image_id: user.image_id,
         // Add other user fields as needed
     });
+
+    // console.log(formData);
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -48,12 +51,10 @@ export default function UserDetails({ user, apiToken }) {
             .patch(`/api/user/${user.id}`, formData, {
                 headers: {
                     "Content-Type": "application/json",
-                    // Add any other headers if needed
-                    Authorization: `Bearer 1|${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
-
                 setModalMessage("user was updated successfully");
                 // Redirect to user details page after successful update
                 Inertia.visit(`/dashboard/${user.id}`);
@@ -63,6 +64,7 @@ export default function UserDetails({ user, apiToken }) {
                 }, 2000);
             })
             .catch((error) => {
+                console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -85,7 +87,6 @@ export default function UserDetails({ user, apiToken }) {
         minute: "numeric",
         hour12: true,
     });
-    console.log(formData);
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
