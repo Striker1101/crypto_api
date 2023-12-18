@@ -36,7 +36,7 @@ class NotificationController extends Controller
 
     public function create($userId)
     {
-        return inertia::render('CreateNotify', [
+        return inertia::render('CreateNotification', [
             'user_id' => $userId,
         ]);
     }

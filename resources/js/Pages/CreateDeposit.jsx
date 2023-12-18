@@ -36,19 +36,10 @@ export default function CreateDeposit({ user_id }) {
             })
             .then((res) => {
                 setModalMessage("deposit was created successfully");
-                // Redirect to deposit details page after successful update
-
                 form.current.reset();
-                setFormData({
-                    user_id: user_id,
-                    amount: "",
-                    currency: "",
-                    status: "pending",
-                    wallet_address: "",
-                });
-
                 setTimeout(() => {
                     setModalMessage("");
+                    Inertia.reload();
                 }, 2000);
             })
             .catch((error) => {

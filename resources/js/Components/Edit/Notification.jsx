@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import React from "react";
 import { Link } from "@inertiajs/react";
-import axios from "axios";
-
+import { InertiaLink } from "@inertiajs/inertia-react";
 export default function Notification({ notification, user_id }) {
     if (notification === null) {
         return (
@@ -14,7 +11,7 @@ export default function Notification({ notification, user_id }) {
             </div>
         );
     }
-
+    console.log();
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-xl mx-auto bg-white p-8 border shadow-md rounded-md">
@@ -25,10 +22,9 @@ export default function Notification({ notification, user_id }) {
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         href={`/dashboard/${user_id}/notification`}
-                        method="get"
                         as="button"
                     >
-                        Add notification
+                        Add Notification
                     </Link>
                 </div>
                 <table className="table table-striped table-bordered">

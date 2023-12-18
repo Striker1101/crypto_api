@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import axios from "axios";
 
 const ListUsers = ({ users }) => {
     // Function to format the timestamp
@@ -21,33 +22,29 @@ const ListUsers = ({ users }) => {
             new Date(timestamp)
         );
     };
-
+    const token = localStorage.getItem("token");
     const [modalMessage, setModalMessage] = useState("");
 
     const deleteUser = (userId, userName) => {
         if (confirm(`Are you sure you want to delete ${userName}?`)) {
-            fetch(`/api/auth/user/${userId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    // Add any other headers if needed
-                },
-            })
+            axios
+                .delete(`/api/user/${userId}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Add any other headers if needed
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 .then((response) => {
-                    if (response.ok) {
-                        setModalMessage(
-                            `${userName} has been deleted successfully.`
-                        );
+                    setModalMessage(
+                        `${userName} has been deleted successfully.`
+                    );
 
+                    // Hide the message after 3 seconds
+                    setTimeout(() => {
+                        setModalMessage("");
                         Inertia.reload();
-
-                        // Hide the message after 3 seconds
-                        setTimeout(() => {
-                            setModalMessage("");
-                        }, 2000);
-                    } else {
-                        throw new Error(`Error deleting ${userName}.`);
-                    }
+                    }, 2000);
                 })
                 .catch((error) => {
                     setModalMessage(error.message);

@@ -33,8 +33,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
 Route::get('/dashboard/{userId}', [DashboardController::class, 'edit'])
     ->name('dashboard.edit');
+
+Route::get('/dashboard/{userId}/notification/', [NotificationController::class, 'create'])
+    ->name('dashboard.createNotification');
 
 Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
     ->name('dashboard.createDeposit');
@@ -42,8 +46,7 @@ Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
 Route::get('/dashboard/{userId}/withdraw', [WithdrawController::class, 'create'])
     ->name('dashboard.createWithdraw');
 
-Route::get('/dashboard/{userId}/notifiy', [NotificationController::class, 'create'])
-    ->name('dashboard.createNotify');
+
 
 
 Route::middleware('auth')->group(function () {

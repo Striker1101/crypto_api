@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
