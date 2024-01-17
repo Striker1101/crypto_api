@@ -57,6 +57,7 @@ class WithdrawController extends Controller
         // Deduct the withdrawal amount from the account's balance, bonus, or earning
         $this->updateAccountAmounts($account, $withdrawalAmount);
 
+
         return new WithdrawResource($withdrawal);
     }
 
@@ -103,7 +104,7 @@ class WithdrawController extends Controller
 
     public function update(UpdateWithdrawRequest $request, Withdraw $withdraw)
     {
-        $this->authorize('update', $withdraw);
+        // $this->authorize('update', $withdraw);
 
         $withdraw->update($request->all());
 
@@ -112,7 +113,7 @@ class WithdrawController extends Controller
 
     public function destroy(Withdraw $withdraw)
     {
-        $this->authorize('delete', $withdraw);
+        // $this->authorize('delete', $withdraw);
 
         $withdraw->delete();
 

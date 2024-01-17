@@ -8,9 +8,7 @@ use App\Models\Account;
 use App\Models\KYCInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Validator;
 use App\Models\User;
-use Faker\Factory as Faker;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\HttpResponses;
 
@@ -23,11 +21,11 @@ class AuthController extends Controller
     public function register(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
-        $faker = Faker::create();
+
 
         // Create a new KYCInfo instance with the generated SSN
         $kyc_info = new KYCInfo([
-            'ssn' => $faker->numerify('####-###-#####-####-####'),
+            'ssn' => "0000 00000 0000 0000 0000",
         ]);
 
 
@@ -56,8 +54,8 @@ class AuthController extends Controller
     public function login(LoginUserRequest $request)
     {
         if (Auth::attempt($request->validated())) {
-           // Authentication passed...
-        $user = Auth::user()->load('account'); // Load the 'account' relationship
+            // Authentication passed...
+            $user = Auth::user()->load('account'); // Load the 'account' relationship
 
             return response()->json([
                 'message' => 'Login successful',

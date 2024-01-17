@@ -7,7 +7,12 @@ import Deposit from "@/Components/Edit/Deposit";
 import Withdraw from "@/Components/Edit/Withdraw";
 import Notification from "@/Components/Edit/Notification";
 
-export default function EditUser({ auth, user, apiToken }) {
+export default function EditUser({ auth, user }) {
+    let apiToken = "";
+    useEffect(() => {
+        apiToken = localStorage.getItem("token");
+    }, []);
+
     return (
         <AuthenticatedLayout
             user={auth.user}

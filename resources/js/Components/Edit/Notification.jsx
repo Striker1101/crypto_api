@@ -11,7 +11,7 @@ export default function Notification({ notification, user_id }) {
             </div>
         );
     }
-    console.log();
+
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-xl mx-auto bg-white p-8 border shadow-md rounded-md">

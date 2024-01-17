@@ -35,12 +35,12 @@ class UpdateWithdrawRequest extends FormRequest
         } else {
             return [
                 //
-                'user_id' => 'required|exists:users,id',
-                'withdrawal_type' => 'required|in:crypto,bank_transfer',
-                'amount' => 'required|numeric|min:0.01',
+                'user_id' => 'sometimes|exists:users,id',
+                'withdrawal_type' => 'sometimes|in:crypto,bank_transfer',
+                'amount' => 'sometimes|numeric|min:0.01',
                 'name' => 'nullable|string',
-                'currency' => 'required|string',
-                'destination' => 'required|string',
+                'currency' => 'sometimes|string',
+                'destination' => 'sometimes|string',
             ];
         }
     }

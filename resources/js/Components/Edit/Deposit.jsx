@@ -3,7 +3,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-export default function Deposit({ deposit, user_id }) {
+export default function Deposit({ deposit, user_id, apiToken }) {
     if (deposit === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -40,12 +40,10 @@ export default function Deposit({ deposit, user_id }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer ${apiToken}`,
                 },
             })
             .then((res) => {
-
                 setModalMessage("deposit was updated successfully");
                 // Redirect to deposit details page after successful update
                 Inertia.visit(`/dashboard/${formData.user_id}`);
@@ -69,8 +67,7 @@ export default function Deposit({ deposit, user_id }) {
                     headers: {
                         "Content-Type": "application/json",
                         // Add any other headers if needed
-                        Authorization:
-                            "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                        Authorization: `Bearer ${apiToken}`,
                     },
                 })
                 .then((res) => {
@@ -94,7 +91,7 @@ export default function Deposit({ deposit, user_id }) {
 
     return (
         <div className="container mx-auto mt-8">
-            <div className="max-w-xl mx-auto bg-white p-8 border shadow-md rounded-md">
+            <div className="max-w-xxl mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-semibold">Edit Deposit</h2>
                     <Link

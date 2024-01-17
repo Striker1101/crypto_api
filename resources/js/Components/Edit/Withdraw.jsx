@@ -4,7 +4,7 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-export default function Withdraw({ withdraw, user_id }) {
+export default function Withdraw({ withdraw, user_id, apiToken }) {
     if (withdraw === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -37,8 +37,7 @@ export default function Withdraw({ withdraw, user_id }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer ${apiToken}`,
                 },
             })
             .then((res) => {
@@ -65,8 +64,7 @@ export default function Withdraw({ withdraw, user_id }) {
                     headers: {
                         "Content-Type": "application/json",
                         // Add any other headers if needed
-                        Authorization:
-                            "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                        Authorization: `Bearer ${apiToken}`,
                     },
                 })
                 .then((res) => {

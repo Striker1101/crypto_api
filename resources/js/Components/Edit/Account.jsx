@@ -13,8 +13,7 @@ export default function Account({ account, apiToken }) {
     }
 
     const [modalMessage, setModalMessage] = useState("");
-    const token = localStorage.getItem("token");
-    // console.log(token);
+
     const [formData, setFormData] = useState({
         user_id: account.user_id,
         balance: account.balance,
@@ -42,7 +41,7 @@ export default function Account({ account, apiToken }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${apiToken}`,
                 },
             })
             .then((res) => {

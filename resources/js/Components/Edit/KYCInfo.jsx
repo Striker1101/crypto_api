@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
-export default function KYCInfo({ kyc_info }) {
+export default function KYCInfo({ kyc_info, apiToken }) {
     if (kyc_info == null) {
         return;
     }
@@ -29,8 +29,7 @@ export default function KYCInfo({ kyc_info }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization:
-                        "Bearer 1|Pgtgzj7z3KFINtsff5sXjebfNe20Putf2Wv3GmkNcb8264a3",
+                    Authorization: `Bearer ${apiToken}`,
                 },
             })
             .then((res) => {
