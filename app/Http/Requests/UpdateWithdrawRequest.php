@@ -31,6 +31,7 @@ class UpdateWithdrawRequest extends FormRequest
                 'name' => 'nullable|string',
                 'currency' => 'required|string',
                 'destination' => 'required|string',
+                
             ];
         } else {
             return [
