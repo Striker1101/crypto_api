@@ -16,6 +16,8 @@ class CreateDepositsTable extends Migration
             $table->decimal('amount', 10, 2);
             $table->string('currency');
             $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('image_url')->nullable(); // Add the 'DLF_imageUrl' field
+            $table->string('image_id')->nullable(); // Add the 'DLF_imageID' field
             $table->timestamps();
         });
     }

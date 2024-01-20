@@ -34,7 +34,7 @@ return new class extends Migration {
 
             // Add image_url and image_id fields
             $table->string('image_url')->nullable();
-            $table->unsignedInteger('image_id')->nullable();
+            $table->string('image_id')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
