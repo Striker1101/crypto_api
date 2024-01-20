@@ -33,7 +33,7 @@ class StoreAccountRequest extends FormRequest
             'earning' => 'required|numeric',
             'bonus' => 'required|numeric',
             'account_type' => 'required|in:trading,margin',
-            'account_stage' => 'required|in:bronze,silver,gold,premium',
+            'account_stage' => 'required|in:beginner,bronze,silver,gold,premium',
         ];
     }
 }

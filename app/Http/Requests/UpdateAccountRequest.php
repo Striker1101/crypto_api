@@ -33,7 +33,7 @@ class UpdateAccountRequest extends FormRequest
                 'bonus' => 'required|numeric',
                 'trade' => 'sometimes|boolean',
                 'account_type' => 'required|in:trading,margin',
-                'account_stage' => 'required|in:bronze,silver,gold,premium',
+                'account_stage' => 'required|in:beginner,bronze,silver,gold,premium',
             ];
         } else {
 
@@ -48,7 +48,7 @@ class UpdateAccountRequest extends FormRequest
                 'bonus' => 'sometimes|numeric',
                 'trade' => 'sometimes|boolean',
                 'account_type' => 'sometimes|in:trading,margin',
-                'account_stage' => 'sometimes|in:bronze,silver,gold,premium',
+                'account_stage' => 'sometimes|in:beginner,bronze,silver,gold,premium',
             ];
         }
     }

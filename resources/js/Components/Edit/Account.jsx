@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
+
 export default function Account({ account, apiToken }) {
     if (account === null) {
         return (
@@ -15,7 +16,30 @@ export default function Account({ account, apiToken }) {
     const token = localStorage.getItem("token");
 
     const [modalMessage, setModalMessage] = useState("");
-//trade day - current day = days of trade
+    //trade day - current day = days of trade
+
+    /**
+     *
+     * @param {Date givenDate}
+     * @returns int
+     */
+    function calculateDaysDifference(givenDate) {
+        // Convert the given date string to a Date object
+        const givenDateObj = new Date(givenDate);
+
+        // Get the current date
+        const currentDate = new Date();
+
+        // Calculate the difference in milliseconds
+        const timeDifference = currentDate.getTime() - givenDateObj.getTime();
+
+        // Convert the time difference to days
+        const daysDifference = Math.floor(
+            timeDifference / (1000 * 60 * 60 * 24)
+        );
+
+        return daysDifference;
+    }
     const [formData, setFormData] = useState({
         user_id: account.user_id,
         balance: account.balance,
@@ -24,7 +48,9 @@ export default function Account({ account, apiToken }) {
         earning: account.earning,
         account_type: account.account_type,
         account_stage: account.account_stage,
-        trade_changed_at: account.trade_changed_at,
+        trade_changed_at: `Start ${
+            account.trade_changed_at
+        } Count ${calculateDaysDifference(account.trade_changed_at)} days`,
         // Add other user fields as needed
     });
 
@@ -71,7 +97,6 @@ export default function Account({ account, apiToken }) {
             ...prevFormData,
             trade: prevFormData.trade == 1 ? 0 : 1,
         }));
-
     };
 
     const formattedDate = new Date(account.updated_at).toLocaleString("en-US", {
@@ -168,7 +193,7 @@ export default function Account({ account, apiToken }) {
                             type="text"
                             id="trade_timer"
                             name="trade_timer"
-                            value={formData.trade_timer}
+                            value={formData.trade_changed_at}
                             onChange={handleChange}
                             disabled
                             className="mt-1 p-2 w-full border rounded-md"
@@ -210,10 +235,11 @@ export default function Account({ account, apiToken }) {
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         >
-                            <option value="bronze">bronze</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="bronze">Bronze</option>
                             <option value="silver">Silver</option>
                             <option value="gold">Gold</option>
-                            <option value="premium">premium</option>
+                            <option value="premium">Premium</option>
                         </select>
                     </div>
                     {/* Add other user fields as needed */}
