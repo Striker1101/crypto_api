@@ -43,7 +43,7 @@ class WithdrawController extends Controller
         $account = $user->account;
 
         // Check if KYC is verified
-        if (!$user->kycInfo->verified) {
+        if (!$user->kyc_infos->verified) {
             return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
         }
 
@@ -72,36 +72,12 @@ class WithdrawController extends Controller
 
     public function update(UpdateWithdrawRequest $request, Withdraw $withdraw)
     {
-        // Check if status is updated to 1 and added is 0
-        if ($request->input('status') == 1 && $request->input('added') == 0) {
-            $user = $withdraw->user;
-            $account = $user->account;
+        // $this->authorize('update', $withdraw);
 
-            // Add the withdrawal amount to the account's balance
-            $account->increment('balance', $withdraw->amount);
-
-            // Update 'added' to true (1)
-            $withdraw->added = "1";
-            $request->added = "1";
-        } elseif ($request->input('status') == 0 && $request->input('added') == 1) {
-            // Check if status is updated to 1 and added is 1
-            $user = $withdraw->user;
-            $account = $user->account;
-
-            // Subtract the withdrawal amount from the account's balance
-            $account->decrement('balance', $withdraw->amount);
-
-            // Update 'added' to false (0)
-            $withdraw->added = "0";
-            $request->added = "0";
-        }
-
-        // Update the withdrawal details
         $withdraw->update($request->all());
 
         return new WithdrawResource($withdraw);
     }
-
 
     public function destroy(Withdraw $withdraw)
     {

@@ -13,6 +13,9 @@ export default function Deposit({ deposit, user_id, apiToken }) {
             </div>
         );
     }
+
+    console.log(deposit);
+
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");

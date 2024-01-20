@@ -14,7 +14,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
             </div>
         );
     }
-    console.log(withdraw);
+    
     const token = localStorage.getItem("token");
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
