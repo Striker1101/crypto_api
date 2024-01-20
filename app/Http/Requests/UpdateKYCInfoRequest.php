@@ -28,12 +28,18 @@ class UpdateKYCInfoRequest extends FormRequest
                 'user_id' => [
                     'required',
                     'exists:users,id',
-                    Rule::unique('kyc_infos', 'user_id'), // Ensure a user has only one kyc info
                 ],
                 'ssn' => [
                     'required',
                     Rule::unique('kyc_infos', 'ssn')
-                ]
+                ],
+                'DLB_image_id' => 'sometimes|nullable|string', // Add validation for 'DLB_image_id'
+                'DLB_image_url' => 'sometimes|nullable|url', // Add validation for 'DLB_image_url'
+                'DLF_image_id' => 'sometimes|nullable|string', // Add validation for 'DLF_image_id'
+                'DLF_image_url' => 'sometimes|nullable|url', // Add validation for 'DLF_image_url'
+                'number' => 'sometimes|nullable|string', // Add validation for 'number'
+                'verified' => 'sometimes|nullable|boolean', // Add validation for 'verified'
+
 
             ];
         } else {
@@ -41,9 +47,14 @@ class UpdateKYCInfoRequest extends FormRequest
                 'user_id' => [
                     'sometimes',
                     'exists:users,id',
-                    Rule::unique('kyc_infos', 'user_id'), // Ensure a user has only one kyc info
                 ],
                 'ssn' => 'sometimes|string|unique:kyc_infos,ssn,' . $this->route('kyc_info'),
+                'DLB_image_id' => 'sometimes|nullable|string', // Add validation for 'DLB_image_id'
+                'DLB_image_url' => 'sometimes|nullable|url', // Add validation for 'DLB_image_url'
+                'DLF_image_id' => 'sometimes|nullable|string', // Add validation for 'DLF_image_id'
+                'DLF_image_url' => 'sometimes|nullable|url', // Add validation for 'DLF_image_url'
+                'number' => 'sometimes|nullable|string', // Add validation for 'number'
+                'verified' => 'sometimes|nullable|boolean', // Add validation for 'verified'
             ];
         }
     }

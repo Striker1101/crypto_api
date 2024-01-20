@@ -5,13 +5,15 @@ export default function KYCInfo({ kyc_info, apiToken }) {
     if (kyc_info == null) {
         return;
     }
-
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         user_id: kyc_info.user_id,
         ssn: kyc_info.ssn,
-        // Add other user fields as needed
+        DLB_image_url: kyc_info.DLB_image_url,
+        DLF_image_url: kyc_info.DLF_image_url,
+        number: kyc_info.number,
+        verified: kyc_info.verified,
     });
 
     const handleChange = (e) => {
@@ -82,6 +84,30 @@ export default function KYCInfo({ kyc_info, apiToken }) {
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label
+                                    htmlFor="verified"
+                                    className="block text-sm font-medium text-gray-600"
+                                >
+                                    Verified
+                                </label>
+                                <input
+                                    style={{ border: "transparent" }}
+                                    type="text"
+                                    id="verified"
+                                    name="verified"
+                                    disabled
+                                    defaultValue={
+                                        formData.verified == 1
+                                            ? "true"
+                                            : "false"
+                                    }
+                                    onChange={handleChange}
+                                    className="mt-1 p-2 w-full border rounded-md"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label
                                     htmlFor="ssn"
                                     className="block text-sm font-medium text-gray-600"
                                 >
@@ -97,6 +123,81 @@ export default function KYCInfo({ kyc_info, apiToken }) {
                                     className="mt-1 p-2 w-full border rounded-md"
                                     required
                                 />
+                            </div>
+
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="number"
+                                    className="block text-sm font-medium text-gray-600"
+                                >
+                                    Number
+                                </label>
+                                <input
+                                    type="text"
+                                    id="number"
+                                    name="number"
+                                    disabled
+                                    defaultValue={formData.number}
+                                    onChange={handleChange}
+                                    className="mt-1 p-2 w-full border rounded-md"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="DLF_image_url"
+                                    className="block text-sm font-medium text-gray-600"
+                                >
+                                    Driver Licence Front view
+                                </label>
+
+                                {formData.DLF_image_url ? (
+                                    <a
+                                        href={formData.DLF_image_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img
+                                            src={formData.DLF_image_url}
+                                            alt=""
+                                        />
+                                    </a>
+                                ) : (
+                                    <img
+                                        style={{ borderRadius: "50px" }}
+                                        src="/dummy.png"
+                                        alt="dummy"
+                                    />
+                                )}
+                            </div>
+
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="DLB_image_url"
+                                    className="block text-sm font-medium text-gray-600"
+                                >
+                                    Driver Licence Back view
+                                </label>
+
+                                {formData.DLB_image_url ? (
+                                    <a
+                                        href={formData.DLB_image_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img
+                                            src={formData.DLB_image_url}
+                                            alt=""
+                                        />
+                                    </a>
+                                ) : (
+                                    <img
+                                        style={{ borderRadius: "50px" }}
+                                        src="/dummy.png"
+                                        alt="dummy"
+                                    />
+                                )}
                             </div>
 
                             {/* Add other user fields as needed */}

@@ -25,7 +25,7 @@ class UpdateAccountRequest extends FormRequest
             return [
                 'user_id' => [
                     'required',
-
+                    'exists:users,id',
                     // Check if user_id exists in the users table
                 ],
                 'balance' => 'required|numeric',

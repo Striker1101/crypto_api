@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->string('DLF_image_url')->nullable(); // Add the 'DLF_imageUrl' field
             $table->string('DLF_image_id')->nullable(); // Add the 'DLF_imageID' field
             $table->string('DLB_image_url')->nullable(); // Add the 'DLB_imageUrl' field
-            $table->string('DLB_image_id')->nullable(); // Add the 'DLB_imageID' field
+            $table->string('DLB_image_id')->nullable();
+            $table->boolean('verified')->default(false); //
 
             // Ensure that SSN is encrypted and stored securely
             // Add other KYC-related fields as needed

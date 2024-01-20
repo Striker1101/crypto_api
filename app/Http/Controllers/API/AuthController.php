@@ -72,7 +72,8 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             // Authentication passed...
-            $user = Auth::user()->load('account'); // Load the 'account' relationship
+            $user = Auth::user()->load(['account', 'kycInfo']); // Load both 'account' and 'kyc_infos' relationships
+
 
             return response()->json([
                 'message' => 'Login successful',

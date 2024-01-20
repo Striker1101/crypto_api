@@ -13,8 +13,15 @@ class KYCInfo extends Model
 
     protected $fillable = [
         'ssn',
-        'user_id'
-    ] ;
+        'user_id',
+        'DLB_image_id',
+        'DLB_image_url',
+        'DLF_image_id',
+        'DLF_image_url',
+        'number',
+        'verified'
+
+    ];
 
     public function user()
     {

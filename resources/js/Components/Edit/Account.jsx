@@ -12,7 +12,7 @@ export default function Account({ account, apiToken }) {
             </div>
         );
     }
-    console.log(account);
+    
     const token = localStorage.getItem("token");
 
     const [modalMessage, setModalMessage] = useState("");
@@ -21,9 +21,12 @@ export default function Account({ account, apiToken }) {
     /**
      *
      * @param {Date givenDate}
-     * @returns int
+     * @returns int, string
      */
     function calculateDaysDifference(givenDate) {
+        if (givenDate == null) {
+            return "null";
+        }
         // Convert the given date string to a Date object
         const givenDateObj = new Date(givenDate);
 
@@ -40,6 +43,7 @@ export default function Account({ account, apiToken }) {
 
         return daysDifference;
     }
+
     const [formData, setFormData] = useState({
         user_id: account.user_id,
         balance: account.balance,
