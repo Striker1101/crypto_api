@@ -11,9 +11,11 @@ export default function Account({ account, apiToken }) {
             </div>
         );
     }
+    console.log(account);
+    const token = localStorage.getItem("token");
 
     const [modalMessage, setModalMessage] = useState("");
-
+//trade day - current day = days of trade
     const [formData, setFormData] = useState({
         user_id: account.user_id,
         balance: account.balance,
@@ -22,8 +24,10 @@ export default function Account({ account, apiToken }) {
         earning: account.earning,
         account_type: account.account_type,
         account_stage: account.account_stage,
+        trade_changed_at: account.trade_changed_at,
         // Add other user fields as needed
     });
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -41,7 +45,7 @@ export default function Account({ account, apiToken }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer ${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
@@ -67,7 +71,7 @@ export default function Account({ account, apiToken }) {
             ...prevFormData,
             trade: prevFormData.trade == 1 ? 0 : 1,
         }));
-        console.log(formData.trade);
+
     };
 
     const formattedDate = new Date(account.updated_at).toLocaleString("en-US", {
@@ -102,7 +106,6 @@ export default function Account({ account, apiToken }) {
                             <span className="slider round"></span>
                         </label>{" "}
                     </div>
-
                     <div className="mb-4">
                         <label
                             htmlFor="balance"
@@ -120,7 +123,6 @@ export default function Account({ account, apiToken }) {
                             required
                         />
                     </div>
-
                     <div className="mb-4">
                         <label
                             htmlFor="bonus"
@@ -138,7 +140,6 @@ export default function Account({ account, apiToken }) {
                             required
                         />
                     </div>
-
                     <div className="mb-4">
                         <label
                             htmlFor="earning"
@@ -152,6 +153,24 @@ export default function Account({ account, apiToken }) {
                             name="earning"
                             value={formData.earning}
                             onChange={handleChange}
+                            className="mt-1 p-2 w-full border rounded-md"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label
+                            htmlFor="trade_timer"
+                            className="block text-sm font-medium text-gray-600"
+                        >
+                            trade_timer
+                        </label>
+                        <input
+                            type="text"
+                            id="trade_timer"
+                            name="trade_timer"
+                            value={formData.trade_timer}
+                            onChange={handleChange}
+                            disabled
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
@@ -176,7 +195,6 @@ export default function Account({ account, apiToken }) {
                             <option value="margin">Margin</option>
                         </select>
                     </div>
-
                     <div className="mb-4">
                         <label
                             htmlFor="account_stage"
@@ -198,9 +216,7 @@ export default function Account({ account, apiToken }) {
                             <option value="premium">premium</option>
                         </select>
                     </div>
-
                     {/* Add other user fields as needed */}
-
                     <div className="mt-4">
                         <button
                             type="submit"

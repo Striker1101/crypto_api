@@ -14,6 +14,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
             </div>
         );
     }
+    const token = localStorage.getItem("token");
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
 
@@ -37,7 +38,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer ${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
@@ -64,7 +65,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                     headers: {
                         "Content-Type": "application/json",
                         // Add any other headers if needed
-                        Authorization: `Bearer ${apiToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 })
                 .then((res) => {

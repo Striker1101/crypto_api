@@ -21,8 +21,7 @@ class AccountFactory extends Factory
             'bonus' => $this->faker->randomFloat(2, 100, 10000),
             'account_type' => $this->faker->randomElement(['trading', 'margin']),
             'account_stage' => $this->faker->randomElement(['bronze', 'silver', 'gold', 'premium']),
+            'trade_changed_at' => now(), // Set initial value for trade_changed_at
         ];
     }
 }
-
-

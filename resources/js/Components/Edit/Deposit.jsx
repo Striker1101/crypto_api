@@ -15,7 +15,7 @@ export default function Deposit({ deposit, user_id, apiToken }) {
     }
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
-
+    const token = localStorage.getItem("token");
     const handleToggle = (id) => {
         deposit.map((item) => {
             if (item.id == id) {
@@ -40,7 +40,7 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer ${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
@@ -67,7 +67,7 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                     headers: {
                         "Content-Type": "application/json",
                         // Add any other headers if needed
-                        Authorization: `Bearer ${apiToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 })
                 .then((res) => {

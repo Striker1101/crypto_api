@@ -7,7 +7,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
     }
 
     const [modalMessage, setModalMessage] = useState("");
-
+    const token = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         user_id: kyc_info.user_id,
         ssn: kyc_info.ssn,
@@ -29,7 +29,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
-                    Authorization: `Bearer ${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {

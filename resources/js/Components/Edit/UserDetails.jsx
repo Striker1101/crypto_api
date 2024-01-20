@@ -51,7 +51,7 @@ export default function UserDetails({ user, apiToken }) {
             .patch(`/api/user/${user.id}`, formData, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${apiToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {

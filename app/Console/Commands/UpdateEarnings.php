@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Account;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
@@ -23,42 +24,57 @@ class UpdateEarnings extends Command
      */
     protected $description = 'Update earnings for accounts with active trades';
 
+
+
+    private function checkOverdueTrades()
+    {
+        $accounts = Account::where('trade', true)->get();
+
+        foreach ($accounts as $account) {
+            // Check if trade_changed_at is set and overdue
+            if ($account->trade_changed_at !== null) {
+                $plan = Plan::where('plan', $account->account_stage)->first();
+
+                if ($plan && $plan->duration !== null) {
+                    $dueDate = Carbon::parse($account->trade_changed_at)->addDays($plan->duration);
+
+                    if (now()->gte($dueDate)) {
+                        // Turn off the trade
+                        $account->update(['trade' => false]);
+                        $this->info("Trade turned off for Account ID: {$account->id}");
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Execute the console command.
      */
 
     public function handle()
     {
+        // Call the checkOverdueTrades method with the specified due times
+        $this->checkOverdueTrades();
+
         try {
             $accounts = Account::where('trade', true)->get();
 
             foreach ($accounts as $account) {
-                $earningsIncrement = 0;
+                // Get the plan for the current account
+                $plan = Plan::where('plan', $account->account_stage)->first();
 
-                switch ($account->account_stage) {
-                    case 'bronze':
-                        $earningsIncrement = 0.20;
-                        break;
-                    case 'silver':
-                        $earningsIncrement = 0.40;
-                        break;
-                    case 'gold':
-                        $earningsIncrement = 0.70;
-                        break;
-                    case 'premium':
-                        $earningsIncrement = 1.00;
-                        break;
+                if ($plan) {
+                    // Calculate time elapsed since the last update
+                    $lastUpdate = $account->updated_at ?? now();
+                    $timeElapsed = now()->diffInMinutes($lastUpdate);
+
+                    // Update earnings based on the plan's percent and time elapsed
+                    $earningsIncrease = $plan->percent * $timeElapsed / 100;
+
+                    // Update the earnings
+                    $account->increment('earning', $earningsIncrease);
                 }
-
-                // Calculate time elapsed since the last update
-                $lastUpdate = $account->updated_at ?? now(); // Use updated_at or current time if not available
-                $timeElapsed = now()->diffInMinutes($lastUpdate);
-
-                // Update earnings based on the percentage and time elapsed
-                $earningsIncrease =     $earningsIncrement * $timeElapsed;
-
-                // Update the earnings
-                $account->increment('earning', $earningsIncrease);
             }
 
             $this->info('Earnings updated successfully.');

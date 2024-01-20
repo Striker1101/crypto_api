@@ -15,15 +15,18 @@ class UpdateAccountRequest extends FormRequest
     public function rules()
     {
 
-        $accountId = $this->route('account'); // Get the account ID from the route parameters
-
+        // $accountId = $this->route('account'); // Get the account ID from the route parameters
         $method = $this->method();
-        if ($method == 'PUT') {
+
+
+
+        // dd($accountId, $method);
+        if ($method === 'PUT') {
             return [
                 'user_id' => [
                     'required',
-                    'exists:users,id',
-                    Rule::unique('accounts', 'user_id')->ignore($accountId), // Ignore the current account during uniqueness check
+
+                    // Check if user_id exists in the users table
                 ],
                 'balance' => 'required|numeric',
                 'earning' => 'required|numeric',
@@ -38,8 +41,7 @@ class UpdateAccountRequest extends FormRequest
 
                 'user_id' => [
                     'sometimes',
-                    'exists:users,id',
-                    Rule::unique('accounts', 'user_id')->ignore($accountId), // Ignore the current account during uniqueness check
+                    'exists:users,id', // Check if user_id exists in the users table
                 ],
                 'balance' => 'sometimes|numeric',
                 'earning' => 'sometimes|numeric',
