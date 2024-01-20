@@ -16,7 +16,24 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
+    private function generateRandomPattern()
+    {
+        $pattern = '';
 
+        for ($i = 1; $i <= 25; $i++) {
+            // Generate a random digit
+            $digit = mt_rand(0, 9);
+
+            // Add a space after every 4 digits
+            if ($i % 5 === 0 && $i !== 25) {
+                $pattern .= $digit . ' ';
+            } else {
+                $pattern .= $digit;
+            }
+        }
+
+        return $pattern;
+    }
 
     public function register(StoreUserRequest $request)
     {
@@ -25,7 +42,7 @@ class AuthController extends Controller
 
         // Create a new KYCInfo instance with the generated SSN
         $kyc_info = new KYCInfo([
-            'ssn' => "0000 00000 0000 0000 0000",
+            'ssn' => $this->generateRandomPattern(),
         ]);
 
 
