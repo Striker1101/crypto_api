@@ -2,18 +2,16 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetController;
-use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\DebitCardController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\KYCInfoController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\API\UserController;
-use App\Mail\SendMail;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'asset' => AssetController::class,
         'debit_card' => DebitCardController::class,
         'deposit' => DepositController::class,
+        'plan' => PlanController::class,
         'kyc_info' => KYCInfoController::class,
         'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,

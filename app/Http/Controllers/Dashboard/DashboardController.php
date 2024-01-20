@@ -10,8 +10,7 @@ use App\Http\Resources\WithdrawResource;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Account;
-use App\Models\KYCInfo;
+use App\Models\Plan;
 use Inertia\Inertia;
 use App\Models\Deposit;
 
@@ -36,15 +35,19 @@ class DashboardController extends Controller
 
     public function edit($userId)
     {
-        $apiToken = config('services.myapi.token');
+
         // Fetch user details with all associated relationships
         $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
             ->find($userId);
 
+        // Fetch all plans
+        $plans = Plan::all();
+
+
         // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
-            'apiToken' => $apiToken
+            'plans' => $plans,
         ]);
     }
 

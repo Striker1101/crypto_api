@@ -9,6 +9,7 @@ use App\Models\KYCInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class KYCInfoController extends Controller
 {
     public function index(Request $request)

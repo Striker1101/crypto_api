@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Plan;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Notifications\EarningsUpdated;
 
 class UpdateEarnings extends Command
 {
@@ -74,6 +75,10 @@ class UpdateEarnings extends Command
 
                     // Update the earnings
                     $account->increment('earning', $earningsIncrease);
+
+
+                    // Send the earnings updated notification to the user
+                    $account->user->notify(new EarningsUpdated($account->earning));
                 }
             }
 

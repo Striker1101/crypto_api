@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\HttpResponses;
+use App\Notifications\WelcomeNotification;
+
 
 class AuthController extends Controller
 {
@@ -57,8 +59,12 @@ class AuthController extends Controller
             // Add other fields as needed
         ]);
 
+        // Notify the user after registration
+        $user->notify(new WelcomeNotification());
+
         // Save the related record to the user
         $user->account()->save($account);
+
 
         return response()->json([
             'message' => 'User successfully registered',
