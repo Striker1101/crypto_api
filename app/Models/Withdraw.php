@@ -17,6 +17,7 @@ class Withdraw extends Model
         'name',
         'currency',
         'destination',
+        'added',
     ];
 
     public function user()

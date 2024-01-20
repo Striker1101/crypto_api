@@ -42,6 +42,11 @@ class WithdrawController extends Controller
         $user = Auth::user();
         $account = $user->account;
 
+        // Check if KYC is verified
+        if (!$user->kycInfo->verified) {
+            return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
+        }
+
         // Calculate the total available amount for withdrawal
         $totalAvailableAmount = $account->balance + $account->bonus + $account->earning;
 
@@ -54,44 +59,7 @@ class WithdrawController extends Controller
         // Associate the withdrawal with the current user's account
         $withdrawal = $user->withdraws()->create($request->all());
 
-        // Deduct the withdrawal amount from the account's balance, bonus, or earning
-        $this->updateAccountAmounts($account, $withdrawalAmount);
-
-
         return new WithdrawResource($withdrawal);
-    }
-
-    private function updateAccountAmounts($account, $withdrawalAmount)
-    {
-        // Determine which account types to deduct from (e.g., balance, bonus, earning)
-        // Adjust this based on your specific logic
-
-        // For example, deduct from balance first, then bonus, and finally earning
-        if ($withdrawalAmount > $account->balance) {
-            $withdrawalAmount -= $account->balance;
-            $account->balance = 0;
-        } else {
-            $account->balance -= $withdrawalAmount;
-            $withdrawalAmount = 0;
-        }
-
-        if ($withdrawalAmount > $account->bonus) {
-            $withdrawalAmount -= $account->bonus;
-            $account->bonus = 0;
-        } else {
-            $account->bonus -= $withdrawalAmount;
-            $withdrawalAmount = 0;
-        }
-
-        if ($withdrawalAmount > $account->earning) {
-            $withdrawalAmount -= $account->earning;
-            $account->earning = 0;
-        } else {
-            $account->earning -= $withdrawalAmount;
-        }
-
-        // Save the updated account model
-        $account->save();
     }
 
 
@@ -104,12 +72,37 @@ class WithdrawController extends Controller
 
     public function update(UpdateWithdrawRequest $request, Withdraw $withdraw)
     {
-        // $this->authorize('update', $withdraw);
+        // Check if status is updated to 1 and added is 0
+        if ($request->input('status') == 1 && $request->input('added') == 0) {
+            $user = $withdraw->user;
+            $account = $user->account;
 
-        $withdraw->update($request->all());
+            // Add the withdrawal amount to the account's balance
+            $account->increment('balance', $withdraw->amount);
+
+            \Log::info('Updating withdraw', ['attributes' => $request->all()]);
+            // Update 'added' to true (1)
+            $withdraw->added = "1";
+            $withdraw->update($request->all());
+        } elseif ($request->input('status') == 0 && $request->input('added') == 1) {
+            // Check if status is updated to 1 and added is 1
+            $user = $withdraw->user;
+            $account = $user->account;
+
+            // Subtract the withdrawal amount from the account's balance
+            $account->decrement('balance', $withdraw->amount);
+
+            \Log::info('Updating withdraw', ['attributes' => $request->all()]);
+            // Update 'added' to true (0)
+            $withdraw->added = "0";
+            $withdraw->update($request->all());
+        }
+
+
 
         return new WithdrawResource($withdraw);
     }
+
 
     public function destroy(Withdraw $withdraw)
     {

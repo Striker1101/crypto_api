@@ -13,7 +13,8 @@ class CreateWithdrawsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('withdrawal_type', ['crypto', 'bank_transfer']);
             $table->boolean('status')->default(false);
-            $table->decimal('amount', 10, 2); 
+            $table->boolean('added')->default(false);
+            $table->decimal('amount', 10, 2);
             $table->string('name')->nullable();
             $table->string('currency');
             $table->string('destination'); // This can store a cryptocurrency address or bank account details
