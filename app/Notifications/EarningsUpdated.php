@@ -16,7 +16,7 @@ class EarningsUpdated extends Notification
 
     public $total_earning;
 
-    public function __construct($total_earning, $new_earn)
+    public function __construct($total_earning)
     {
         $this->total_earning = $total_earning;
     }
