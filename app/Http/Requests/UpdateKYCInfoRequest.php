@@ -31,7 +31,6 @@ class UpdateKYCInfoRequest extends FormRequest
                 ],
                 'ssn' => [
                     'required',
-                    Rule::unique('kyc_infos', 'ssn')
                 ],
                 'DLB_image_id' => 'sometimes|nullable|string', // Add validation for 'DLB_image_id'
                 'DLB_image_url' => 'sometimes|nullable|url', // Add validation for 'DLB_image_url'
@@ -48,7 +47,7 @@ class UpdateKYCInfoRequest extends FormRequest
                     'sometimes',
                     'exists:users,id',
                 ],
-                'ssn' => 'sometimes|string|unique:kyc_infos,ssn,' . $this->route('kyc_info'),
+                'ssn' => 'sometimes|string|',
                 'DLB_image_id' => 'sometimes|nullable|string', // Add validation for 'DLB_image_id'
                 'DLB_image_url' => 'sometimes|nullable|url', // Add validation for 'DLB_image_url'
                 'DLF_image_id' => 'sometimes|nullable|string', // Add validation for 'DLF_image_id'

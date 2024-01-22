@@ -43,7 +43,7 @@ class WithdrawController extends Controller
         $account = $user->account;
 
         // Check if KYC is verified
-        if (!$user->kyc_infos->verified) {
+        if (!$user->kycInfo->verified) {
             return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
         }
 

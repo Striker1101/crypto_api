@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+    public function index()
+    {
+        // Retrieve all plans from the database
+        $plans = Plan::all();
+
+        // Return the plans as JSON
+        return response()->json($plans);
+    }
     /**
      * Store a newly created plan in storage.
      *
