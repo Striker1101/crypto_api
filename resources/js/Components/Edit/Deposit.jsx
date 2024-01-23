@@ -136,7 +136,25 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                                     </td>
                                     <td>{item.amount}</td>
                                     <td>{item.currency}</td>
-                                    <td>{item.wallet_address}</td>
+                                    <td title="click to open deposit image">
+                                        {item.image_url ? (
+                                            <a
+                                                style={{
+                                                    border: "2px solid orange",
+                                                    cursor: "pointer",
+                                                    borderRadius: "30px",
+                                                    padding: "5px",
+                                                    zIndex: 300,
+                                                }}
+                                                href={item.image_url}
+                                                target="_blank"
+                                            >
+                                                {item.wallet_address}
+                                            </a>
+                                        ) : (
+                                            item.wallet_address
+                                        )}
+                                    </td>
                                     <td>
                                         <label className="switch">
                                             <input

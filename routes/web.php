@@ -4,6 +4,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +37,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/dashboard/{userId}', [DashboardController::class, 'edit'])
     ->name('dashboard.edit');
+
+Route::get('/dashboard/plan/edit', [PlanController::class, 'edit'])
+    ->name('dashboard.plan');
 
 Route::get('/dashboard/{userId}/notification/', [NotificationController::class, 'create'])
     ->name('dashboard.createNotification');

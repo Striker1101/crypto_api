@@ -40,14 +40,10 @@ class DashboardController extends Controller
         $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
             ->find($userId);
 
-        // Fetch all plans
-        $plans = Plan::all();
-
 
         // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
-            'plans' => $plans,
         ]);
     }
 

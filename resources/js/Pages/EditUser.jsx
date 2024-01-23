@@ -4,11 +4,10 @@ import UserDetails from "@/Components/Edit/UserDetails";
 import Account from "@/Components/Edit/Account";
 import KYCInfo from "@/Components/Edit/KYCInfo";
 import Deposit from "@/Components/Edit/Deposit";
-import Plan from "@/Components/Edit/Plan";
 import Withdraw from "@/Components/Edit/Withdraw";
 import Notification from "@/Components/Edit/Notification";
 
-export default function EditUser({ auth, user, plans }) {
+export default function EditUser({ auth, user }) {
     let apiToken = "";
     useEffect(() => {
         apiToken = localStorage.getItem("token");
@@ -27,7 +26,6 @@ export default function EditUser({ auth, user, plans }) {
                 <UserDetails user={user} apiToken={apiToken} />
                 <Account account={user.account} apiToken={apiToken} />
                 <KYCInfo kyc_info={user.kyc_info} apiToken={apiToken} />
-                <Plan plans={plans} />
                 <Deposit
                     deposit={user.deposit}
                     apiToken={apiToken}

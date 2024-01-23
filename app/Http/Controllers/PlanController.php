@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PlanController extends Controller
 {
+
+
     public function index()
     {
         // Retrieve all plans from the database
@@ -14,6 +17,16 @@ class PlanController extends Controller
 
         // Return the plans as JSON
         return response()->json($plans);
+    }
+
+    public function edit()
+    {
+        // Fetch all plans
+        $plans = Plan::all();
+        // Pass the user to the view
+        return Inertia::render('UsersPlan', [
+            'plans' => $plans,
+        ]);
     }
     /**
      * Store a newly created plan in storage.
