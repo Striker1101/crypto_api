@@ -11,7 +11,7 @@ class StoreEarningRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,9 @@ class StoreEarningRequest extends FormRequest
     {
         return [
             //
+            'user_id' => 'required|exists:users,id',
+            'amount' => 'required|numeric|min:0.01',
+            'balance' => 'required|numeric|min:0.01',
         ];
     }
 }

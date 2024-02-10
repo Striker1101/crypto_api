@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('earnings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->decimal('amount', 15, 2)->default(0);
+            $table->decimal('balance', 15, 2)->default(0);
             $table->timestamps();
         });
     }

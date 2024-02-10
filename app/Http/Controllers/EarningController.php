@@ -1,66 +1,46 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Earning;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEarningRequest;
-use App\Http\Requests\UpdateEarningRequest;
 
 class EarningController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $earnings = Earning::all();
+
+        return response()->json(['earnings' => $earnings], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEarningRequest $request)
     {
-        //
+
+        $earning = Earning::create($request->all());
+
+        return response()->json(['message' => 'Earning created successfully', 'earning' => $earning], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Earning $earning)
+    public function update(Request $request, Earning $earning)
     {
-        //
+        $request->validate([
+            'amount' => 'required|numeric',
+            'balance' => 'required|numeric',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $earning->update($request->all());
+
+        return response()->json(['message' => 'Earning updated successfully', 'earning' => $earning], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Earning $earning)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEarningRequest $request, Earning $earning)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Earning $earning)
     {
-        //
+        $earning->delete();
+
+        return response()->json(['message' => 'Earning deleted successfully'], 200);
     }
 }

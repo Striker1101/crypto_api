@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\KYCInfo::factory(10)->create();
         \App\Models\Notification::factory(10)->create();
         \App\Models\Withdraw::factory(10)->create();
+        \App\Models\Earning::factory(10)->create();
+        \App\Models\Investment::factory(10)->create();
     }
 }
