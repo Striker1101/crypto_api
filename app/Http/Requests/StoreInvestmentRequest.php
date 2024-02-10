@@ -23,10 +23,8 @@ class StoreInvestmentRequest extends FormRequest
     {
         return [
             //
-            'user_id' => 'required|exists:users,id',
             'amount' => 'required|numeric|min:0.01',
-            'duration' => 'nullable|numeric',
-            'plan' => 'required|in:beginner,bronze,silver,gold,premium',
+            'check' => 'sometimes|boolean'
         ];
     }
 }

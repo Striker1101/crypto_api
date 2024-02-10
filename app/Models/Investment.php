@@ -11,5 +11,5 @@ class Investment extends Model
 
     protected $table = 'investments'; // Name of the table in the database
 
-    protected $fillable = ['user_id', 'amount', 'plan', 'duration']; // Fillable attribute
+    protected $fillable = ['amount']; // Fillable attribute
 }

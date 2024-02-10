@@ -15,11 +15,11 @@ class PlansTableSeeder extends Seeder
     {
         //
         $plans = [
-            ['plan' => 'beginner', 'percent' => 1, 'duration' => 30],
-            ['plan' => 'bronze', 'percent' => 3, 'duration' => 30],
-            ['plan' => 'silver', 'percent' => 5, 'duration' => 30],
-            ['plan' => 'gold', 'percent' => 8, 'duration' => 60],
-            ['plan' => 'premium', 'percent' => 10, 'duration' => 90],
+            ['plan' => 'beginner', 'percent' => 1, 'duration' => 30, 'max_account'=>50000],
+            ['plan' => 'bronze', 'percent' => 3, 'duration' => 30, 'max_account'=> 100000],
+            ['plan' => 'silver', 'percent' => 5, 'duration' => 30, 'max_account'=> 700000],
+            ['plan' => 'gold', 'percent' => 8, 'duration' => 60], 'max_account'=> 1000000,
+            ['plan' => 'premium', 'percent' => 10, 'duration' => 90, 'max_account'=> 20000000],
         ];
 
         // Insert data into the 'plans' table

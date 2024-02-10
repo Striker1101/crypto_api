@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('plan');
             $table->integer('percent');
             $table->integer('duration');
+            $table->integer('max_amount');
             $table->timestamps();
         });
     }

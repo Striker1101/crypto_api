@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\EarningController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DebitCardController;
 use App\Http\Controllers\DepositController;
@@ -60,6 +62,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'debit_card' => DebitCardController::class,
         'deposit' => DepositController::class,
         'plan' => PlanController::class,
+        'invest' => InvestmentController::class,
+        'earn' => EarningController::class,
         'kyc_info' => KYCInfoController::class,
         'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,

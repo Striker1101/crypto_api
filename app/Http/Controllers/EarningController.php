@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Earning;
@@ -19,6 +19,7 @@ class EarningController extends Controller
     public function store(StoreEarningRequest $request)
     {
 
+
         $earning = Earning::create($request->all());
 
         return response()->json(['message' => 'Earning created successfully', 'earning' => $earning], 201);
@@ -26,6 +27,7 @@ class EarningController extends Controller
 
     public function update(Request $request, Earning $earning)
     {
+
         $request->validate([
             'amount' => 'required|numeric',
             'balance' => 'required|numeric',
