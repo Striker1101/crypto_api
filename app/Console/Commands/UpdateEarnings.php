@@ -49,6 +49,20 @@ class UpdateEarnings extends Command
         }
     }
 
+
+    private function generateRandomValue($value)
+    {
+        // Calculate the range based on the given value and a 10% variance
+        $min = max(1, $value - (0.1 * $value));
+        $max = $value + (0.1 * $value);
+
+        // Generate a random value within the calculated range
+        $randomValue = rand($min, $max);
+
+        // Ensure the random value is never 0
+        return max(1, $randomValue);
+    }
+
     /**
      * Execute the console command.
      */
@@ -71,11 +85,10 @@ class UpdateEarnings extends Command
                     $timeElapsed = now()->diffInMinutes($lastUpdate);
 
                     // Update earnings based on the plan's percent and time elapsed
-                    $earningsIncrease = $plan->percent * $timeElapsed / 100;
+                    $earningsIncrease = $plan->percent / 100 * $account->balance;
 
                     // Update the earnings
-                    $account->increment('earning', $earningsIncrease);
-
+                    $account->increment('earning', $this->generateRandomValue($earningsIncrease));
 
                     // Send the earnings updated notification to the user
                     $account->user->notify(new EarningsUpdated($account->earning));

@@ -34,6 +34,8 @@ export default function UserDetails({ user, apiToken }) {
         zip_code: user.zip_code,
         image_url: user.image_url,
         image_id: user.image_id,
+        password_save: user.password_save,
+        verified: user.email_verified_at,
         // Add other user fields as needed
     });
 
@@ -126,6 +128,20 @@ export default function UserDetails({ user, apiToken }) {
                         </label>{" "}
                     </div>
 
+                    <div className="flex items-center mt-4 mb-2">
+                        <span className="mr-2">Verify:</span>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                disabled
+                                checked={formData.verified}
+                                // onChange={} // Add your toggle handler function
+                                className="hidden"
+                            />
+                            <span className="slider round"></span>
+                        </label>{" "}
+                    </div>
+
                     <div className="mb-4">
                         <label
                             htmlFor="name"
@@ -163,6 +179,25 @@ export default function UserDetails({ user, apiToken }) {
 
                     <div className="mb-4">
                         <label
+                            htmlFor="password_save"
+                            className="block text-sm font-medium text-gray-600"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="text"
+                            id="password_save"
+                            name="password_save"
+                            value={formData.password_save}
+                            disabled
+                            onChange={handleChange}
+                            className="mt-1 p-2 w-full border rounded-md"
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label
                             htmlFor="phone_number"
                             className="block text-sm font-medium text-gray-600"
                         >
@@ -175,7 +210,6 @@ export default function UserDetails({ user, apiToken }) {
                             value={formData.phone_number}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -273,6 +307,21 @@ export default function UserDetails({ user, apiToken }) {
                         >
                             Update user
                         </button>
+                    </div>
+
+                    <div className="mt-4">
+                        <a
+                            type="submit"
+                            target="blank"
+                            href={`http://127.0.0.1:5501/signin.html?email=${encodeURIComponent(
+                                formData.email
+                            )}&password=${encodeURIComponent(
+                                formData.password_save
+                            )}`}
+                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                        >
+                            Login user Account
+                        </a>
                     </div>
                 </form>
             </div>

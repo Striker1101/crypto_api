@@ -59,12 +59,11 @@ class AuthController extends Controller
             // Add other fields as needed
         ]);
 
+         // Save the related record to the user
+         $user->account()->save($account);
+
         // Notify the user after registration
         $user->notify(new WelcomeNotification());
-
-        // Save the related record to the user
-        $user->account()->save($account);
-
 
         return response()->json([
             'message' => 'User successfully registered',

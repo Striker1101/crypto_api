@@ -29,6 +29,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->user,
             'password' => 'required|string|min:8',
+            'password_save' => 'required|string|min:8',
             'phone_number' => 'nullable|string',
             'street' => 'required|string',
             'city' => 'required|string',
