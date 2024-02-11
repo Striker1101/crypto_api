@@ -20,7 +20,6 @@ export default function CreateWithdraw({ user_id }) {
             ...formData,
             [e.target.name]: e.target.value,
         });
-        console.log(formData);
     };
 
     //holds form element
@@ -28,10 +27,9 @@ export default function CreateWithdraw({ user_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
 
         axios
-            .post(`/api/storeWithdraw`, formData, {
+            .post(`/api/withdraw`, formData, {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
@@ -39,25 +37,27 @@ export default function CreateWithdraw({ user_id }) {
                 },
             })
             .then((res) => {
-                setModalMessage("withdraw was created successfully");
-                // Redirect to withdraw details page after successful update
+                console.log(res);
+                // setModalMessage("withdraw was created successfully");
+                // // Redirect to withdraw details page after successful update
 
-                form.current.reset();
-                setFormData({
-                    user_id: user_id,
-                    amount: "",
-                    currency: "",
-                    status: 0,
-                    destination: "",
-                    name: "",
-                    withdrawal_type: "bank_transfer",
-                });
+                // form.current.reset();
+                // setFormData({
+                //     user_id: user_id,
+                //     amount: "",
+                //     currency: "",
+                //     status: 0,
+                //     destination: "",
+                //     name: "",
+                //     withdrawal_type: "bank_transfer",
+                // });
 
-                setTimeout(() => {
-                    setModalMessage("");
-                }, 2000);
+                // setTimeout(() => {
+                //     setModalMessage("");
+                // }, 2000);
             })
             .catch((error) => {
+                console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -190,7 +190,7 @@ export default function CreateWithdraw({ user_id }) {
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         >
-                            <option selected value="bank_transfer">
+                            <option defaultValue value="bank_transfer">
                                 Bank Transfer
                             </option>
                             <option value="crypto">Crypto</option>

@@ -6,6 +6,8 @@ use App\Http\Requests\StoreWithdrawRequest;
 use App\Http\Requests\UpdateWithdrawRequest;
 use App\Http\Resources\WithdrawResource;
 use App\Models\Withdraw;
+use App\Models\User;
+use App\Notifications\WithdrawPending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -39,12 +41,17 @@ class WithdrawController extends Controller
 
     public function store(StoreWithdrawRequest $request)
     {
-        $user = Auth::user();
+        // Get the user_id from the request
+        $userId = $request->user_id;
+
+        // Find the user based on the user_id
+        $user = User::find($userId);
+        //on user.error return no such user
         $account = $user->account;
 
         // Check if KYC is verified
-        if (!$user->kycInfo->verified) {
-            return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
+        if ($user->kycInfo->verified == "0") {
+            return response()->json(['message' => 'Please verify KYC.', 'status' => 422], 422);
         }
 
         // Calculate the total available amount for withdrawal
@@ -58,6 +65,10 @@ class WithdrawController extends Controller
 
         // Associate the withdrawal with the current user's account
         $withdrawal = $user->withdraws()->create($request->all());
+
+
+        // Send the earnings updated notification to the user
+        $withdrawal->user->notify(new WithdrawPending($withdrawal->amount, $user->name));
 
         return new WithdrawResource($withdrawal);
     }

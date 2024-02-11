@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvestmentRequest;
-use App\Models\Account;
+use App\Models\User;
 use App\Models\Investment;
 use App\Models\Plan;
 use Illuminate\Http\Request;
@@ -29,8 +29,12 @@ class InvestmentController extends Controller
 
     public function store(StoreInvestmentRequest $request)
     {
-        dd($request->amount);
-        $user = auth()->user();
+        // Get the user_id from the request
+        $userId = $request->user_id;
+
+        // Find the user based on the user_id
+        $user = User::find($userId);
+        //on user.error return no such user
         $accountStage = $user->account->account_stage;
         $account = $user->account;
 
