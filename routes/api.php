@@ -11,9 +11,7 @@ use App\Http\Controllers\KYCInfoController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\API\UserController;
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +35,7 @@ Route::group([
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
 
 });
-
+Route::post('/sendEmailVerificationLink', 'App\Http\Controllers\API\AuthController@sendEmailVerificationLink');
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
 
@@ -51,7 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
     Route::get('user-profile', 'App\Http\Controllers\API\AuthController@userProfile');
     Route::get('user/auth', 'App\Http\Controllers\API\UserController@auth');
-    Route::get('/sendEmailVerificationLink', [AuthController::class, 'sendEmailVerificationLink']);
+
     Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
     Route::Post('/storeDeposit', 'App\Http\Controllers\Dashboard\DashboardController@storeDeposit');
     Route::Post('/storeWithdraw', 'App\Http\Controllers\Dashboard\DashboardController@storeWithdraw');

@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\HttpResponses;
 use App\Notifications\WelcomeNotification;
-
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -59,8 +59,11 @@ class AuthController extends Controller
             // Add other fields as needed
         ]);
 
-         // Save the related record to the user
-         $user->account()->save($account);
+        // Save the related record to the user
+        $user->account()->save($account);
+
+        // Send email verification link to the user
+        event(new Registered($user));
 
         // Notify the user after registration
         $user->notify(new WelcomeNotification());
@@ -75,16 +78,25 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
+        //
+
         if (Auth::attempt($request->validated())) {
             // Authentication passed...
             $user = Auth::user()->load(['account', 'kycInfo']); // Load both 'account' and 'kyc_infos' relationships
 
+            // Check if the user's email is verified
+            if (auth()->user()->hasVerifiedEmail()) {
+                // If email is verified, return success response or generate JWT token
+                return response()->json([
+                    'message' => 'Login successful',
+                    'user' => $user,
+                    'access_token' => $this->createNewToken($user->createToken('API token of ' . $user->name)->plainTextToken)
+                ]);
+            } else {
+                // If email is not verified, return error response
+                return response()->json(['message' => 'Please verify your email'], 403);
+            }
 
-            return response()->json([
-                'message' => 'Login successful',
-                'user' => $user,
-                'access_token' => $this->createNewToken($user->createToken('API token of ' . $user->name)->plainTextToken)
-            ]);
         } else {
             // Authentication failed...
             return response()->json([
@@ -124,14 +136,21 @@ class AuthController extends Controller
 
     public function sendEmailVerificationLink(Request $request)
     {
-        $user = Auth::user();
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], [
+            'email.exists' => 'User does not exist.',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
 
         if (!$user->hasVerifiedEmail()) {
             $user->sendEmailVerificationNotification();
-            return response()->json(['message' => 'Verification link sent to your email'], 200);
+            return response()->json(['message' => 'Verification link sent successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Email already verified'], 400);
         }
-
-        return response()->json(['message' => 'Email already verified'], 400);
     }
 
     // Controller Method for Verifying Email:
