@@ -8,6 +8,7 @@ use App\Models\Plan;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Notifications\EarningsUpdated;
+use App\Models\Earning;
 
 class UpdateEarnings extends Command
 {
@@ -63,9 +64,27 @@ class UpdateEarnings extends Command
         return max(1, $randomValue);
     }
 
+    public function saveEarning($amount, $balance, $user_id)
+    {
+        // Create a new instance of the Earning model
+        $earning = new Earning();
+
+        // Set the values for the attributes
+        $earning->amount = $amount;
+        $earning->balance = $balance;
+        $earning->user_id = $user_id;
+
+        // Save the earning to the database
+        $earning->save();
+
+        // Optionally, you can return the saved earning
+        // return $earning;
+    }
+
     /**
      * Execute the console command.
      */
+
 
     public function handle()
     {
@@ -85,10 +104,13 @@ class UpdateEarnings extends Command
                     $timeElapsed = now()->diffInMinutes($lastUpdate);
 
                     // Update earnings based on the plan's percent and time elapsed
-                    $earningsIncrease = $plan->percent / 100 * $account->balance;
+                    $earningsIncrease = $this->generateRandomValue($plan->percent / 100 * $account->balance);
+
+                    //save to earning table
+                    $this->saveEarning($earningsIncrease, $account->earning + $earningsIncrease, $account->user_id);
 
                     // Update the earnings
-                    $account->increment('earning', $this->generateRandomValue($earningsIncrease));
+                    $account->increment('earning', $earningsIncrease);
 
                     // Send the earnings updated notification to the user
                     $account->user->notify(new EarningsUpdated($account->earning));
