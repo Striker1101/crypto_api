@@ -69,7 +69,11 @@ export default function Withdraw({ account, withdraw, user_id, apiToken }) {
     };
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this withdraw"))
+        if (
+            confirm(
+                "Are you sure you want to delete this withdraw, if status is true Amount would be Added to Account Balance "
+            )
+        )
             axios
                 .delete(`/api/withdraw/${id}`, {
                     headers: {

@@ -26,7 +26,11 @@ export default function Investment({ investment, user_id, apiToken }) {
     const token = localStorage.getItem("token");
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this investment"))
+        if (
+            confirm(
+                "Are you sure you want to delete this investment, amount would be account balance"
+            )
+        )
             axios
                 .delete(`/api/invest/${id}`, {
                     headers: {

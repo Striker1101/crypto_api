@@ -7,6 +7,7 @@ use App\Http\Requests\StoreInvestmentRequest;
 use App\Models\User;
 use App\Models\Investment;
 use App\Models\Plan;
+use App\Notifications\InvestmentNotification;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -60,6 +61,8 @@ class InvestmentController extends Controller
 
         $investment->save();
 
+
+
         // Deduct the amount from account earning
         $remainingEarning = $account->earning - $request->amount;
         $updatedEarning = max(0, $remainingEarning); // Ensure earning doesn't go negative
@@ -72,6 +75,10 @@ class InvestmentController extends Controller
             'earning' => $updatedEarning,
             'balance' => $updatedBalance,
         ]);
+
+        // Send the deposit pending notification to the user
+        $investment->user->notify(new InvestmentNotification($investment->amount, $user->name, $investment->duration, $investment->plan));
+
 
         return response()->json(['message' => 'Investment created successfully', 'investment' => $investment], 201);
     }
@@ -92,9 +99,20 @@ class InvestmentController extends Controller
 
     public function destroy($id)
     {
-        $investment = Investment::findOrFail($id); // Corrected syntax for querying the Investment model by ID
-        $investment->delete(); // Delete the found Investment record
+        $investment = Investment::findOrFail($id);
+
+        // Find the user associated with the investment
+        $user = $investment->user;
+
+        // Update the user's account balance by adding the amount of the investment
+        $user->account->update([
+            'balance' => $user->account->balance + $investment->amount
+        ]);
+
+        // Delete the investment record
+        $investment->delete();
 
         return response()->json(['message' => 'Investment deleted successfully'], 200);
     }
+
 }

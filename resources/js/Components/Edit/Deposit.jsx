@@ -68,7 +68,11 @@ export default function Deposit({ deposit, user_id, apiToken }) {
     };
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this deposit"))
+        if (
+            confirm(
+                "Are you sure you want to delete this deposit, if status is true Amount would be Decreased from Account Balance "
+            )
+        )
             axios
                 .delete(`/api/deposit/${id}`, {
                     headers: {

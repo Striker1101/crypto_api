@@ -25,7 +25,6 @@ class StoreEarningRequest extends FormRequest
             //
             'user_id' => 'required|exists:users,id',
             'amount' => 'required|numeric|min:0.01',
-            'balance' => 'required|numeric|min:0.01',
         ];
     }
 }

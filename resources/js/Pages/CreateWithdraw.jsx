@@ -12,6 +12,7 @@ export default function CreateWithdraw({ user_id }) {
         destination: "",
         name: "",
         withdrawal_type: "bank_transfer",
+        check: 0,
         // Add other user fields as needed
     });
 
@@ -20,6 +21,13 @@ export default function CreateWithdraw({ user_id }) {
             ...formData,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const handleToggle = () => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            check: prevFormData.check == 1 ? 0 : 1,
+        }));
     };
 
     //holds form element
@@ -37,27 +45,25 @@ export default function CreateWithdraw({ user_id }) {
                 },
             })
             .then((res) => {
-                console.log(res);
-                // setModalMessage("withdraw was created successfully");
-                // // Redirect to withdraw details page after successful update
+                setModalMessage("withdraw was created successfully");
+                // Redirect to withdraw details page after successful update
 
-                // form.current.reset();
-                // setFormData({
-                //     user_id: user_id,
-                //     amount: "",
-                //     currency: "",
-                //     status: 0,
-                //     destination: "",
-                //     name: "",
-                //     withdrawal_type: "bank_transfer",
-                // });
+                form.current.reset();
+                setFormData({
+                    user_id: user_id,
+                    amount: "",
+                    currency: "",
+                    status: 0,
+                    destination: "",
+                    name: "",
+                    withdrawal_type: "bank_transfer",
+                });
 
-                // setTimeout(() => {
-                //     setModalMessage("");
-                // }, 2000);
+                setTimeout(() => {
+                    setModalMessage("");
+                }, 2000);
             })
             .catch((error) => {
-                console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -197,6 +203,18 @@ export default function CreateWithdraw({ user_id }) {
                         </select>
                     </div>
 
+                    <div className="flex items-center">
+                        <span className="mr-2">Check KYC verification:</span>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={formData.check == 1}
+                                onChange={() => handleToggle()}
+                                className="hidden"
+                            />
+                            <span className="slider round"></span>
+                        </label>{" "}
+                    </div>
                     {/* Add other user fields as needed */}
 
                     <div className="mt-4">

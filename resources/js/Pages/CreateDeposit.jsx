@@ -27,7 +27,7 @@ export default function CreateDeposit({ user_id }) {
         e.preventDefault();
 
         axios
-            .post(`/api/storeDeposit`, formData, {
+            .post(`/api/deposit`, formData, {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed

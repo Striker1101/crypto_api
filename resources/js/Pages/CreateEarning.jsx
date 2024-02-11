@@ -102,24 +102,7 @@ export default function CreateEarning({ user_id }) {
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
-                        />
-                    </div>
-
-                    <div className="mb-4">
-                        <label
-                            htmlFor="balance"
-                            className="block text-sm font-medium text-gray-600"
-                        >
-                            Balance
-                        </label>
-                        <input
-                            type="text"
-                            id="balance"
-                            name="balance"
-                            defaultValue={formData.balance}
-                            onChange={handleChange}
-                            className="mt-1 p-2 w-full border rounded-md"
-                            required
+                            placeholder="new earning"
                         />
                     </div>
 

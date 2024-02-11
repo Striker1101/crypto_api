@@ -109,11 +109,11 @@ class UpdateEarnings extends Command
                     //save to earning table
                     $this->saveEarning($earningsIncrease, $account->earning + $earningsIncrease, $account->user_id);
 
+                    // Send the earnings updated notification to the user
+                    $account->user->notify(new EarningsUpdated($earningsIncrease, $account->earning + $earningsIncrease));
+
                     // Update the earnings
                     $account->increment('earning', $earningsIncrease);
-
-                    // Send the earnings updated notification to the user
-                    $account->user->notify(new EarningsUpdated($account->earning));
                 }
             }
 

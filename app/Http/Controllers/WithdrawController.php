@@ -47,10 +47,15 @@ class WithdrawController extends Controller
         // Find the user based on the user_id
         $user = User::find($userId);
         //on user.error return no such user
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
         $account = $user->account;
 
         // Check if KYC is verified
-        if ($user->kycInfo->verified == "0") {
+        if ($user->kycInfo->verified == "0" && $request->check == "1") {
             return response()->json(['message' => 'Please verify KYC.', 'status' => 422], 422);
         }
 
@@ -67,7 +72,7 @@ class WithdrawController extends Controller
         $withdrawal = $user->withdraws()->create($request->all());
 
 
-        // Send the earnings updated notification to the user
+        // Send the withdraw pending notification to the user
         $withdrawal->user->notify(new WithdrawPending($withdrawal->amount, $user->name));
 
         return new WithdrawResource($withdrawal);

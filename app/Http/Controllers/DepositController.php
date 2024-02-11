@@ -8,6 +8,7 @@ use App\Http\Resources\DebitCardResource;
 use App\Http\Resources\DepositResource;
 use App\Models\Deposit;
 use App\Models\User;
+use App\Notifications\DepositPending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -54,8 +55,15 @@ class DepositController extends Controller
         $user = User::find($userId);
         //on user.error return no such user
 
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
         // Associate the deposit with the current user
         $deposit = $user->deposit()->create($request->all());
+
+        // Send the deposit pending notification to the user
+        $deposit->user->notify(new DepositPending($deposit->amount, $user->name));
 
         return new DepositResource($deposit);
     }

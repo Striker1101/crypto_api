@@ -29,7 +29,7 @@ export default function CreateInvestment({ user_id }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         formData.amount = parseInt(formData.amount);
-        console.log(formData);
+
         axios
             .post(`/api/invest/`, formData, {
                 headers: {
@@ -52,7 +52,7 @@ export default function CreateInvestment({ user_id }) {
                 }, 2000);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -64,7 +64,9 @@ export default function CreateInvestment({ user_id }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">Create Investment</h2>
+                    <h2 className="text-2xl font-semibold">
+                        Create Investment
+                    </h2>
                     <button
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         onClick={() => window.history.back()}
