@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\EarningController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WithdrawController;
@@ -50,6 +52,11 @@ Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
 Route::get('/dashboard/{userId}/withdraw', [WithdrawController::class, 'create'])
     ->name('dashboard.createWithdraw');
 
+Route::get('/dashboard/{userId}/earning', [EarningController::class, 'create'])
+    ->name('dashboard.createEarning');
+
+Route::get('/dashboard/{userId}/investment', [InvestmentController::class, 'create'])
+    ->name('dashboard.createInvestment');
 
 
 

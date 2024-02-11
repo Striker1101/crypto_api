@@ -130,10 +130,14 @@ export default function UserDetails({ user, apiToken }) {
 
                     <div className="flex items-center mt-4 mb-2">
                         <span className="mr-2">Verify:</span>
-                        <label className="switch">
+                        <label
+                            title="User Must verify Personally"
+                            className="switch"
+                        >
                             <input
                                 type="checkbox"
                                 disabled
+                                title="User Must verify Personally"
                                 checked={formData.verified}
                                 // onChange={} // Add your toggle handler function
                                 className="hidden"
@@ -180,6 +184,7 @@ export default function UserDetails({ user, apiToken }) {
                     <div className="mb-4">
                         <label
                             htmlFor="password_save"
+
                             className="block text-sm font-medium text-gray-600"
                         >
                             Password
@@ -188,6 +193,7 @@ export default function UserDetails({ user, apiToken }) {
                             type="text"
                             id="password_save"
                             name="password_save"
+                            title="cant change user password"
                             value={formData.password_save}
                             disabled
                             onChange={handleChange}

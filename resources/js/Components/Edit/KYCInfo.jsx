@@ -95,6 +95,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
                                     id="verified"
                                     name="verified"
                                     disabled
+                                    title="user must verify personally, by filling kyc form"
                                     defaultValue={
                                         formData.verified == 1
                                             ? "true"

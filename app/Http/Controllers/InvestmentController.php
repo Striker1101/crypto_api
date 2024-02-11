@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Investment;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 
 class InvestmentController extends Controller
@@ -19,8 +20,16 @@ class InvestmentController extends Controller
         return response()->json(['investments' => $investments], 200);
     }
 
+    public function create($userId)
+    {
+        return Inertia::render('CreateInvestment', [
+            'user_id' => $userId,
+        ]);
+    }
+
     public function store(StoreInvestmentRequest $request)
     {
+        dd($request->amount);
         $user = auth()->user();
         $accountStage = $user->account->account_stage;
         $account = $user->account;
@@ -35,7 +44,7 @@ class InvestmentController extends Controller
         }
 
         // Check if account balance + account earning is greater than or equal to the requested amount
-        if (($user->account->balance + $user->account->earning) < $request->amount) {
+        if ($request->amount > ($user->account->balance + $user->account->earning)) {
             return response()->json(['message' => 'Insufficient funds'], 422);
         }
 
@@ -77,9 +86,10 @@ class InvestmentController extends Controller
         return response()->json(['message' => 'Investment updated successfully', 'investment' => $investment], 200);
     }
 
-    public function destroy(Investment $investment)
+    public function destroy($id)
     {
-        $investment->delete();
+        $investment = Investment::findOrFail($id); // Corrected syntax for querying the Investment model by ID
+        $investment->delete(); // Delete the found Investment record
 
         return response()->json(['message' => 'Investment deleted successfully'], 200);
     }

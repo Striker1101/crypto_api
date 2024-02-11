@@ -37,7 +37,7 @@ class DashboardController extends Controller
     {
 
         // Fetch user details with all associated relationships
-        $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
+        $user = User::with(['account', 'earning', "investment", 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
             ->find($userId);
 
 

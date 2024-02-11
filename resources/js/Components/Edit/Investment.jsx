@@ -3,74 +3,32 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-export default function Deposit({ deposit, user_id, apiToken }) {
-    if (deposit.length < 1) {
+export default function Investment({ investment, user_id, apiToken }) {
+    if (investment.length < 1) {
         return (
             <div className="container mx-auto mt-8">
                 <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
-                    No Deposit Found For this User
+                    No investment Found For this User
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-                        href={`/dashboard/${user_id}/deposit`}
+                        href={`/dashboard/${user_id}/investment`}
                         method="get"
                         as="button"
                     >
-                        Add Deposit
+                        Add Investment
                     </Link>
                 </div>
             </div>
         );
     }
-
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
-    const handleToggle = (id) => {
-        deposit.map((item) => {
-            if (item.id == id) {
-                item.status === "pending"
-                    ? (item.status = "completed")
-                    : (item.status = "pending");
-
-                //reload
-                setreload(!reload);
-
-                //submit
-                handleSubmit(item);
-            }
-        });
-    };
-
-    const handleSubmit = (formData) => {
-        axios
-            .put(`/api/deposit/${formData.id}`, formData, {
-                headers: {
-                    "Content-Type": "application/json",
-                    // Add any other headers if needed
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then((res) => {
-                setModalMessage("deposit was updated successfully");
-                // Redirect to deposit details page after successful update
-                Inertia.visit(`/dashboard/${formData.user_id}`);
-
-                setTimeout(() => {
-                    setModalMessage("");
-                }, 2000);
-            })
-            .catch((error) => {
-                setModalMessage(error.response.data.message);
-                setTimeout(() => {
-                    setModalMessage("");
-                }, 2000);
-            });
-    };
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this deposit"))
+        if (confirm("Are you sure you want to delete this investment"))
             axios
-                .delete(`/api/deposit/${id}`, {
+                .delete(`/api/invest/${id}`, {
                     headers: {
                         "Content-Type": "application/json",
                         // Add any other headers if needed
@@ -78,10 +36,8 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                     },
                 })
                 .then((res) => {
-                    console.log(res);
-
-                    setModalMessage("deposit was deleted successfully");
-                    // Redirect to deposit details page after successful update
+                    setModalMessage("investment was deleted successfully");
+                    // Redirect to investment details page after successful update
                     Inertia.visit(`/dashboard/${user_id}`);
 
                     setTimeout(() => {
@@ -100,14 +56,14 @@ export default function Deposit({ deposit, user_id, apiToken }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-xxl mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">Edit Deposit</h2>
+                    <h2 className="text-2xl font-semibold">Edit Investment</h2>
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-                        href={`/dashboard/${user_id}/deposit`}
+                        href={`/dashboard/${user_id}/investment`}
                         method="get"
                         as="button"
                     >
-                        Add Deposit
+                        Add Investment
                     </Link>
                 </div>
                 <table className="table table-striped table-bordered">
@@ -115,15 +71,14 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                         <tr>
                             <th>Time</th>
                             <th>Amount</th>
-                            <th>Currency</th>
-                            <th>Wallet Address</th>
-                            <th>Status</th>
+                            <th>Duration</th>
+                            <th>Plan</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {deposit &&
-                            deposit.map((item) => (
+                        {investment &&
+                            investment.map((item) => (
                                 <tr key={item.id}>
                                     <td>
                                         {" "}
@@ -141,41 +96,8 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                                         </p>
                                     </td>
                                     <td>{item.amount}</td>
-                                    <td>{item.currency}</td>
-                                    <td title="click to open deposit image">
-                                        {item.image_url ? (
-                                            <a
-                                                style={{
-                                                    border: "2px solid orange",
-                                                    cursor: "pointer",
-                                                    borderRadius: "30px",
-                                                    padding: "5px",
-                                                    zIndex: 300,
-                                                }}
-                                                href={item.image_url}
-                                                target="_blank"
-                                            >
-                                                {item.wallet_address}
-                                            </a>
-                                        ) : (
-                                            item.wallet_address
-                                        )}
-                                    </td>
-                                    <td>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                checked={
-                                                    item.status === "completed"
-                                                }
-                                                onChange={() =>
-                                                    handleToggle(item.id)
-                                                } // Add your toggle handler function
-                                                className="hidden"
-                                            />
-                                            <span className="slider round"></span>
-                                        </label>
-                                    </td>
+                                    <td>{item.duration}</td>
+                                    <td>{item.plan}</td>
                                     <td>
                                         <button
                                             onClick={() => {

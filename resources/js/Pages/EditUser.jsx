@@ -6,6 +6,8 @@ import KYCInfo from "@/Components/Edit/KYCInfo";
 import Deposit from "@/Components/Edit/Deposit";
 import Withdraw from "@/Components/Edit/Withdraw";
 import Notification from "@/Components/Edit/Notification";
+import Earning from "@/Components/Edit/Earning";
+import Investment from "@/Components/Edit/Investment";
 
 export default function EditUser({ auth, user }) {
     let apiToken = "";
@@ -29,13 +31,25 @@ export default function EditUser({ auth, user }) {
                 <Deposit
                     deposit={user.deposit}
                     apiToken={apiToken}
+                    account={{
+                        balance: user.account.balance,
+                        earning: user.account.earning,
+                        bonus: user.account.bonus,
+                    }}
                     user_id={user.id}
                 />
                 <Withdraw
                     withdraw={user.withdraws}
                     apiToken={apiToken}
+                    account={{
+                        balance: user.account.balance,
+                        earning: user.account.earning,
+                        bonus: user.account.bonus,
+                    }}
                     user_id={user.id}
                 />
+                <Earning earning={user.earning} user_id={user.id} />
+                <Investment investment={user.investment} user_id={user.id} />
                 <Notification
                     notification={user.notifications}
                     user_id={user.id}

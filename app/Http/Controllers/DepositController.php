@@ -74,6 +74,18 @@ class DepositController extends Controller
 
     public function destroy(Deposit $deposit)
     {
+
+        // Check if the deposit status is 1 (completed)
+        if ($deposit->status === "completed") {
+            $user = $deposit->user;
+            $account = $user->account;
+
+            // Increase the account's balance with the deposital amount
+            $account->decrement('balance', $deposit->amount);
+
+            // Save the updated account
+            $account->save();
+        }
         $deposit->delete();
 
         return response()->json(['message' => 'Deposit deleted successfully']);

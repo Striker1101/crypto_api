@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-export default function CreateNotify({ user_id }) {
+export default function CreateInvestment({ user_id }) {
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         user_id: user_id,
-        content: "",
-        read: 0,
-        header: "",
-        footer: "",
-        // Add other user fields as needed
+        amount: parseInt(0),
+        check: 0,
     });
 
     const handleChange = (e) => {
@@ -19,31 +16,35 @@ export default function CreateNotify({ user_id }) {
         });
     };
 
+    const handleToggle = () => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            check: prevFormData.check == 1 ? 0 : 1,
+        }));
+    };
+
     //holds form element
     const form = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        formData.amount = parseInt(formData.amount);
+        console.log(formData);
         axios
-            .post(`/api/notify`, formData, {
+            .post(`/api/invest/`, formData, {
                 headers: {
                     "Content-Type": "application/json",
-                    // Add any other headers if needed
                     Authorization: `Bearer ${token}`,
                 },
             })
             .then((res) => {
-                setModalMessage("mail was created successfully");
-                // Redirect to deposit details page after successful update
+                setModalMessage("investment was created successfully");
+                // Reset page
 
                 form.current.reset();
                 setFormData({
                     user_id: user_id,
-                    content: "",
-                    read: 0,
-                    header: "",
-                    footer: "",
+                    amount: 0,
                 });
 
                 setTimeout(() => {
@@ -51,6 +52,7 @@ export default function CreateNotify({ user_id }) {
                 }, 2000);
             })
             .catch((error) => {
+                console.log(error)
                 setModalMessage(error.response.data.message);
                 setTimeout(() => {
                     setModalMessage("");
@@ -62,9 +64,7 @@ export default function CreateNotify({ user_id }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">
-                        Send Mail
-                    </h2>
+                    <h2 className="text-2xl font-semibold">Create Investment</h2>
                     <button
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         onClick={() => window.history.back()}
@@ -95,56 +95,35 @@ export default function CreateNotify({ user_id }) {
 
                     <div className="mb-4">
                         <label
-                            htmlFor="content"
+                            htmlFor="amount"
                             className="block text-sm font-medium text-gray-600"
                         >
-                            Content
+                            Amount
                         </label>
-                        <textarea
+                        <input
                             type="number"
-                            id="content"
-                            name="content"
-                            defaultValue={formData.content}
+                            id="amount"
+                            name="amount"
+                            min={1}
+                            minLength={1}
+                            defaultValue={formData.amount}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label
-                            htmlFor="header"
-                            className="block text-sm font-medium text-gray-600"
-                        >
-                            Header
-                        </label>
-                        <input
-                            type="text"
-                            id="header"
-                            name="header"
-                            defaultValue={formData.header}
-                            onChange={handleChange}
-                            className="mt-1 p-2 w-full border rounded-md"
-                            required
-                        />
-                    </div>
-
-                    <div className="mb-4">
-                        <label
-                            htmlFor="footer"
-                            className="block text-sm font-medium text-gray-600"
-                        >
-                            Footer
-                        </label>
-                        <input
-                            type="text"
-                            id="footer"
-                            name="footer"
-                            defaultValue={formData.footer}
-                            onChange={handleChange}
-                            className="mt-1 p-2 w-full border rounded-md"
-                            required
-                        />
+                    <div className="flex items-center">
+                        <span className="mr-2">Check User Plan Package:</span>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={formData.check == 1}
+                                onChange={() => handleToggle()}
+                                className="hidden"
+                            />
+                            <span className="slider round"></span>
+                        </label>{" "}
                     </div>
 
                     {/* Add other user fields as needed */}

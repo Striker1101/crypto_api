@@ -54,7 +54,7 @@ export default function CreateDeposit({ user_id }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">Edit Deposit</h2>
+                    <h2 className="text-2xl font-semibold">Create Deposit</h2>
                     <button
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         onClick={() => window.history.back()}
@@ -94,6 +94,7 @@ export default function CreateDeposit({ user_id }) {
                             type="number"
                             id="amount"
                             name="amount"
+                            placeholder="100"
                             defaultValue={formData.amount}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
@@ -106,12 +107,13 @@ export default function CreateDeposit({ user_id }) {
                             htmlFor="currency"
                             className="block text-sm font-medium text-gray-600"
                         >
-                            Currency
+                            Holder
                         </label>
                         <input
                             type="text"
                             id="currency"
                             name="currency"
+                            placeholder="Bank Name OR Crypto Name"
                             value={formData.currency}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
@@ -124,12 +126,13 @@ export default function CreateDeposit({ user_id }) {
                             htmlFor="wallet_address"
                             className="block text-sm font-medium text-gray-600"
                         >
-                            Wallet Address
+                            Holder Address
                         </label>
                         <input
                             type="text"
                             id="wallet_address"
                             name="wallet_address"
+                            placeholder="Bank Number OR Wallet Address"
                             value={formData.wallet_address}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"

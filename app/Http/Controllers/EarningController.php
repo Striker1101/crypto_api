@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Earning;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEarningRequest;
+use Inertia\Inertia;
 
 class EarningController extends Controller
 {
@@ -14,6 +15,13 @@ class EarningController extends Controller
         $earnings = Earning::all();
 
         return response()->json(['earnings' => $earnings], 200);
+    }
+
+    public function create($userId)
+    {
+        return Inertia::render('CreateEarning', [
+            'user_id' => $userId,
+        ]);
     }
 
     public function store(StoreEarningRequest $request)
@@ -39,9 +47,10 @@ class EarningController extends Controller
         return response()->json(['message' => 'Earning updated successfully', 'earning' => $earning], 200);
     }
 
-    public function destroy(Earning $earning)
+    public function destroy($id)
     {
-        $earning->delete();
+        $earning = Earning::findOrFail($id); // Corrected syntax for querying the Earning model by ID
+        $earning->delete(); // Delete the found Earning record
 
         return response()->json(['message' => 'Earning deleted successfully'], 200);
     }

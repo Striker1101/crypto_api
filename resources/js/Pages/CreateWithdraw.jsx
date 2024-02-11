@@ -11,7 +11,7 @@ export default function CreateWithdraw({ user_id }) {
         status: 0,
         destination: "",
         name: "",
-        withdrawal_type: "",
+        withdrawal_type: "bank_transfer",
         // Add other user fields as needed
     });
 
@@ -20,6 +20,7 @@ export default function CreateWithdraw({ user_id }) {
             ...formData,
             [e.target.name]: e.target.value,
         });
+        console.log(formData);
     };
 
     //holds form element
@@ -27,6 +28,7 @@ export default function CreateWithdraw({ user_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData);
 
         axios
             .post(`/api/storeWithdraw`, formData, {
@@ -48,7 +50,7 @@ export default function CreateWithdraw({ user_id }) {
                     status: 0,
                     destination: "",
                     name: "",
-                    withdrawal_type: "",
+                    withdrawal_type: "bank_transfer",
                 });
 
                 setTimeout(() => {
@@ -67,7 +69,7 @@ export default function CreateWithdraw({ user_id }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">Edit Withdraw</h2>
+                    <h2 className="text-2xl font-semibold">Create Withdraw</h2>
                     <button
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         onClick={() => window.history.back()}
@@ -107,6 +109,7 @@ export default function CreateWithdraw({ user_id }) {
                             type="number"
                             id="amount"
                             name="amount"
+                            placeholder="100"
                             defaultValue={formData.amount}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
@@ -119,11 +122,12 @@ export default function CreateWithdraw({ user_id }) {
                             htmlFor="currency"
                             className="block text-sm font-medium text-gray-600"
                         >
-                            Currency
+                            Holder
                         </label>
                         <input
                             type="text"
                             id="currency"
+                            placeholder="CryptoCurrency Name OR Bank Name"
                             name="currency"
                             value={formData.currency}
                             onChange={handleChange}
@@ -143,6 +147,7 @@ export default function CreateWithdraw({ user_id }) {
                             type="text"
                             id="destination"
                             name="destination"
+                            placeholder="3140938909 OR Wallet address"
                             value={formData.destination}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
@@ -160,6 +165,7 @@ export default function CreateWithdraw({ user_id }) {
                         <input
                             type="text"
                             id="name"
+                            placeholder="John Smith"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -175,7 +181,7 @@ export default function CreateWithdraw({ user_id }) {
                         >
                             Withdrawal Type
                         </label>
-                        <input
+                        <select
                             type="text"
                             id="withdrawal_type"
                             name="withdrawal_type"
@@ -183,7 +189,12 @@ export default function CreateWithdraw({ user_id }) {
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
-                        />
+                        >
+                            <option selected value="bank_transfer">
+                                Bank Transfer
+                            </option>
+                            <option value="crypto">Crypto</option>
+                        </select>
                     </div>
 
                     {/* Add other user fields as needed */}

@@ -81,8 +81,19 @@ class WithdrawController extends Controller
 
     public function destroy(Withdraw $withdraw)
     {
-        // $this->authorize('delete', $withdraw);
+        // Check if the withdraw status is 1 (completed)
+        if ($withdraw->status === 1) {
+            $user = $withdraw->user;
+            $account = $user->account;
 
+            // Increase the account's balance with the withdrawal amount
+            $account->increment('balance', $withdraw->amount);
+
+            // Save the updated account
+            $account->save();
+        }
+
+        // Delete the withdrawal
         $withdraw->delete();
 
         return response()->json(['message' => 'Withdrawal deleted successfully']);

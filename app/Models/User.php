@@ -89,6 +89,16 @@ class User extends Authenticatable
         return $this->hasMany(Withdraw::class);
     }
 
+    public function earning()
+    {
+        return $this->hasMany(Earning::class);
+    }
+
+    public function investment()
+    {
+        return $this->hasMany(Investment::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

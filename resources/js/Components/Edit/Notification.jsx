@@ -2,11 +2,18 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 export default function Notification({ notification, user_id }) {
-    if (notification === null) {
+    if (notification.length < 1) {
         return (
             <div className="container mx-auto mt-8">
                 <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
-                    No notification Found For this User
+                    No mail Found For this User
+                    <Link
+                        className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+                        href={`/dashboard/${user_id}/notification`}
+                        as="button"
+                    >
+                        Add Mail
+                    </Link>
                 </div>
             </div>
         );
@@ -17,14 +24,14 @@ export default function Notification({ notification, user_id }) {
             <div className="max-w-xl mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-semibold">
-                        Notification Messages
+                        Mail Messages
                     </h2>
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         href={`/dashboard/${user_id}/notification`}
                         as="button"
                     >
-                        Add Notification
+                        Add Mail
                     </Link>
                 </div>
                 <table className="table table-striped table-bordered">

@@ -4,17 +4,25 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
 
-export default function Withdraw({ withdraw, user_id, apiToken }) {
-    if (withdraw === null) {
+export default function Withdraw({ account, withdraw, user_id, apiToken }) {
+    if (withdraw.length < 1) {
         return (
             <div className="container mx-auto mt-8">
                 <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                     No withdraw Found For this User
+                    <Link
+                        className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+                        href={`/dashboard/${user_id}/withdraw`}
+                        method="get"
+                        as="button"
+                    >
+                        Add withdraw
+                    </Link>
                 </div>
             </div>
         );
     }
-    
+
     const token = localStorage.getItem("token");
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
@@ -34,6 +42,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
     };
 
     const handleSubmit = (formData) => {
+        console.log(withdraw);
         axios
             .put(`/api/withdraw/${formData.id}`, formData, {
                 headers: {
@@ -70,11 +79,9 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                     },
                 })
                 .then((res) => {
-                    console.log(res);
-
                     setModalMessage("withdraw was deleted successfully");
                     // Redirect to withdraw details page after successful update
-                    Inertia.visit(`/dashboard/${formData.user_id}`);
+                    Inertia.visit(`/dashboard/${user_id}`);
 
                     setTimeout(() => {
                         setModalMessage("");
@@ -86,6 +93,10 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                         setModalMessage("");
                     }, 2000);
                 });
+    };
+
+    const check = (balance, earning, amount) => {
+        return parseInt(balance) + parseInt(earning) > parseInt(amount);
     };
 
     return (
@@ -140,10 +151,51 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                                     <td>{item.destination}</td>
                                     <td>{item.withdrawal_type}</td>
                                     <td>
-                                        <label className="switch">
+                                        {/* check if user account balance and earning is greater than the amount to withdraw */}
+                                        <label
+                                            title={
+                                                check(
+                                                    account.balance,
+                                                    account.earning,
+                                                    item.amount
+                                                )
+                                                    ? item.status === 1
+                                                        ? check(
+                                                              account.balance,
+                                                              account.earning,
+                                                              item.amount
+                                                          )
+                                                            ? "Increase Balance"
+                                                            : "please add money to balance"
+                                                        : "withdraw From Balance"
+                                                    : item.status == 1
+                                                    ? "Increase Balance"
+                                                    : "please add money to balance"
+                                            }
+                                            className="switch"
+                                        >
                                             <input
                                                 type="checkbox"
                                                 checked={item.status == 1}
+                                                disabled={
+                                                    check(
+                                                        account.balance,
+                                                        account.earning,
+                                                        item.amount
+                                                    )
+                                                        ? item.status === 1
+                                                            ? check(
+                                                                  account.balance,
+                                                                  account.earning,
+                                                                  item.amount
+                                                              )
+                                                                ? false
+                                                                : true
+                                                            : false
+                                                        : item.status == 1
+                                                        ? false
+                                                        : true
+                                                }
                                                 onChange={() =>
                                                     handleToggle(item.id)
                                                 } // Add your toggle handler function
