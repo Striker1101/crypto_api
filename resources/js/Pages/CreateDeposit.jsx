@@ -4,6 +4,7 @@ import axios from "axios";
 export default function CreateDeposit({ user_id }) {
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         user_id: user_id,
         amount: "",
@@ -25,6 +26,7 @@ export default function CreateDeposit({ user_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
 
         axios
             .post(`/api/deposit`, formData, {
@@ -47,6 +49,9 @@ export default function CreateDeposit({ user_id }) {
                 setTimeout(() => {
                     setModalMessage("");
                 }, 2000);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -146,8 +151,9 @@ export default function CreateDeposit({ user_id }) {
                         <button
                             type="submit"
                             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                            disabled={loading} // Disable the button when loading
                         >
-                            Update deposit
+                            {loading ? "Hold..." : "Create Deposit"}
                         </button>
                     </div>
                 </form>

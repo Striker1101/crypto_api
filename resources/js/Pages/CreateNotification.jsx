@@ -3,6 +3,7 @@ import axios from "axios";
 export default function CreateNotify({ user_id }) {
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         user_id: user_id,
         content: "",
@@ -24,7 +25,7 @@ export default function CreateNotify({ user_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setLoading(true);
         axios
             .post(`/api/notify`, formData, {
                 headers: {
@@ -55,6 +56,9 @@ export default function CreateNotify({ user_id }) {
                 setTimeout(() => {
                     setModalMessage("");
                 }, 2000);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -62,9 +66,7 @@ export default function CreateNotify({ user_id }) {
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold">
-                        Send Mail
-                    </h2>
+                    <h2 className="text-2xl font-semibold">Send Mail</h2>
                     <button
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         onClick={() => window.history.back()}
@@ -153,8 +155,9 @@ export default function CreateNotify({ user_id }) {
                         <button
                             type="submit"
                             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                            disabled={loading} // Disable the button when loading
                         >
-                            Send
+                            {loading ? "Hold..." : "Send Notification"}
                         </button>
                     </div>
                 </form>
