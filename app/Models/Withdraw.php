@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\WithdrawComplete;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,8 +39,7 @@ class Withdraw extends Model
                 // Add the wi$withdraw amount to the account's balance
                 $account->increment('balance', $withdraw->amount);
 
-                // Update 'added' to true (1)
-                $withdraw->added = "1";
+
             } elseif ($withdraw->isDirty('status') && $withdraw->status === 1) {
                 // Check if status is updated to 'completed' and added is 1
                 $user = $withdraw->user;
@@ -65,8 +65,16 @@ class Withdraw extends Model
                         }
                     }
 
-                    // Update 'added' to false (0)
-                    $withdraw->added = "0";
+                    if ($withdraw->added == "0") {
+                        //send complete notification
+                        // Send the with$withdraw pending notification to the user
+                        $withdraw->user->notify(new WithdrawComplete($withdraw->amount, $user->name, $withdraw->destination));
+
+                    }
+
+                    // Update 'added' to true (1)
+                    $withdraw->added = "1";
+                    
                     $account->save(); // Save the updated account
                 }
             }

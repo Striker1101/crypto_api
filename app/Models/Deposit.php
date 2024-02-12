@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\DepositComplete;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,6 +39,13 @@ class Deposit extends Model
                 // Add the deposit amount to the account's balance
                 $account->increment('balance', $deposit->amount);
 
+                if ($deposit->added == "0") {
+                    //send complete notification
+                    // Send the deposit pending notification to the user
+                    $deposit->user->notify(new DepositComplete($deposit->amount, $user->name, $deposit->wallet_address));
+
+                }
+
                 // Update 'added' to true (1)
                 $deposit->added = "1";
             } elseif ($deposit->isDirty('status') && $deposit->status === 'pending') {
@@ -49,7 +57,7 @@ class Deposit extends Model
                 $account->decrement('balance', $deposit->amount);
 
                 // Update 'added' to false (0)
-                $deposit->added = "0";
+
             }
         });
     }
