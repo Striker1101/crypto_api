@@ -1,5 +1,3 @@
-# dev task
-
 # crypto_api
 
 ![crypto_api Logo](public/defaultLogo.svg)
@@ -26,7 +24,7 @@
     ```
 
 3. Configure environment variables:
-   Update `.env` with your database credentials, API keys, and other configuration settings.
+   Update `.env` with your database credentials, API keys, email credentials and other configuration settings.
 
     ```bash
      cp .env.example .env
@@ -57,6 +55,16 @@
 -   **KYC (Know Your Customer)**: Collect and manage user information, including social security numbers, for compliance and security.
 
 -   **Notifications**: Send notifications to users for important events or updates.
+
+-   **Custom Email**: Send custom mail to users for important billing or products.
+
+-   **Smart System**: All adjustment to user details are done automatically.
+
+-   **Auto Trade**: trades are carry out automatically, and earn record keep and added the user balance automatically and the ability to adjust user trading duration and automatically stops when trade timer is clocked .
+
+-   **Flexibly Plan**: User has beginerr, bronze, silver,gold, premium Plan to choose from with their respective percentage and duration, admin can adjust this details to fit needs.
+
+-   **Super Admin**: Admin can fix and edit users details from the admin panel, Customly add Deposit, withdraw, earn, investment as needed .
 
 ## API Endpoints
 
@@ -111,6 +119,22 @@
 -   `POST /api/withdrawal`: Initiate a new withdrawal.
 -   `PUT /api/withdrawal/{id}`: Update withdrawal status.
 -   `DELETE /api/withdrawal/{id}`: Cancel a withdrawal.
+
+### Earnings:
+
+-   `GET /api/earn`: Get all Earning transactions.
+-   `GET /api/earn/{id}`: Get details of a specific Earning.
+-   `POST /api/earn`: Initiate a new Earning.
+-   `PUT /api/earn/{id}`: Update Earning status.
+-   `DELETE /api/earn/{id}`: Cancel a Earning.
+
+### Investment:
+
+-   `GET /api/invest`: Get all Investment transactions.
+-   `GET /api/invest/{id}`: Get details of a specific Investment.
+-   `POST /api/invest`: Initiate a new Investment.
+-   `PUT /api/invest/{id}`: Update Investment status.
+-   `DELETE /api/invest/{id}`: Cancel a Investment.
 
 ### Debit Card:
 
@@ -265,5 +289,5 @@ Implement additional security measures, such as setting up firewalls, securing s
 
 These steps provide a general guideline, and you may need to adapt them based on your specific hosting environment and requirements. Always refer to the documentation of your web server and hosting provider for specific details.
 
-``    You can save this content in a file with a `.md` extension, such as `deployment_guide.md`. Feel free to customize it further based on your project's specific details and requirements.
- ``
+``   You can save this content in a file with a `.md` extension, such as `deployment_guide.md`. Feel free to customize it further based on your project's specific details and requirements.
+``
