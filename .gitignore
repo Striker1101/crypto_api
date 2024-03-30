@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
-/cryto_api.zip
+cryto_api.zip
 .env
 .env.backup
 .env.production
