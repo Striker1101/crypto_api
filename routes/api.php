@@ -9,7 +9,8 @@ use App\Http\Controllers\KYCInfoController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\API\UserController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
@@ -33,7 +34,8 @@ Route::group([
     //auth
     Route::post('login', 'App\Http\Controllers\API\AuthController@login');
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
-
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
 });
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
