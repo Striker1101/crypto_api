@@ -25,16 +25,22 @@ return new class extends Migration {
             $table->string('phone_number')->nullable();
 
             // location
-            $table->string('street');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip_code');
-            $table->string('country');
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('country')->nullable();
 
 
             // Add image_url and image_id fields
             $table->string('image_url')->nullable();
             $table->string('image_id')->nullable();
+
+            //uplink
+            $table->string('uplink')->nullable();
+            $table->boolean('terms')->default(false);
+
+
 
             $table->rememberToken();
             $table->timestamps();

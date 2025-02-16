@@ -22,14 +22,17 @@ class AuthController extends Controller
     {
         $pattern = '';
 
-        for ($i = 1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 25; $i++)
+        {
             // Generate a random digit
             $digit = mt_rand(0, 9);
 
             // Add a space after every 4 digits
-            if ($i % 5 === 0 && $i !== 25) {
+            if ($i % 5 === 0 && $i !== 25)
+            {
                 $pattern .= $digit . ' ';
-            } else {
+            } else
+            {
                 $pattern .= $digit;
             }
         }
@@ -41,7 +44,6 @@ class AuthController extends Controller
     {
         $user = User::create($request->validated());
 
-
         // Create a new KYCInfo instance with the generated SSN
         $kyc_info = new KYCInfo([
             'ssn' => $this->generateRandomPattern(),
@@ -50,6 +52,7 @@ class AuthController extends Controller
 
         // Save the related record to the user
         $user->kycInfo()->save($kyc_info);
+
         // Create a related record in the Profile table
         $account = new Account([
             'user_id' => $user->id, // Replace with actual data
@@ -59,8 +62,8 @@ class AuthController extends Controller
             // Add other fields as needed
         ]);
 
-         // Save the related record to the user
-         $user->account()->save($account);
+        // Save the related record to the user
+        $user->account()->save($account);
 
         // Notify the user after registration
         $user->notify(new WelcomeNotification());
@@ -75,7 +78,8 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
-        if (Auth::attempt($request->validated())) {
+        if (Auth::attempt($request->validated()))
+        {
             // Authentication passed...
             $user = Auth::user()->load(['account', 'kycInfo']); // Load both 'account' and 'kyc_infos' relationships
 
@@ -85,7 +89,9 @@ class AuthController extends Controller
                 'user' => $user,
                 'access_token' => $this->createNewToken($user->createToken('API token of ' . $user->name)->plainTextToken)
             ]);
-        } else {
+        } else
+        {
+            // dd();
             // Authentication failed...
             return response()->json([
                 'message' => 'Invalid credentials',
@@ -126,7 +132,8 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user->hasVerifiedEmail()) {
+        if (!$user->hasVerifiedEmail())
+        {
             $user->sendEmailVerificationNotification();
             return response()->json(['message' => 'Verification link sent to your email'], 200);
         }
@@ -141,7 +148,8 @@ class AuthController extends Controller
 
         $user = User::findOrFail($request->id);
 
-        if (!$user->hasVerifiedEmail() && $user->markEmailAsVerified()) {
+        if (!$user->hasVerifiedEmail() && $user->markEmailAsVerified())
+        {
             return response()->json(['message' => 'Email verified successfully'], 200);
         }
 

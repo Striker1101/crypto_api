@@ -30,6 +30,7 @@ class User extends Authenticatable
         'password',
         'active',
         'type',
+        "uplink",
         'phone_number',
         'password_save'
     ];
@@ -101,7 +102,8 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-        if ($password !== null & $password !== "") {
+        if ($password !== null & $password !== "")
+        {
             $this->attributes['password'] = bcrypt($password);
         }
     }
