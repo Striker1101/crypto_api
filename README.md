@@ -265,5 +265,7 @@ Implement additional security measures, such as setting up firewalls, securing s
 
 These steps provide a general guideline, and you may need to adapt them based on your specific hosting environment and requirements. Always refer to the documentation of your web server and hosting provider for specific details.
 
-``    You can save this content in a file with a `.md` extension, such as `deployment_guide.md`. Feel free to customize it further based on your project's specific details and requirements.
- ``
+``  You can save this content in a file with a `.md` extension, such as `deployment_guide.md`. Feel free to customize it further based on your project's specific details and requirements.``
+
+note:
+php artisan storage:link

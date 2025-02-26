@@ -6,11 +6,15 @@ use App\Http\Controllers\DebitCardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\KYCInfoController;
+use App\Http\Controllers\TraderController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\WithdrawTypeController;
+use App\Models\WithdrawType;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
@@ -40,6 +44,9 @@ Route::group([
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
+Route::post('/verify_user_token', 'App\Http\Controllers\API\UserController@verify_user_token');
+Route::post('/resend_user_token', [UserController::class, 'resend_user_token'])
+    ->middleware('throttle:1,5');
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -67,5 +74,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'withdraw' => WithdrawController::class,
         'account' => AccountController::class,
         'user' => UserController::class,
+        'trader' => TraderController::class,
+        'wallet' => WalletController::class,
+        'withdraw_type' => WithdrawTypeController::class
     ]);
 });

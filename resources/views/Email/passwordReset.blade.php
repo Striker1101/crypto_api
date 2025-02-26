@@ -5,7 +5,7 @@ Please Click this Button to reset your password
 
 #ignore if you did not request for reset password
 
-@component('mail::button', ['url' => 'https://coinpecko.online/dashboard/user/change-password-confirm.html?token='.$token])
+@component('mail::button', ['url' => config('app.frontend_url'). '/confirm_password?token='.$token])
 Change password
 @endcomponent
 

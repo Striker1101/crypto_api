@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\KYCInfo;
 use App\Models\User;
+use App\Models\WithdrawType;
 use Illuminate\Auth\Access\Response;
 
-class KYCInfoPolicy
+class WithdrawTypePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,10 +19,9 @@ class KYCInfoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, KYCInfo $kyc_info)
+    public function view(User $user, WithdrawType $withdrawType): bool
     {
-        // Logic to determine if the user can view the KYCInfo
-        return $user->id === $kyc_info->user_id; // Example: Only the owner can view
+        //
     }
 
     /**
@@ -36,25 +35,23 @@ class KYCInfoPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, KYCInfo $kyc_info): bool
+    public function update(User $user, WithdrawType $withdrawType): bool
     {
         //
-        return $user->id === $kyc_info->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, KYCInfo $kyc_info): bool
+    public function delete(User $user, WithdrawType $withdrawType): bool
     {
         //
-        return $user->id === $kyc_info->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, KYCInfo $kYCInfo): bool
+    public function restore(User $user, WithdrawType $withdrawType): bool
     {
         //
     }
@@ -62,7 +59,7 @@ class KYCInfoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, KYCInfo $kYCInfo): bool
+    public function forceDelete(User $user, WithdrawType $withdrawType): bool
     {
         //
     }

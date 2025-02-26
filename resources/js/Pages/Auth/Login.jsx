@@ -36,10 +36,15 @@ export default function Login({ status, canResetPassword }) {
             // Save the token to localStorage
             localStorage.setItem("token", token);
 
-            // Redirect to the dashboard URL
-            window.location.href = route("dashboard"); // Replace with your actual dashboard route
+            console.log(response.data);
+            //reject login  when user is not admin
+            if (response.data.type == "admin") {
+                // Redirect to the dashboard URL
+                window.location.href = route("dashboard"); // Replace with your actual dashboard route
+            } else {
+                alert("Only Admin can login here");
+            }
         } catch (error) {
-
             // Access error details if available
             const errorData = error.response?.data;
             const errorMessage = errorData?.message || "An error occurred";

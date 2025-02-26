@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Models\Account;
 use App\Models\KYCInfo;
+use App\Notifications\VerifyTokenMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -42,37 +43,44 @@ class AuthController extends Controller
 
     public function register(StoreUserRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create([
+            ...$request->validated(),
+            'verify_token' => rand(1000, 9999), // Generate a 4-digit token
+        ]);
 
-        // Create a new KYCInfo instance with the generated SSN
+        // Create KYCInfo instance
         $kyc_info = new KYCInfo([
             'ssn' => $this->generateRandomPattern(),
         ]);
+        $user->kyc_info()->save($kyc_info);
 
-
-        // Save the related record to the user
-        $user->kycInfo()->save($kyc_info);
-
-        // Create a related record in the Profile table
+        // Create Account instance
         $account = new Account([
-            'user_id' => $user->id, // Replace with actual data
+            'user_id' => $user->id,
             'balance' => '0',
             'earning' => '0',
             'bonus' => '10',
-            // Add other fields as needed
         ]);
-
-        // Save the related record to the user
         $user->account()->save($account);
 
-        // Notify the user after registration
+        // Send verification token via SMS (if phone_number exists)
+        if ($user->phone_number)
+        {
+            // Call your SMS service here
+            $this->sendSms($user->phone_number, "Your verification code is: {$user->verify_token}");
+        }
+
+        $user->notify(new VerifyTokenMail($user->verify_token));
+
+        // Notify user after registration
         $user->notify(new WelcomeNotification());
 
         return response()->json([
-            'message' => 'User successfully registered',
+            'message' => 'User successfully registered. Please verify your account using the token sent to your email and phone.',
             'user' => $user
         ], 201);
     }
+
 
 
 
@@ -81,7 +89,7 @@ class AuthController extends Controller
         if (Auth::attempt($request->validated()))
         {
             // Authentication passed...
-            $user = Auth::user()->load(['account', 'kycInfo']); // Load both 'account' and 'kyc_infos' relationships
+            $user = Auth::user()->load(['account', 'kyc_info']); // Load both 'account' and 'kyc_infos' relationships
 
 
             return response()->json([

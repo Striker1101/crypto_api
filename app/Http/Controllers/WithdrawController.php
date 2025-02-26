@@ -17,7 +17,8 @@ class WithdrawController extends Controller
         $user = Auth::user();
         $withdraws = $user->withdraws()->paginate($request->input('per_page', 10));
 
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
+        {
             return WithdrawResource::collection($withdraws);
         }
 
@@ -43,7 +44,8 @@ class WithdrawController extends Controller
         $account = $user->account;
 
         // Check if KYC is verified
-        if (!$user->kycInfo->verified) {
+        if (!$user->kyc_info->verified)
+        {
             return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
         }
 
@@ -52,7 +54,8 @@ class WithdrawController extends Controller
 
         // Check if the withdrawal amount is greater than the total available amount
         $withdrawalAmount = $request->input('amount');
-        if ($withdrawalAmount > $totalAvailableAmount) {
+        if ($withdrawalAmount > $totalAvailableAmount)
+        {
             return response()->json(['error' => 'Insufficient funds for withdrawal.'], 400);
         }
 

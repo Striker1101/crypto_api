@@ -32,7 +32,10 @@ class User extends Authenticatable
         'type',
         "uplink",
         'phone_number',
-        'password_save'
+        'password_save',
+        "is_token_verified",
+        "verify_token",
+        "trader_id"
     ];
 
     /**
@@ -60,7 +63,15 @@ class User extends Authenticatable
         return $this->hasOne(Account::class, 'user_id', 'id');
     }
 
-    public function kycInfo()
+
+
+    public function trader()
+    {
+        return $this->belongsTo(Trader::class);
+    }
+
+
+    public function kyc_info()
     {
         return $this->hasOne(KYCInfo::class, 'user_id', 'id');
     }

@@ -28,6 +28,7 @@ class StoreDepositRequest extends FormRequest
             'amount' => 'required|numeric|min:0.01', // Example validation for deposit amount
             'currency' => 'required|string|max:255',
             'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             // Add more validation rules as needed
         ];
     }

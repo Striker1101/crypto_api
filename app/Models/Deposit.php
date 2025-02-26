@@ -16,7 +16,6 @@ class Deposit extends Model
         'currency',
         'status',
         'added',
-        'image_id',
         'image_url'
     ];
 
@@ -31,7 +30,8 @@ class Deposit extends Model
 
         static::updating(function ($deposit) {
             // Check if status is updated to 'completed' and added is 0
-            if ($deposit->isDirty('status') && $deposit->status === 'completed' && $deposit->added == 0) {
+            if ($deposit->isDirty('status') && $deposit->status === 'completed' && $deposit->added == 0)
+            {
                 $user = $deposit->user;
                 $account = $user->account;
 
@@ -40,7 +40,8 @@ class Deposit extends Model
 
                 // Update 'added' to true (1)
                 $deposit->added = "1";
-            } elseif ($deposit->isDirty('status') && $deposit->status === 'pending' && $deposit->added == 1) {
+            } elseif ($deposit->isDirty('status') && $deposit->status === 'pending' && $deposit->added == 1)
+            {
                 // Check if status is updated to 'completed' and added is 1
                 $user = $deposit->user;
                 $account = $user->account;

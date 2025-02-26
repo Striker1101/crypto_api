@@ -3,23 +3,23 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EarningsUpdated extends Notification
+class VerifyTokenMail extends Notification
 {
     use Queueable;
 
+    protected $token;
 
-
-
-    public $total_earning;
-
-    public function __construct($total_earning)
+    /**
+     * Create a new notification instance.
+     */
+    public function __construct($token)
     {
-        $this->total_earning = $total_earning;
+        $this->token = $token;
     }
+
     /**
      * Get the notification's delivery channels.
      *
@@ -36,10 +36,12 @@ class EarningsUpdated extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Your earnings have been updated!')
-            ->line('Total Earnings: $' . $this->total_earning)
-            ->action('View Details', url(config('app.frontend_url') . '/dashboard'))
-            ->line('Thank you for using our application!');
+            ->subject('Verify Your Account - Action Required')
+            ->greeting('Hello ' . $notifiable->name)
+            ->line('To complete your registration, please use the verification code below:')
+            ->line('**' . $this->token . '**') // Bold the token
+            ->line('If you did not request this, please ignore this email.')
+            ->line('Thank you for choosing us!');
     }
 
     /**
@@ -50,7 +52,7 @@ class EarningsUpdated extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'verify_token' => $this->token
         ];
     }
 }

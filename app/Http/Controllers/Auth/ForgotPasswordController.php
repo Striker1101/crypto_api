@@ -2,35 +2,39 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\ResetPasswordMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\URL;
 use App\Models\User;
 
 class ForgotPasswordController extends Controller
 {
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate(['email' => 'required|email|exists:users,email']);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $user = User::where('email', $request->email)->first();
 
-        if ($status === Password::RESET_LINK_SENT) {
-            // Generate the reset link with token and email parameters
-            $frontendUrl = 'https://coinpeckko.online/reset-password.html'; // Replace with your frontend URL
-            $resetLink = $frontendUrl . '?token=' . $this->getToken($request->email) . '&email=' . urlencode($request->email);
-
-            // You can then use $resetLink to send in an email
-            // For example, if you're sending an email using Laravel's built-in mail function:
-            // Mail::to($request->email)->send(new ResetPasswordMail($resetLink));
-
-            return response()->json(['message' => __('Reset link sent successfully'), 'reset_link' => $resetLink], 200);
-        } else {
-            return response()->json(['message' => __('Failed to send reset link, Make sure email is register')], 400);
+        if (!$user)
+        {
+            return response()->json(['message' => 'Failed to send reset link, make sure email is registered'], 400);
         }
+
+        // Manually generate the token
+        $token = Password::broker()->createToken($user);
+
+        // Use your frontend URL
+        $frontendUrl = config('app.frontend_url', 'http://localhost:3003');
+
+        // Generate the correct reset link
+        $resetLink = $frontendUrl . '/confirm_password?token=' . $token . '&email=' . urlencode($request->email);
+
+        // Send email
+        Mail::to($request->email)->send(new ResetPasswordMail($resetLink));
+
+        return response()->json(['message' => 'Reset link sent successfully', 'reset_link' => $resetLink], 200);
     }
 
     protected function getToken($email)

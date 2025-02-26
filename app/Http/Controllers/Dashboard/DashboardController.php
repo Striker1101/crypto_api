@@ -24,7 +24,8 @@ class DashboardController extends Controller
             ->paginate(10); // Adjust the pagination as needed
 
         // Check if the request is from an API
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
+        {
             return response()->json(['users' => $users]);
         }
 
@@ -37,7 +38,7 @@ class DashboardController extends Controller
     {
 
         // Fetch user details with all associated relationships
-        $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kycInfo', 'withdraws', 'notifications'])
+        $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kyc_info', 'withdraws', 'notifications'])
             ->find($userId);
 
 

@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->boolean('active')->default(false);
             $table->enum('type', ['user', 'admin'])->default('user');
 
-
             // phone number
             $table->string('phone_number')->nullable();
 
@@ -31,16 +30,24 @@ return new class extends Migration {
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
 
-
             // Add image_url and image_id fields
             $table->string('image_url')->nullable();
             $table->string('image_id')->nullable();
 
-            //uplink
+            // uplink
             $table->string('uplink')->nullable();
             $table->boolean('terms')->default(false);
 
+            // verify_token
+            $table->string('verify_token')->nullable();
+            $table->boolean('is_token_verified')->default(false);
+            $table->date("token_sent_at")->nullable();
 
+            // **Add trader_id before defining the foreign key**
+            $table->unsignedBigInteger('trader_id')->nullable();
+
+            // **Define the foreign key constraint**
+            $table->foreign('trader_id')->references('id')->on('traders')->onDelete('cascade');
 
             $table->rememberToken();
             $table->timestamps();

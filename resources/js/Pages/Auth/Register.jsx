@@ -16,6 +16,7 @@ export default function Register() {
         zip_code: "",
         country: "",
         password: "",
+        password_save: password,
         password_confirmation: "",
     });
 
@@ -196,7 +197,6 @@ export default function Register() {
                         className="mt-2"
                     />
                 </div>
-
 
                 <div className="flex items-center justify-end mt-4">
                     <Link

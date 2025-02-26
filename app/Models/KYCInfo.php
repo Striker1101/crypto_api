@@ -33,8 +33,8 @@ class KYCInfo extends Model
         parent::boot();
 
         // Listen for the 'updating' event
-        static::updating(function ($kycInfo) {
-            $kycInfo->verifyIfAllFieldsFilled();
+        static::updating(function ($kyc_info) {
+            $kyc_info->verifyIfAllFieldsFilled();
         });
     }
 
@@ -51,7 +51,8 @@ class KYCInfo extends Model
         $this->verified = $allFieldsFilled;
 
         // If all fields are filled and 'verified' becomes true, send notification
-        if ($allFieldsFilled && $this->isDirty('verified') && $this->verified) {
+        if ($allFieldsFilled && $this->isDirty('verified') && $this->verified)
+        {
             $this->user->notify(new KycVerificationSuccess());
         }
     }

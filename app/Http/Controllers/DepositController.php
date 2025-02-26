@@ -21,7 +21,8 @@ class DepositController extends Controller
         // Retrieve deposits only for the current user
         $deposits = $user->deposit()->paginate($perPage);
 
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
+        {
             return DepositResource::collection($deposits);
         }
 
@@ -31,7 +32,8 @@ class DepositController extends Controller
     public function show(Request $request, Deposit $deposit)
     {
 
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
+        {
             return new DebitCardResource($deposit);
         }
 
@@ -46,13 +48,39 @@ class DepositController extends Controller
     }
     public function store(StoreDepositRequest $request)
     {
-        $user = Auth::user();
+        \Log::debug('Request Data:', $request->all());
+        \Log::debug('Has file:', ['hasFile' => $request->hasFile('image_url')]);
+        \Log::debug('All Files:', $request->allFiles());
 
-        // Associate the deposit with the current user
-        $deposit = $user->deposit()->create($request->all());
+        $user = Auth::user();
+        $data = $request->except('image_url'); // Exclude image to manually handle it
+
+        // Handle image upload
+        if ($request->hasFile('image_url'))
+        {
+            $image = $request->file('image_url');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('deposits', $imageName, 'public');
+
+            // Ensure it's stored as a string
+            $data['image_url'] = asset('storage/' . $imagePath);
+            $data['image_id'] = $imageName; // Store filename or unique identifier
+        } else
+        {
+            $data['image_url'] = null;
+            $data['image_id'] = null;
+        }
+
+        // Ensure 'amount' is numeric
+        $data['amount'] = (float) $request->input('amount');
+
+        // Create the deposit record
+        $deposit = $user->deposit()->create($data);
 
         return new DepositResource($deposit);
     }
+
+
 
     public function edit(Deposit $deposit)
     {
@@ -65,7 +93,8 @@ class DepositController extends Controller
     {
         $deposit->update($request->all());
 
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
+        {
             return new DepositResource($deposit);
         }
 

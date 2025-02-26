@@ -38,7 +38,7 @@ class WelcomeNotification extends Notification
             ->subject('Welcome to YourApp!')
             ->greeting('Hello ' . $notifiable->name)
             ->line('Welcome to YourApp. We are excited to have you on board!')
-            ->action('Visit YourApp', url("https://coinpecko.online"))
+            ->action('Visit YourApp', url(config('app.frontend_url')))
             ->line('Thank you for joining us!');
     }
 
