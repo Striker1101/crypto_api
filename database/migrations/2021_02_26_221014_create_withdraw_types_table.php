@@ -13,13 +13,10 @@ return new class extends Migration {
         Schema::create('withdraw_types', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('account_name')->nullable();
-            $table->string('wallet_address')->nullable();
-            $table->string('account_number')->nullable();
-            $table->string('bank_name')->nullable();
-            $table->string('routing_number')->nullable();
-            $table->string('code')->nullable();
-            $table->enum('type', ['bank', 'crypto']);
+            $table->string('image')->nullable();
+            $table->string(column: 'symbol')->nullable();
+            $table->string('currency')->nullable();
+            $table->enum('type', ['bank_transfer', 'crypto'])->default("crypto");
             $table->decimal('min_limit', 10, 2)->default(0);
             $table->decimal('max_limit', 10, 2)->default(10000);
             $table->timestamps();

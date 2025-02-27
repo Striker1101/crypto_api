@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DebitCardController;
 use App\Http\Controllers\DepositController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\WithdrawTypeController;
-use App\Models\WithdrawType;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
@@ -76,6 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'user' => UserController::class,
         'trader' => TraderController::class,
         'wallet' => WalletController::class,
-        'withdraw_type' => WithdrawTypeController::class
+        'withdraw_type' => WithdrawTypeController::class,
+        'invest' => InvestmentController::class
     ]);
 });

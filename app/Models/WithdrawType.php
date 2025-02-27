@@ -11,12 +11,9 @@ class WithdrawType extends Model
 
     protected $fillable = [
         'name',
-        'account_name',
-        'wallet_address',
-        'account_number',
-        'bank_name',
-        'routing_number',
-        'code',
+        'image',
+        'symbol',
+        'currency',
         'type',
         'min_limit',
         'max_limit',

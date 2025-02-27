@@ -11,12 +11,14 @@ class CreateWithdrawsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('withdrawal_type', ['crypto', 'bank_transfer']);
+            $table->unsignedBigInteger('withdrawal_type_id');
+            $table->foreign('withdrawal_type_id')->references('id')->on('withdraw_types')->onDelete('cascade');
             $table->boolean('status')->default(false);
             $table->boolean('added')->default(false);
             $table->decimal('amount', 10, 2);
             $table->string('name')->nullable();
-            $table->string('currency');
+            $table->string('routing_number')->nullable();
+            $table->string('code')->nullable();
             $table->string('destination'); // This can store a cryptocurrency address or bank account details
             $table->timestamps();
         });

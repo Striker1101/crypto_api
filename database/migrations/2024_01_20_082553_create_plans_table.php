@@ -15,7 +15,11 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('plan');
+            $table->string('name');
+            $table->decimal('amount', 15, 2)->default(0);
+            $table->integer('support');
+            $table->integer('agent');
+            $table->string('type');
             $table->integer('percent');
             $table->integer('duration');
             $table->timestamps();

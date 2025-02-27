@@ -15,10 +15,10 @@ class WithdrawTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'type' => 'required|in:bank,crypto',
-            'wallet_address' => 'nullable|required_if:type,crypto|string',
-            'account_name' => 'nullable|required_if:type,bank|string',
-            'account_number' => 'nullable|required_if:type,bank|string',
+            'image' => 'required|string',
+            'symbol' => 'required|string',
+            'currency' => 'required|string',
+            'type' => 'required|string',
             'bank_name' => 'nullable|required_if:type,bank|string',
             'routing_number' => 'nullable|string',
             'code' => 'nullable|string',

@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvestmentRequest;
 use App\Models\Investment;
+use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class InvestmentController extends Controller
 {
@@ -18,10 +21,48 @@ class InvestmentController extends Controller
 
     public function store(StoreInvestmentRequest $request)
     {
-        $investment = Investment::create($request->all());
+        try
+        {
+            // Get the user and check balance
+            $user = User::findOrFail($request->user_id);
 
-        return response()->json(['message' => 'Investment created successfully', 'investment' => $investment], 201);
+            if ($user->balance < $request->amount)
+            {
+                return response()->json(['message' => 'Insufficient balance'], 400);
+            }
+
+            // Deduct investment amount from user balance
+            $user->balance -= $request->amount;
+            $user->save();
+
+            // Create the investment
+            $investment = Investment::create($request->all());
+
+            // Create the withdrawal entry
+            $withdraw = Withdraw::create([
+                'user_id' => $investment->user_id,
+                'withdrawal_type_id' => 1, // Dummy withdrawal type
+                'status' => false, // Pending status
+                'added' => false,
+                'amount' => $investment->amount,
+                'name' => 'Investment Withdrawal',
+                'routing_number' => null, // Dummy data
+                'code' => strtoupper(Str::random(10)), // Random withdrawal code
+                'destination' => 'crypto_wallet_or_bank_account', // Dummy destination
+            ]);
+
+            return response()->json([
+                'message' => 'Investment created and withdrawal initiated successfully',
+                'investment' => $investment,
+                'withdrawal' => $withdraw
+            ], 201);
+        } catch (\Exception $e)
+        {
+            return response()->json(['error' => 'Something went wrong', 'message' => $e->getMessage()], 500);
+        }
     }
+
+
 
     public function update(Request $request, Investment $investment)
     {

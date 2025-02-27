@@ -38,19 +38,13 @@ class PlanController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            'plan' => 'required|string|unique:plans',
+            'name' => 'required|string|unique:plans',
             'percent' => 'required|numeric',
             'duration' => 'required|integer',
         ]);
 
-        // Create a new plan instance
-        $plan = new Plan();
-        $plan->plan = $request->input('plan');
-        $plan->percent = $request->input('percent');
-        $plan->duration = $request->input('duration');
+        $plan = Plan::create($request->all());
 
-        // Save the plan to the database
-        $plan->save();
 
         // Return a response
         return response()->json(['message' => 'Plan created successfully', 'plan' => $plan], 201);

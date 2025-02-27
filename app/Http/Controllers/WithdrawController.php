@@ -15,14 +15,14 @@ class WithdrawController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $withdraws = $user->withdraws()->paginate($request->input('per_page', 10));
+        $withdraws = $user->withdraws()->with('withdrawType')->paginate($request->input('per_page', 20));
 
         if ($request->wantsJson())
         {
             return WithdrawResource::collection($withdraws);
         }
-
     }
+
 
     public function show(Withdraw $withdraw)
     {
@@ -44,10 +44,10 @@ class WithdrawController extends Controller
         $account = $user->account;
 
         // Check if KYC is verified
-        if (!$user->kyc_info->verified)
-        {
-            return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
-        }
+        // if (!$user->kyc_info->verified)
+        // {
+        //     return response()->json(['message' => 'Please verify KYC.', 'status' => 200]);
+        // }
 
         // Calculate the total available amount for withdrawal
         $totalAvailableAmount = $account->balance + $account->bonus + $account->earning;
@@ -56,7 +56,7 @@ class WithdrawController extends Controller
         $withdrawalAmount = $request->input('amount');
         if ($withdrawalAmount > $totalAvailableAmount)
         {
-            return response()->json(['error' => 'Insufficient funds for withdrawal.'], 400);
+            return response()->json(['message' => 'Insufficient funds for withdrawal.'], 400);
         }
 
         // Associate the withdrawal with the current user's account

@@ -22,13 +22,11 @@ class StoreWithdrawRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
             'user_id' => 'required|exists:users,id',
-            'withdrawal_type' => 'required|in:crypto,bank_transfer',
+            'withdrawal_type_id' => 'required|exists:withdraw_types,id', // Ensure it references the correct table
             'amount' => 'required|numeric|min:0.01',
-            'name' => 'nullable|string',
-            'currency' => 'required|string',
-            'destination' => 'required|string',
+            'name' => 'nullable|string|max:255',
+            'destination' => 'required|string|max:255',
         ];
     }
 }
