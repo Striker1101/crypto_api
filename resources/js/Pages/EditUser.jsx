@@ -25,7 +25,7 @@ export default function EditUser({ auth, user }) {
             <div>
                 <UserDetails user={user} apiToken={apiToken} />
                 <Account account={user.account} apiToken={apiToken} />
-                <KYCInfo kyc_info={user.kyc_info} apiToken={apiToken} />
+                {/* <KYCInfo kyc_info={user.kyc_info} apiToken={apiToken} /> */}
                 <Deposit
                     deposit={user.deposit}
                     apiToken={apiToken}
@@ -36,11 +36,11 @@ export default function EditUser({ auth, user }) {
                     apiToken={apiToken}
                     user_id={user.id}
                 />
-                <Notification
+                {/* <Notification
                     notification={user.notifications}
                     user_id={user.id}
                     apiToken={apiToken}
-                />
+                /> */}
             </div>
         </AuthenticatedLayout>
     );

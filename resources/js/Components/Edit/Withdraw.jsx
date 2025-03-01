@@ -3,8 +3,9 @@ import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import { Link } from "@inertiajs/react";
 import axios from "axios";
+import { getToken } from "@/Util/transform";
 
-export default function Withdraw({ withdraw, user_id, apiToken }) {
+export default function Withdraw({ withdraw, user_id }) {
     if (withdraw === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -14,8 +15,8 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
             </div>
         );
     }
-    
-    const token = localStorage.getItem("token");
+
+    const token = getToken();
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
 
@@ -34,6 +35,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
     };
 
     const handleSubmit = (formData) => {
+        console.log(formData);
         axios
             .put(`/api/withdraw/${formData.id}`, formData, {
                 headers: {
@@ -87,6 +89,7 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                     }, 2000);
                 });
     };
+    console.log(withdraw);
 
     return (
         <div className="container mx-auto mt-8">
@@ -110,7 +113,6 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                             <th>Amount</th>
                             <th>Currency</th>
                             <th>Destination</th>
-                            <th>Withdrawal Type</th>
                             <th>Status</th>
                             <th>Delete</th>
                         </tr>
@@ -138,7 +140,6 @@ export default function Withdraw({ withdraw, user_id, apiToken }) {
                                     <td>{item.amount}</td>
                                     <td>{item.currency}</td>
                                     <td>{item.destination}</td>
-                                    <td>{item.withdrawal_type}</td>
                                     <td>
                                         <label className="switch">
                                             <input

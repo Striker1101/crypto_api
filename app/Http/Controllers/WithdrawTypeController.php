@@ -3,12 +3,23 @@ namespace App\Http\Controllers;
 
 use App\Models\WithdrawType;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class WithdrawTypeController extends Controller
 {
     public function index()
     {
         return response()->json(WithdrawType::all(), 200);
+    }
+
+    public function edit()
+    {
+        // Fetch all plans
+        $withdrawTypes = WithdrawType::all();
+        // Pass the user to the view
+        return Inertia::render('WithdrawType', [
+            'withdrawTypes' => $withdrawTypes,
+        ]);
     }
 
     public function store(Request $request)
@@ -19,9 +30,6 @@ class WithdrawTypeController extends Controller
             'symbol' => 'required|string',
             'currency' => 'required|string',
             'type' => 'required|string',
-            'bank_name' => 'nullable|required_if:type,bank|string',
-            'routing_number' => 'nullable|string',
-            'code' => 'nullable|string',
             'min_limit' => 'required|numeric|min:0',
             'max_limit' => 'required|numeric|min:0|gt:min_limit',
         ]);

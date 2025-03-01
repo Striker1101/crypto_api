@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
-export default function CreateWithdraw({ user_id }) {
+import { getToken } from "@/Util/transform";
+export default function CreateWithdraw({ user_id, withdraw_type }) {
     const [modalMessage, setModalMessage] = useState("");
-    const token = localStorage.getItem("token");
+    const token = getToken();
     const [formData, setFormData] = useState({
         user_id: user_id,
         amount: "",
-        currency: "",
+        routing_number: "",
         status: 0,
         destination: "",
         name: "",
-        withdrawal_type: "",
+        withdrawal_type_id: "",
+        code: "",
         // Add other user fields as needed
     });
 
@@ -44,11 +45,12 @@ export default function CreateWithdraw({ user_id }) {
                 setFormData({
                     user_id: user_id,
                     amount: "",
-                    currency: "",
+                    routing_number: "",
                     status: 0,
                     destination: "",
                     name: "",
-                    withdrawal_type: "",
+                    withdrawal_type_id: "",
+                    code: "",
                 });
 
                 setTimeout(() => {
@@ -63,6 +65,7 @@ export default function CreateWithdraw({ user_id }) {
             });
     };
 
+    console.log(withdraw_type);
     return (
         <div className="container mx-auto mt-8">
             <div className="max-w-md mx-auto bg-white p-8 border shadow-md rounded-md">
@@ -170,20 +173,63 @@ export default function CreateWithdraw({ user_id }) {
 
                     <div className="mb-4">
                         <label
+                            htmlFor="routing_number"
+                            className="block text-sm font-medium text-gray-600"
+                        >
+                            Routing Number
+                        </label>
+                        <input
+                            type="text"
+                            id="routing_number"
+                            name="routing_number"
+                            value={formData.routing_number}
+                            onChange={handleChange}
+                            className="mt-1 p-2 w-full border rounded-md"
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label
+                            htmlFor="code"
+                            className="block text-sm font-medium text-gray-600"
+                        >
+                            Code
+                        </label>
+                        <input
+                            type="text"
+                            id="code"
+                            name="code"
+                            value={formData.code}
+                            onChange={handleChange}
+                            className="mt-1 p-2 w-full border rounded-md"
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label
                             htmlFor="withdrawal_type"
                             className="block text-sm font-medium text-gray-600"
                         >
                             Withdrawal Type
                         </label>
-                        <input
+                        <select
                             type="text"
-                            id="withdrawal_type"
-                            name="withdrawal_type"
-                            value={formData.withdrawal_type}
+                            id="withdrawal_type_id"
+                            name="withdrawal_type_id"
+                            value={formData.withdrawal_type_id}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
-                        />
+                        >
+                            <option value="">Select Withdraw Type</option>
+                            {withdraw_type.map((item, index) => {
+                                return (
+                                    <option value={item.id}>{item.name}</option>
+                                );
+                            })}
+                        </select>
                     </div>
 
                     {/* Add other user fields as needed */}
@@ -193,7 +239,7 @@ export default function CreateWithdraw({ user_id }) {
                             type="submit"
                             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
                         >
-                            Update withdraw
+                            Create withdraw
                         </button>
                     </div>
                 </form>

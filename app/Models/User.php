@@ -35,7 +35,8 @@ class User extends Authenticatable
         'password_save',
         "is_token_verified",
         "verify_token",
-        "trader_id"
+        "trader_id",
+        "image_url"
     ];
 
     /**

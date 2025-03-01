@@ -38,7 +38,7 @@ Route::group([
     //auth
     Route::post('login', 'App\Http\Controllers\API\AuthController@login');
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
-    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.mail');
     Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
 });
 

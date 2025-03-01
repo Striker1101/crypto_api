@@ -38,6 +38,7 @@ class UpdateUserRequest extends FormRequest
                     'zip_code' => 'required|string',
                     'image_url' => 'nullable|string',
                     'image_id' => 'nullable|integer',
+                    'avatar' => 'nullable|image|max:2048'
                 ];
             default:
                 return [
@@ -51,6 +52,7 @@ class UpdateUserRequest extends FormRequest
                     'zip_code' => 'sometimes|string',
                     'image_url' => 'nullable|string',
                     'image_id' => 'nullable|integer',
+                    'avatar' => 'nullable|image|max:2048'
                 ];
         }
     }

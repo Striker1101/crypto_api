@@ -81,9 +81,6 @@ class AuthController extends Controller
         ], 201);
     }
 
-
-
-
     public function login(LoginUserRequest $request)
     {
         if (Auth::attempt($request->validated()))
@@ -106,7 +103,6 @@ class AuthController extends Controller
             ], 401); // Unauthorized
         }
     }
-
 
     public function logout(Request $request)
     {

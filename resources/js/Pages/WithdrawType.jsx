@@ -1,11 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useEffect, useState } from "react";
-import Plan, { PlanForm } from "@/Components/Edit/Plan";
-import { getToken } from "@/Util/transform";
+import React, { useState } from "react";
+import WithdrawTypesDetail, {
+    WithdrawTypeForm,
+} from "@/Components/Edit/WithdrawTypesDetail";
 
-export default function UsersPlan({ auth, plans }) {
+export default function UsersPlan({ auth, withdrawTypes }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState(plans);
+    const [formData, setFormData] = useState(withdrawTypes);
 
     return (
         <AuthenticatedLayout
@@ -13,18 +14,22 @@ export default function UsersPlan({ auth, plans }) {
             header={
                 <div className="flex justify-between">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Plans Edit
+                        Withdraw Types Edit
                     </h2>
                     <button
                         onClick={() => setIsModalOpen(true)}
                         className="bg-green-500 h-10 text-white py-2 px-4 rounded-md hover:bg-green-600"
                     >
-                        New Plan
+                        New WithdrawType
                     </button>
                 </div>
             }
         >
-            <Plan plans={plans} formData={formData} setFormData={setFormData} />
+            <WithdrawTypesDetail
+                withdrawTypes={withdrawTypes}
+                formData={formData}
+                setFormData={setFormData}
+            />
 
             {/* Modal */}
             {isModalOpen && (
@@ -32,7 +37,7 @@ export default function UsersPlan({ auth, plans }) {
                     <div className="bg-white p-6 rounded-lg shadow-lg w-96 h-[500px] overflow-y-auto">
                         <div className="flex justify-between">
                             <h3 className="text-lg font-semibold mb-4">
-                                Create New Plan
+                                Create New Withdraw Type
                             </h3>
 
                             <button
@@ -43,7 +48,7 @@ export default function UsersPlan({ auth, plans }) {
                             </button>
                         </div>
                         {/* Add form or content here */}
-                        <PlanForm
+                        <WithdrawTypeForm
                             isAdd={true}
                             setIsModalOpen={setIsModalOpen}
                         />

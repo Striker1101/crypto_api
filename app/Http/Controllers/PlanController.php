@@ -8,8 +8,6 @@ use Inertia\Inertia;
 
 class PlanController extends Controller
 {
-
-
     public function index()
     {
         // Retrieve all plans from the database
@@ -54,18 +52,44 @@ class PlanController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            'percent' => 'required|numeric',
-            'duration' => 'required|integer',
+            'name' => 'sometimes|string|max:255',
+            'percent' => 'sometimes|numeric',
+            'duration' => 'sometimes|integer',
+            'amount' => 'sometimes|numeric',
+            'support' => 'sometimes|numeric',
+            'agent' => 'sometimes|numeric',
+            'type' => 'sometimes|string|max:255',
         ]);
 
-        // Update the plan instance
-        $plan->percent = $request->input('percent');
-        $plan->duration = $request->input('duration');
-
-        // Save the updated plan to the database
-        $plan->save();
+        // Update only the provided fields
+        $plan->update($request->only([
+            'name',
+            'percent',
+            'duration',
+            'amount',
+            'support',
+            'agent',
+            'type',
+        ]));
 
         // Return a response
         return response()->json(['message' => 'Plan updated successfully', 'plan' => $plan]);
     }
+
+    public function destroy(Plan $plan)
+    {
+        try
+        {
+            // Delete the plan
+            $plan->delete();
+
+            // Return success response
+            return response()->json(['message' => 'Plan deleted successfully'], 200);
+        } catch (\Exception $e)
+        {
+            // Return error response
+            return response()->json(['error' => 'Failed to delete plan', 'message' => $e->getMessage()], 500);
+        }
+    }
+
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getToken } from "@/Util/transform";
 const token = getToken();
-export default function Plan({ plans, formData, setFormData }) {
+export default function WalletDetails({ wallets, formData, setFormData }) {
     function getDate(update_at) {
         return new Date(update_at).toLocaleString("en-US", {
             year: "numeric",
@@ -18,7 +18,7 @@ export default function Plan({ plans, formData, setFormData }) {
     function handleDelete(index) {
         // Delete on server
         axios
-            .delete(`/api/plan/${index}`, {
+            .delete(`/api/wallet/${index}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`, // Ensure token is defined
@@ -31,7 +31,7 @@ export default function Plan({ plans, formData, setFormData }) {
                 );
             })
             .catch((err) => {
-                console.error("Error deleting plan:", err);
+                console.error("Error deleting wallet:", err);
             });
     }
 
@@ -61,7 +61,7 @@ export default function Plan({ plans, formData, setFormData }) {
                                 </button>
                             </div>
 
-                            <PlanForm
+                            <WalletForm
                                 element={element}
                                 index={index}
                                 formData={formData}
@@ -75,7 +75,7 @@ export default function Plan({ plans, formData, setFormData }) {
     );
 }
 
-export function PlanForm({
+export function WalletForm({
     element,
     index,
     isAdd = false,
@@ -84,13 +84,12 @@ export function PlanForm({
     formData,
 }) {
     const [addForm, setAddForm] = useState({
-        agent: 0,
-        amount: 0,
-        duration: 0,
         name: "",
-        percent: 0,
-        support: 0,
-        type: "",
+        address: 0,
+        balance: 0,
+        currency: "",
+        symbol: "",
+        image: "",
     });
 
     const handleAddChange = (e) => {
@@ -112,7 +111,7 @@ export function PlanForm({
     const handleSubmit = (i, id) => {
         console.log(formData, i);
         axios
-            .put(`/api/plan/${id}`, formData[i], {
+            .put(`/api/wallet/${id}`, formData[i], {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
@@ -130,28 +129,26 @@ export function PlanForm({
 
     function formReset() {
         setAddForm({
-            agent: 0,
-            amount: 0,
-            duration: 0,
             name: "",
-            percent: 0,
-            support: 0,
-            type: "",
+            address: 0,
+            balance: 0,
+            currency: "",
+            symbol: "",
+            image: "",
         });
     }
 
     const handleAddSubmit = () => {
         const data = {
-            agent: parseInt(addForm.agent),
-            amount: parseInt(addForm.amount),
-            duration: parseInt(addForm.duration),
             name: addForm.name,
-            percent: parseInt(addForm.percent),
-            support: parseInt(addForm.support),
-            type: addForm.type,
+            currency: addForm.currency,
+            address: addForm.address,
+            balance: parseInt(addForm.balance),
+            image: addForm.image,
+            symbol: addForm.symbol,
         };
         axios
-            .post(`/api/plan`, data, {
+            .post(`/api/wallet`, data, {
                 headers: {
                     "Content-Type": "application/json",
                     // Add any other headers if needed
@@ -199,18 +196,18 @@ export function PlanForm({
 
             <div className="mb-4">
                 <label
-                    htmlFor="duration"
+                    htmlFor="address"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Days
+                    Address
                 </label>
                 <input
-                    type="number"
-                    id={isAdd ? "duration" : element?.duration}
-                    name="duration"
-                    placeholder="Enter Duration"
+                    type="text"
+                    id={isAdd ? "address" : element?.address}
+                    name="address"
+                    placeholder="Enter Address"
                     min={0}
-                    defaultValue={isAdd ? addForm.duration : element?.duration}
+                    defaultValue={isAdd ? addForm.address : element?.address}
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
@@ -221,19 +218,17 @@ export function PlanForm({
 
             <div className="mb-4">
                 <label
-                    htmlFor="percent"
+                    htmlFor="balance"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Percent
+                    Balance
                 </label>
                 <input
                     type="number"
-                    id={isAdd ? "percent" : element?.percent}
-                    name="percent"
-                    defaultValue={isAdd ? addForm.percent : element?.percent}
-                    max={100}
-                    placeholder="Enter Percent"
-                    min={0}
+                    id={isAdd ? "balance" : element?.balance}
+                    name="balance"
+                    defaultValue={isAdd ? addForm.balance : element?.balance}
+                    placeholder="Enter Balance"
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
@@ -244,17 +239,17 @@ export function PlanForm({
 
             <div className="mb-4">
                 <label
-                    htmlFor="amount"
+                    htmlFor="currency"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Amount
+                    Currency
                 </label>
                 <input
-                    type="number"
-                    id={isAdd ? "amount" : element?.amount}
-                    name="amount"
-                    placeholder="Enter Amount"
-                    defaultValue={isAdd ? addForm.amount : element?.amount}
+                    type="text"
+                    id={isAdd ? "currency" : element?.currency}
+                    name="currency"
+                    placeholder="Enter Currency"
+                    defaultValue={isAdd ? addForm.currency : element?.currency}
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
@@ -266,19 +261,17 @@ export function PlanForm({
             {/* amount of support for this plan */}
             <div className="mb-4">
                 <label
-                    htmlFor="support"
+                    htmlFor="symbol"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Support
+                    Symbol
                 </label>
                 <input
-                    type="number"
-                    id={isAdd ? "support" : element?.support}
-                    name="support"
-                    defaultValue={isAdd ? addForm.support : element?.support}
-                    max={100}
-                    placeholder="Enter Amount of  Support"
-                    min={0}
+                    type="text"
+                    id={isAdd ? "symbol" : element?.symbol}
+                    name="symbol"
+                    defaultValue={isAdd ? addForm.symbol : element?.symbol}
+                    placeholder="Enter Symbol"
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
@@ -290,40 +283,17 @@ export function PlanForm({
             {/* amount of agent provided to users for this plan */}
             <div className="mb-4">
                 <label
-                    htmlFor="agent"
+                    htmlFor="image"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Agent
+                    Image
                 </label>
                 <input
-                    type="number"
-                    id={isAdd ? "agent" : element?.agent}
-                    name="agent"
-                    defaultValue={isAdd ? addForm.agent : element?.agent}
-                    max={100}
-                    placeholder="Enter Amount of Agent"
-                    min={0}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            <div className="mb-4">
-                <label
-                    htmlFor="type"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Type
-                </label>
-                <input
-                    type="text"
-                    id={isAdd ? "type" : element?.type}
-                    name="type"
-                    placeholder="Enter Plan Type"
-                    defaultValue={isAdd ? addForm.type : element?.type}
+                    type="url"
+                    id={isAdd ? "image" : element?.image}
+                    name="image"
+                    defaultValue={isAdd ? addForm.image : element?.image}
+                    placeholder="Enter Image URL"
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
@@ -338,7 +308,7 @@ export function PlanForm({
                     type="submit"
                     className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
                 >
-                    {isAdd ? "Add Plan" : `Update ${element?.name} name`}
+                    {isAdd ? "Add Wallet" : `Update ${element?.name} name`}
                 </button>
             </div>
         </form>

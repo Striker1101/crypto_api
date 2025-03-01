@@ -22,25 +22,25 @@ class UpdateWithdrawRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if ($method == 'PUT') {
+        if ($method == 'PUT')
+        {
             return [
                 //
                 'user_id' => 'required|exists:users,id',
-                'withdrawal_type' => 'required|in:crypto,bank_transfer',
+                'withdrawal_type_id' => 'required|exists:withdraw_types,id',
                 'amount' => 'required|numeric|min:0.01',
                 'name' => 'nullable|string',
-                'currency' => 'required|string',
                 'destination' => 'required|string',
-                
+
             ];
-        } else {
+        } else
+        {
             return [
                 //
                 'user_id' => 'sometimes|exists:users,id',
-                'withdrawal_type' => 'sometimes|in:crypto,bank_transfer',
+                'withdrawal_type_id' => 'required|exists:withdraw_types,id',
                 'amount' => 'sometimes|numeric|min:0.01',
                 'name' => 'nullable|string',
-                'currency' => 'sometimes|string',
                 'destination' => 'sometimes|string',
             ];
         }

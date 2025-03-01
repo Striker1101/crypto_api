@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getToken } from "@/Util/transform";
+import ProfilePictureUpload from "../ProfilePictureUpload";
 const token = getToken();
-export default function Plan({ plans, formData, setFormData }) {
+export default function TradersDetail({ formData, setFormData }) {
     function getDate(update_at) {
         return new Date(update_at).toLocaleString("en-US", {
             year: "numeric",
@@ -18,7 +19,7 @@ export default function Plan({ plans, formData, setFormData }) {
     function handleDelete(index) {
         // Delete on server
         axios
-            .delete(`/api/plan/${index}`, {
+            .delete(`/api/trader/${index}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`, // Ensure token is defined
@@ -31,7 +32,7 @@ export default function Plan({ plans, formData, setFormData }) {
                 );
             })
             .catch((err) => {
-                console.error("Error deleting plan:", err);
+                console.error("Error deleting withdraw_type:", err);
             });
     }
 
@@ -61,7 +62,7 @@ export default function Plan({ plans, formData, setFormData }) {
                                 </button>
                             </div>
 
-                            <PlanForm
+                            <TraderForm
                                 element={element}
                                 index={index}
                                 formData={formData}
@@ -75,7 +76,7 @@ export default function Plan({ plans, formData, setFormData }) {
     );
 }
 
-export function PlanForm({
+export function TraderForm({
     element,
     index,
     isAdd = false,
@@ -84,25 +85,54 @@ export function PlanForm({
     formData,
 }) {
     const [addForm, setAddForm] = useState({
-        agent: 0,
-        amount: 0,
-        duration: 0,
         name: "",
-        percent: 0,
-        support: 0,
-        type: "",
+        position: "",
+        profile_picture: "",
+        rating: "",
+        ROI: 0,
+        PnL: 0,
+        investment: 0,
+        ranking: 0,
+        display: true,
     });
 
     const handleAddChange = (e) => {
-        setAddForm({ ...addForm, [e.target.name]: e.target.value });
+        const { name, value, type, checked } = e.target;
+        setAddForm((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
     };
 
-    const handleChange = (e, index) => {
+    const handleProfilePicture = (file) => {
+        setAddForm((prev) => ({
+            ...prev,
+            profile_picture: file,
+        }));
+    };
+
+    const handleAddProfilePicture = (file, index) => {
+        if (!file) return;
+
         setFormData((prevFormData) => {
             const updatedFormData = [...prevFormData];
             updatedFormData[index] = {
                 ...updatedFormData[index],
-                [e.target.name]: e.target.value,
+                profile_picture: file, //Store the file object
+            };
+            console.log(updatedFormData); // Log updated state
+            return updatedFormData;
+        });
+    };
+
+    const handleChange = (e, index) => {
+        const { name, type, value, checked } = e.target;
+
+        setFormData((prevFormData) => {
+            const updatedFormData = [...prevFormData];
+            updatedFormData[index] = {
+                ...updatedFormData[index],
+                [name]: type === "checkbox" ? checked : value,
             };
             console.log(updatedFormData); // Log updated state
             return updatedFormData;
@@ -110,51 +140,99 @@ export function PlanForm({
     };
 
     const handleSubmit = (i, id) => {
-        console.log(formData, i);
+        console.log(formData[i]);
+
+        let isFileUpload = formData[i]?.profile_picture instanceof File;
+        let payload;
+        let headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+        };
+
+        if (isFileUpload) {
+            // Send as multipart/form-data
+            payload = new FormData();
+            payload.append("name", formData[i]?.name);
+            payload.append("position", formData[i]?.position);
+            payload.append("profile_picture", formData[i]?.profile_picture); // File upload
+            payload.append("rating", formData[i]?.rating);
+            payload.append("ROI", parseInt(formData[i]?.ROI));
+            payload.append("PnL", parseInt(formData[i]?.PnL));
+            payload.append("investment", parseInt(formData[i]?.investment));
+            payload.append("ranking", parseInt(formData[i]?.ranking));
+            payload.append(
+                "display",
+                formData[i]?.display == 0 || formData[i]?.display === true
+                    ? "true"
+                    : "false"
+            ); // Ensure boolean is string for consistency
+
+            headers["Content-Type"] = "multipart/form-data";
+        } else {
+            // Send as JSON
+            payload = JSON.stringify({
+                name: formData[i]?.name,
+                position: formData[i]?.position,
+                profile_picture: formData[i]?.profile_picture, // Existing URL
+                rating: formData[i]?.rating,
+                ROI: parseInt(formData[i]?.ROI),
+                PnL: parseInt(formData[i]?.PnL),
+                investment: parseInt(formData[i]?.investment),
+                ranking: parseInt(formData[i]?.ranking),
+                display:
+                    formData[i]?.display == 0 || formData[i]?.display === true
+                        ? true
+                        : false,
+            });
+
+            headers["Content-Type"] = "application/json";
+        }
+
         axios
-            .put(`/api/plan/${id}`, formData[i], {
-                headers: {
-                    "Content-Type": "application/json",
-                    // Add any other headers if needed
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .put(`/api/trader/${id}`, payload, { headers })
             .then((res) => {
                 toast.success(`${formData[i].name} was updated successfully`);
             })
             .catch((error) => {
-                // console.log(error);
-                toast.error(error.response.data.message);
+                toast.error(
+                    error.response?.data?.message || "Something went wrong"
+                );
             });
     };
 
     function formReset() {
         setAddForm({
-            agent: 0,
-            amount: 0,
-            duration: 0,
             name: "",
-            percent: 0,
-            support: 0,
-            type: "",
+            position: "",
+            profile_picture: "",
+            rating: "",
+            ROI: 0,
+            PnL: 0,
+            investment: 0,
+            ranking: "",
+            display: true,
         });
     }
 
     const handleAddSubmit = () => {
-        const data = {
-            agent: parseInt(addForm.agent),
-            amount: parseInt(addForm.amount),
-            duration: parseInt(addForm.duration),
-            name: addForm.name,
-            percent: parseInt(addForm.percent),
-            support: parseInt(addForm.support),
-            type: addForm.type,
-        };
+        const formData = new FormData();
+        formData.append("name", addForm.name);
+        formData.append("position", addForm.position);
+        formData.append("profile_picture", addForm.profile_picture); // Ensure this is a File object
+        formData.append("rating", addForm.rating);
+        formData.append("ROI", parseInt(addForm.ROI)); // No need for parseInt() as FormData treats all values as strings
+        formData.append("PnL", parseInt(addForm.PnL));
+        formData.append("investment", parseInt(addForm.investment));
+        formData.append("ranking", parseInt(addForm.ranking));
+        formData.append(
+            "display",
+            addForm.display == 0 || addForm.display === true ? true : false
+        ); // Ensure boolean is sent as string
+
         axios
-            .post(`/api/plan`, data, {
+            .post(`/api/trader`, formData, {
                 headers: {
-                    "Content-Type": "application/json",
-                    // Add any other headers if needed
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
                 },
             })
@@ -164,7 +242,6 @@ export function PlanForm({
                 setIsModalOpen(false);
             })
             .catch((error) => {
-                // console.log(error);
                 toast.error(error?.response?.data?.message);
             });
     };
@@ -175,6 +252,7 @@ export function PlanForm({
                 e.preventDefault();
                 isAdd ? handleAddSubmit() : handleSubmit(index, element?.id);
             }}
+            encType="multipart/form-data"
         >
             <div className="mb-4">
                 <label
@@ -199,136 +277,168 @@ export function PlanForm({
 
             <div className="mb-4">
                 <label
-                    htmlFor="duration"
+                    htmlFor="position"
                     className="block text-sm font-medium text-gray-600"
                 >
-                    Days
-                </label>
-                <input
-                    type="number"
-                    id={isAdd ? "duration" : element?.duration}
-                    name="duration"
-                    placeholder="Enter Duration"
-                    min={0}
-                    defaultValue={isAdd ? addForm.duration : element?.duration}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            <div className="mb-4">
-                <label
-                    htmlFor="percent"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Percent
-                </label>
-                <input
-                    type="number"
-                    id={isAdd ? "percent" : element?.percent}
-                    name="percent"
-                    defaultValue={isAdd ? addForm.percent : element?.percent}
-                    max={100}
-                    placeholder="Enter Percent"
-                    min={0}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            <div className="mb-4">
-                <label
-                    htmlFor="amount"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Amount
-                </label>
-                <input
-                    type="number"
-                    id={isAdd ? "amount" : element?.amount}
-                    name="amount"
-                    placeholder="Enter Amount"
-                    defaultValue={isAdd ? addForm.amount : element?.amount}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            {/* amount of support for this plan */}
-            <div className="mb-4">
-                <label
-                    htmlFor="support"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Support
-                </label>
-                <input
-                    type="number"
-                    id={isAdd ? "support" : element?.support}
-                    name="support"
-                    defaultValue={isAdd ? addForm.support : element?.support}
-                    max={100}
-                    placeholder="Enter Amount of  Support"
-                    min={0}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            {/* amount of agent provided to users for this plan */}
-            <div className="mb-4">
-                <label
-                    htmlFor="agent"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Agent
-                </label>
-                <input
-                    type="number"
-                    id={isAdd ? "agent" : element?.agent}
-                    name="agent"
-                    defaultValue={isAdd ? addForm.agent : element?.agent}
-                    max={100}
-                    placeholder="Enter Amount of Agent"
-                    min={0}
-                    onChange={(e) =>
-                        isAdd ? handleAddChange(e) : handleChange(e, index)
-                    }
-                    className="mt-1 p-2 w-full border rounded-md"
-                    required
-                />
-            </div>
-
-            <div className="mb-4">
-                <label
-                    htmlFor="type"
-                    className="block text-sm font-medium text-gray-600"
-                >
-                    Type
+                    Position
                 </label>
                 <input
                     type="text"
-                    id={isAdd ? "type" : element?.type}
-                    name="type"
-                    placeholder="Enter Plan Type"
-                    defaultValue={isAdd ? addForm.type : element?.type}
+                    id={isAdd ? "position" : element?.position}
+                    name="position"
+                    defaultValue={isAdd ? addForm.position : element?.position}
+                    placeholder="Enter Position"
                     onChange={(e) =>
                         isAdd ? handleAddChange(e) : handleChange(e, index)
                     }
                     className="mt-1 p-2 w-full border rounded-md"
                     required
+                />
+            </div>
+
+            <ProfilePictureUpload
+                profilePicture={
+                    addForm.profile_picture || element?.profile_picture
+                }
+                onChange={(file) => {
+                    handleProfilePicture(file) ||
+                        handleAddProfilePicture(file, index);
+                }}
+            />
+
+            <div className="mb-4">
+                <label
+                    htmlFor="rating"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    Rating
+                </label>
+                <input
+                    type="text"
+                    id={isAdd ? "rating" : element?.rating}
+                    name="rating"
+                    placeholder="Enter Rating"
+                    min={0}
+                    defaultValue={isAdd ? addForm.rating : element?.rating}
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md"
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label
+                    htmlFor="ranking"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    Ranking
+                </label>
+                <input
+                    type="number"
+                    id={isAdd ? "ranking" : element?.ranking}
+                    name="ranking"
+                    defaultValue={isAdd ? addForm.ranking : element?.ranking}
+                    placeholder="Enter Ranking"
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md"
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label
+                    htmlFor="ROI"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    ROI
+                </label>
+                <input
+                    type="number"
+                    id={isAdd ? "ROI" : element?.ROI}
+                    name="ROI"
+                    placeholder="Enter ROI"
+                    defaultValue={isAdd ? addForm.ROI : element?.ROI}
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md"
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label
+                    htmlFor="PnL"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    PNL
+                </label>
+                <input
+                    type="number"
+                    id={isAdd ? "PnL" : element?.PnL}
+                    name="PnL"
+                    placeholder="Enter PNL"
+                    defaultValue={isAdd ? addForm.PnL : element?.PnL}
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md"
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label
+                    htmlFor="investment"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    Investment
+                </label>
+                <input
+                    type="number"
+                    id={isAdd ? "investment" : element?.investment}
+                    name="investment"
+                    placeholder="Enter Investment"
+                    defaultValue={
+                        isAdd ? addForm.investment : element?.investment
+                    }
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-full border rounded-md"
+                    required
+                />
+            </div>
+
+            <div className="mb-4">
+                <label
+                    htmlFor="display"
+                    className="block text-sm font-medium text-gray-600"
+                >
+                    Display
+                </label>
+                <input
+                    type="checkbox"
+                    id={isAdd ? "display" : element?.display}
+                    name="display"
+                    placeholder="Enter Display"
+                    defaultChecked={
+                        isAdd
+                            ? addForm.display == 0 || addForm.display == true
+                                ? true
+                                : false
+                            : element?.display == 0
+                            ? true
+                            : false
+                    }
+                    onChange={(e) =>
+                        isAdd ? handleAddChange(e) : handleChange(e, index)
+                    }
+                    className="mt-1 p-2 w-auto border rounded-md"
                 />
             </div>
 
@@ -338,7 +448,7 @@ export function PlanForm({
                     type="submit"
                     className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
                 >
-                    {isAdd ? "Add Plan" : `Update ${element?.name} name`}
+                    {isAdd ? "Add Wallet" : `Update ${element?.name} name`}
                 </button>
             </div>
         </form>

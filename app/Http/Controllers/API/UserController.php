@@ -60,10 +60,29 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->all());
+        \Log::debug('Request Data:', $request->all());
+        \Log::debug('Has file:', ['hasFile' => $request->hasFile('avatar')]);
+        \Log::debug('All Files:', $request->allFiles());
+
+        $data = $request->except('avatar'); // Exclude avatar for manual handling
+
+        if ($request->hasFile('avatar'))
+        {
+            $avatar = $request->file('avatar');
+            $avatarName = time() . '_' . $avatar->getClientOriginalName();
+            $avatarPath = $avatar->storeAs('uploads', $avatarName, 'public');
+
+            // Ensure it's stored as a string
+            $data['image_url'] = asset('storage/' . $avatarPath);
+            $data['image_id'] = $avatarName; // Store filename or unique identifier
+        }
+
+        $user->update($data);
 
         return new UserResource($user);
     }
+
+
 
     public function destroy(User $user)
     {

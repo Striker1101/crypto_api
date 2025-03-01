@@ -1,11 +1,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useEffect, useState } from "react";
-import Plan, { PlanForm } from "@/Components/Edit/Plan";
 import { getToken } from "@/Util/transform";
+import Wallet, { WalletForm } from "@/Components/Edit/WalletDetails";
 
-export default function UsersPlan({ auth, plans }) {
+export default function UsersPlan({ auth, wallets }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState(plans);
+    const token = getToken();
+    const [formData, setFormData] = useState(wallets);
+
+    console.log(wallets);
 
     return (
         <AuthenticatedLayout
@@ -13,18 +16,22 @@ export default function UsersPlan({ auth, plans }) {
             header={
                 <div className="flex justify-between">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Plans Edit
+                        Wallet Edit
                     </h2>
                     <button
                         onClick={() => setIsModalOpen(true)}
                         className="bg-green-500 h-10 text-white py-2 px-4 rounded-md hover:bg-green-600"
                     >
-                        New Plan
+                        New Wallet
                     </button>
                 </div>
             }
         >
-            <Plan plans={plans} formData={formData} setFormData={setFormData} />
+            <Wallet
+                wallets={wallets}
+                formData={formData}
+                setFormData={setFormData}
+            />
 
             {/* Modal */}
             {isModalOpen && (
@@ -43,7 +50,7 @@ export default function UsersPlan({ auth, plans }) {
                             </button>
                         </div>
                         {/* Add form or content here */}
-                        <PlanForm
+                        <WalletForm
                             isAdd={true}
                             setIsModalOpen={setIsModalOpen}
                         />

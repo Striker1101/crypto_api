@@ -1,38 +1,37 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useEffect, useState } from "react";
-import Plan, { PlanForm } from "@/Components/Edit/Plan";
-import { getToken } from "@/Util/transform";
+import React, { useState } from "react";
+import TradersDetail, { TraderForm } from "@/Components/Edit/TradersDetial";
 
-export default function UsersPlan({ auth, plans }) {
+export default function Trader({ auth, traders }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState(plans);
-
+    const [formData, setFormData] = useState(traders);
+    console.log(formData);
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className="flex justify-between">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Plans Edit
+                        Traders
                     </h2>
                     <button
                         onClick={() => setIsModalOpen(true)}
                         className="bg-green-500 h-10 text-white py-2 px-4 rounded-md hover:bg-green-600"
                     >
-                        New Plan
+                        New Trader
                     </button>
                 </div>
             }
         >
-            <Plan plans={plans} formData={formData} setFormData={setFormData} />
+            <TradersDetail formData={formData} setFormData={setFormData} />
 
             {/* Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-96 h-[500px] overflow-y-auto">
-                        <div className="flex justify-between">
-                            <h3 className="text-lg font-semibold mb-4">
-                                Create New Plan
+                        <div className="flex justify-between mb-4">
+                            <h3 className="text-lg font-semibold">
+                                Create New Trader
                             </h3>
 
                             <button
@@ -42,11 +41,15 @@ export default function UsersPlan({ auth, plans }) {
                                 Close
                             </button>
                         </div>
-                        {/* Add form or content here */}
-                        <PlanForm
-                            isAdd={true}
-                            setIsModalOpen={setIsModalOpen}
-                        />
+
+                        {/* Content inside modal should be scrollable */}
+                        <div className="h-[400px] overflow-y-auto">
+                            <TraderForm
+                                setFormData={setFormData}
+                                isAdd={true}
+                                setIsModalOpen={setIsModalOpen}
+                            />
+                        </div>
                     </div>
                 </div>
             )}

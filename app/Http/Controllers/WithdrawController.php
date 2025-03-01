@@ -6,6 +6,7 @@ use App\Http\Requests\StoreWithdrawRequest;
 use App\Http\Requests\UpdateWithdrawRequest;
 use App\Http\Resources\WithdrawResource;
 use App\Models\Withdraw;
+use App\Models\WithdrawType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -33,8 +34,10 @@ class WithdrawController extends Controller
 
     public function create($userId)
     {
+        $withdraw_type = WithdrawType::all();
         return inertia::render('CreateWithdraw', [
             'user_id' => $userId,
+            'withdraw_type' => $withdraw_type
         ]);
     }
 

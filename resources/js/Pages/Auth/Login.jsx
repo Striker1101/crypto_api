@@ -32,18 +32,21 @@ export default function Login({ status, canResetPassword }) {
 
             // Access the token from the response if needed
             const token = response.data.token;
-
+            console.log("token", response);
             // Save the token to localStorage
             localStorage.setItem("token", token);
 
-            console.log(response.data);
+            // console.log(response.data?.users?.data[0]?.type);
             //reject login  when user is not admin
-            if (response.data.type == "admin") {
-                // Redirect to the dashboard URL
-                window.location.href = route("dashboard"); // Replace with your actual dashboard route
-            } else {
-                alert("Only Admin can login here");
-            }
+            setTimeout(() => {
+                window.location.href = route("dashboard");
+            }, 1000);
+            // if (response.data?.users?.data[0]?.type == "admin") {
+            //     // Redirect to the dashboard URL
+            //     window.location.href = route("dashboard"); // Replace with your actual dashboard route
+            // } else {
+            //     alert("Only Admin can login here");
+            // }
         } catch (error) {
             // Access error details if available
             const errorData = error.response?.data;

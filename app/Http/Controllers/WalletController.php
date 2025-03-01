@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class WalletController extends Controller
 {
@@ -15,6 +16,17 @@ class WalletController extends Controller
     {
         $wallets = Wallet::all();
         return response()->json($wallets, 200);
+    }
+
+    public function edit()
+    {
+        // Fetch all plans
+        $wallets = Wallet::all();
+        // Pass the user to the view
+        // dd($wallets);
+        return Inertia::render('Wallet', [
+            'wallets' => $wallets,
+        ]);
     }
 
     /**

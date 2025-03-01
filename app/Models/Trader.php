@@ -16,7 +16,9 @@ class Trader extends Model
         'ROI',
         'PnL',
         'investment',
-        'ranking'
+        'ranking',
+        "display",
+        "position"
     ];
 
 
