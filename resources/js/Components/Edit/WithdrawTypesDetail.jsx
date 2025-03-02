@@ -286,6 +286,7 @@ export function WithdrawTypeForm({
                     className="mt-1 p-2 w-full border rounded-md"
                     required
                 >
+                    <option value="">Select Type</option>
                     <option value="bank_transfer">Bank Transfer</option>
                     <option value="crypto">Crypto</option>
                 </select>
