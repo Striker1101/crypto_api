@@ -16,9 +16,12 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string(column: 'symbol')->nullable();
             $table->string('currency')->nullable();
-            $table->enum('type', ['bank_transfer', 'crypto'])->default("crypto");
+            $table->enum('type', ['bank_transfer', 'crypto', 'others'])->default("crypto");
             $table->decimal('min_limit', 10, 2)->default(0);
             $table->decimal('max_limit', 10, 2)->default(10000);
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
+            $table->json('details')->nullable();
             $table->timestamps();
         });
     }

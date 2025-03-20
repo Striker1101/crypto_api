@@ -13,26 +13,24 @@ export default function Deposit({ deposit, user_id, apiToken }) {
             </div>
         );
     }
-
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
     const token = localStorage.getItem("token");
-    const handleToggle = (id) => {
-        deposit.map((item) => {
-            if (item.id == id) {
-                item.status === "pending"
-                    ? (item.status = "completed")
-                    : (item.status = "pending");
-
-                //reload
-                setreload(!reload);
-
-                console.log(item);
-
-                //submit
-                handleSubmit(item);
+    const handleToggle = (id, e) => {
+        const selectedStatus = e.target.value;
+        if (!selectedStatus) return;
+        const updatedDeposit = deposit.map((item) => {
+            if (item.id === id) {
+                const updatedItem = { ...item, status: selectedStatus };
+                handleSubmit(updatedItem); // send updated item
+                return updatedItem;
             }
+            return item;
         });
+
+        // Optional: update state if you're managing deposit in state
+        // setDeposit(updatedDeposit);
+        setreload(!reload);
     };
 
     const handleSubmit = (formData) => {
@@ -95,93 +93,102 @@ export default function Deposit({ deposit, user_id, apiToken }) {
             <div className="max-w-xxl mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-semibold">Edit Deposit</h2>
-                    <Link
+                    {/* <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         href={`/dashboard/${user_id}/deposit`}
                         method="get"
                         as="button"
                     >
                         Add Deposit
-                    </Link>
+                    </Link> */}
                 </div>
-                <table className="table table-striped table-bordered">
-                    <thead>
+                <table className="min-w-full table-auto border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <thead className="bg-gray-100 text-gray-700 text-sm uppercase">
                         <tr>
-                            <th>Time</th>
-                            <th>Amount</th>
-                            <th>Currency</th>
-                            <th>Wallet Address</th>
-                            <th>Status</th>
-                            <th>Delete</th>
+                            <th className="px-4 py-3 text-left">Time</th>
+                            <th className="px-4 py-3 text-left">Amount</th>
+                            <th className="px-4 py-3 text-left">Currency</th>
+                            <th className="px-4 py-3 text-left">Type</th>
+                            <th className="px-4 py-3 text-left">Name</th>
+                            <th className="px-4 py-3 text-left">Status</th>
+                            <th className="px-4 py-3 text-left">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {deposit &&
-                            deposit.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        {" "}
-                                        <p className="text-sm text-gray-600">
-                                            {new Date(
-                                                item.updated_at
-                                            ).toLocaleString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                                hour: "numeric",
-                                                minute: "numeric",
-                                                hour12: true,
-                                            })}
-                                        </p>
-                                    </td>
-                                    <td>{item.amount}</td>
-                                    <td>{item.currency}</td>
-                                    <td title="click to open deposit image">
-                                        {item.image_url ? (
-                                            <a
-                                                style={{
-                                                    border: "2px solid orange",
-                                                    cursor: "pointer",
-                                                    borderRadius: "30px",
-                                                    padding: "5px",
-                                                    zIndex: 300,
-                                                }}
-                                                href={item.image_url}
-                                                target="_blank"
-                                            >
-                                                {item.wallet_address}
-                                            </a>
-                                        ) : (
-                                            item.wallet_address
-                                        )}
-                                    </td>
-                                    <td>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                checked={
-                                                    item.status === "completed"
-                                                }
-                                                onChange={() =>
-                                                    handleToggle(item.id)
-                                                } // Add your toggle handler function
-                                                className="hidden"
-                                            />
-                                            <span className="slider round"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <button
-                                            onClick={() => {
-                                                handleDelete(item.id);
-                                            }}
-                                            className="bg-red-500 text-white px-2 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-800"
+                    <tbody className="text-sm text-gray-700">
+                        {deposit?.map((item) => (
+                            <tr
+                                key={item.id}
+                                className="hover:bg-gray-50 border-b"
+                            >
+                                <td className="px-4 py-2">
+                                    {new Date(item.updated_at).toLocaleString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                            hour: "numeric",
+                                            minute: "numeric",
+                                            hour12: true,
+                                        }
+                                    )}
+                                </td>
+                                <td className="px-4 py-2 font-semibold">
+                                    {item.amount}
+                                </td>
+                                <td className="px-4 py-2">{item.currency}</td>
+                                <td className="px-4 py-2">
+                                    {item?.deposit_type?.type}
+                                </td>
+                                <td className="px-4 py-2">
+                                    {item?.deposit_type?.name}
+                                </td>
+                                <td className="px-4 py-2">
+                                    <select
+                                        name="status"
+                                        className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                        value={item.status}
+                                        onChange={(e) =>
+                                            handleToggle(item.id, e)
+                                        }
+                                    >
+                                        <option value="">Select Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="completed">
+                                            Completed
+                                        </option>
+                                        <option value="rejected">
+                                            Rejected
+                                        </option>
+                                        <option value="processing">
+                                            Processing
+                                        </option>
+                                    </select>
+                                </td>
+                                <td className="px-4 py-2">
+                                    <button
+                                        onClick={() => handleDelete(item.id)}
+                                        className="flex items-center gap-2 bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition-all duration-200 text-sm"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
                                         >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

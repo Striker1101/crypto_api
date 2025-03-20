@@ -12,12 +12,19 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->decimal('balance', 15, 2)->default(0);
             $table->decimal('earning', 15, 2)->default(0);
             $table->decimal('bonus', 10, 2)->default(10);
+
             $table->boolean('trade')->default(false);
+
+            $table->unsignedBigInteger('account_type_id')->default(1);
+            $table->foreign('account_type_id')->references('id')->on('account_types')->onDelete('cascade');
+
             $table->enum('account_stage', ['beginner', 'bronze', 'silver', 'gold', 'premium'])->default('beginner');
-            $table->enum('account_type', ['trading', 'margin'])->default('trading');
+
+            $table->timestamp('trade_changed_at')->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,8 @@ class UpdateAccountRequest extends FormRequest
 
 
         // dd($accountId, $method);
-        if ($method === 'PUT') {
+        if ($method === 'PUT')
+        {
             return [
                 'user_id' => [
                     'required',
@@ -32,10 +33,10 @@ class UpdateAccountRequest extends FormRequest
                 'earning' => 'required|numeric',
                 'bonus' => 'required|numeric',
                 'trade' => 'sometimes|boolean',
-                'account_type' => 'required|in:trading,margin',
                 'account_stage' => 'required|in:beginner,bronze,silver,gold,premium',
             ];
-        } else {
+        } else
+        {
 
             return [
 
@@ -47,7 +48,6 @@ class UpdateAccountRequest extends FormRequest
                 'earning' => 'sometimes|numeric',
                 'bonus' => 'sometimes|numeric',
                 'trade' => 'sometimes|boolean',
-                'account_type' => 'sometimes|in:trading,margin',
                 'account_stage' => 'sometimes|in:beginner,bronze,silver,gold,premium',
             ];
         }

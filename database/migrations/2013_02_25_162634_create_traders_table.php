@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->decimal('investment', 20, 2)->default(0); // Total investment
             $table->integer('ranking')->default(0); // Ranking among traders
             $table->boolean(column: 'display')->default(false); // Ranking among traders
+
             $table->timestamps();
         });
     }

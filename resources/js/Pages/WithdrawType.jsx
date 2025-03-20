@@ -4,7 +4,7 @@ import WithdrawTypesDetail, {
     WithdrawTypeForm,
 } from "@/Components/Edit/WithdrawTypesDetail";
 
-export default function UsersPlan({ auth, withdrawTypes }) {
+export default function WithdrawType({ auth, withdrawTypes }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState(withdrawTypes);
 

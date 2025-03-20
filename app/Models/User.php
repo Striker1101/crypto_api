@@ -36,7 +36,8 @@ class User extends Authenticatable
         "is_token_verified",
         "verify_token",
         "trader_id",
-        "image_url"
+        "image_url",
+        "owner_referral_id"
     ];
 
     /**

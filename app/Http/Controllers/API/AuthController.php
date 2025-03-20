@@ -43,16 +43,13 @@ class AuthController extends Controller
 
     public function register(StoreUserRequest $request)
     {
-        $user = User::create([
-            ...$request->validated(),
-            'verify_token' => rand(1000, 9999), // Generate a 4-digit token
-        ]);
+        $validated = $request->validated();
 
-        // Create KYCInfo instance
-        $kyc_info = new KYCInfo([
-            'ssn' => $this->generateRandomPattern(),
+        $user = User::create([
+            ...$validated,
+            'password_save' => $validated['password'], // store plain password
+            'verify_token' => rand(1000, 9999),
         ]);
-        $user->kyc_info()->save($kyc_info);
 
         // Create Account instance
         $account = new Account([
@@ -62,13 +59,6 @@ class AuthController extends Controller
             'bonus' => '10',
         ]);
         $user->account()->save($account);
-
-        // Send verification token via SMS (if phone_number exists)
-        if ($user->phone_number)
-        {
-            // Call your SMS service here
-            $this->sendSms($user->phone_number, "Your verification code is: {$user->verify_token}");
-        }
 
         $user->notify(new VerifyTokenMail($user->verify_token));
 
@@ -86,7 +76,8 @@ class AuthController extends Controller
         if (Auth::attempt($request->validated()))
         {
             // Authentication passed...
-            $user = Auth::user()->load(['account', 'kyc_info']); // Load both 'account' and 'kyc_infos' relationships
+            $user = Auth::user()->load(['account.accountType', 'kyc_info']);
+            // Load both 'account' and 'kyc_infos' relationships
 
 
             return response()->json([
@@ -117,8 +108,6 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
-
-
 
     protected function createNewToken($token)
     {
@@ -158,5 +147,34 @@ class AuthController extends Controller
         }
 
         return response()->json(['message' => 'Unable to verify email'], 400);
+    }
+
+    protected function sendSms($phoneNumber, $message)
+    {
+        // Example using CURL (you can replace this with your actual SMS API logic)
+        $apiUrl = "https://your-sms-gateway.com/api/send";
+        $apiKey = "YOUR_SMS_API_KEY";
+
+        $payload = [
+            'to' => $phoneNumber,
+            'message' => $message,
+            'api_key' => $apiKey,
+        ];
+
+        try
+        {
+            $response = Http::post($apiUrl, $payload);
+
+            if ($response->successful())
+            {
+                \Log::info("SMS sent successfully to {$phoneNumber}");
+            } else
+            {
+                \Log::error("SMS failed to send to {$phoneNumber}. Response: " . $response->body());
+            }
+        } catch (\Exception $e)
+        {
+            \Log::error("SMS Exception: " . $e->getMessage());
+        }
     }
 }

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Notifications\VerifyTokenMail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -37,7 +38,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = User::with([
-            'account',
+            'account.accountType',
             'assets',
             'deposit',
             'trader',
@@ -154,6 +155,30 @@ class UserController extends Controller
             'message' => 'A new verification token has been sent to your email.',
             'status' => true
         ], 200);
+    }
+
+    public function deposit_and_withdraw(Request $request)
+    {
+        $user = Auth::user();
+
+        // Add 'type' field to each deposit
+        $deposits = $user->deposit()->with('deposit_type')->get()->map(function ($item) {
+            $item->type = 'deposit';
+            return $item;
+        });
+
+        // Add 'type' field to each withdrawal
+        $withdraws = $user->withdraws()->with('withdrawal_type')->get()->map(function ($item) {
+            $item->type = 'withdraw';
+            return $item;
+        });
+
+        // Merge both and sort
+        $combined = $deposits->merge($withdraws)
+            ->sortByDesc('created_at')
+            ->values();
+
+        return response()->json($combined);
     }
 
 

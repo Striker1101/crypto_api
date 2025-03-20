@@ -20,22 +20,25 @@ export default function Withdraw({ withdraw, user_id }) {
     const [reload, setreload] = useState(true);
     const [modalMessage, setModalMessage] = useState("");
 
-    const handleToggle = (id) => {
-        withdraw.map((item) => {
-            if (item.id == id) {
-                item.status === 0 ? (item.status = 1) : (item.status = 0);
+    const handleToggle = (id, e) => {
+        const selectedStatus = e.target.value;
+        if (!selectedStatus) return;
 
-                //reload
-                setreload(!reload);
-
-                //submit
-                handleSubmit(item);
+        const updatedWithdraw = withdraw.map((item) => {
+            if (item.id === id) {
+                const updatedItem = { ...item, status: selectedStatus };
+                handleSubmit(updatedItem); // send updated item
+                return updatedItem;
             }
+            return item;
         });
+
+        // Optional: update state if you're managing deposit in state
+        // setDeposit(updatedDeposit);
+        setreload(!reload);
     };
 
     const handleSubmit = (formData) => {
-        console.log(formData);
         axios
             .put(`/api/withdraw/${formData.id}`, formData, {
                 headers: {
@@ -89,7 +92,6 @@ export default function Withdraw({ withdraw, user_id }) {
                     }, 2000);
                 });
     };
-    console.log(withdraw);
 
     return (
         <div className="container mx-auto mt-8">
@@ -105,66 +107,97 @@ export default function Withdraw({ withdraw, user_id }) {
                         Add withdraw
                     </Link>
                 </div>
-                <table className="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Name</th>
-                            <th>Amount</th>
-                            <th>Currency</th>
-                            <th>Destination</th>
-                            <th>Status</th>
-                            <th>Delete</th>
+                <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+                    <thead className="bg-gray-100">
+                        <tr className="text-left text-sm font-semibold text-gray-600">
+                            <th className="px-4 py-3">Time</th>
+                            <th className="px-4 py-3">Name</th>
+                            <th className="px-4 py-3">Type</th>
+                            <th className="px-4 py-3">Amount</th>
+                            <th className="px-4 py-3">Currency</th>
+                            <th className="px-4 py-3">Destination</th>
+                            <th className="px-4 py-3">Account</th>
+                            <th className="px-4 py-3">Status</th>
+                            <th className="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {withdraw &&
-                            withdraw.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        {" "}
-                                        <p className="text-sm text-gray-600">
-                                            {new Date(
-                                                item.updated_at
-                                            ).toLocaleString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                                hour: "numeric",
-                                                minute: "numeric",
-                                                hour12: true,
-                                            })}
-                                        </p>
-                                    </td>
-                                    <td>{item.name}</td>
-                                    <td>{item.amount}</td>
-                                    <td>{item.currency}</td>
-                                    <td>{item.destination}</td>
-                                    <td>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                checked={item.status == 1}
-                                                onChange={() =>
-                                                    handleToggle(item.id)
-                                                } // Add your toggle handler function
-                                                className="hidden"
-                                            />
-                                            <span className="slider round"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <button
-                                            onClick={() => {
-                                                handleDelete(item.id);
-                                            }}
-                                            className="bg-red-500 text-white px-2 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-800"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                        {withdraw?.map((item, idx) => (
+                            <tr
+                                key={item.id}
+                                className={`text-sm text-gray-700 border-t ${
+                                    idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                } hover:bg-gray-100 transition duration-150`}
+                            >
+                                <td className="px-4 py-3">
+                                    {new Date(item.updated_at).toLocaleString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                            hour: "numeric",
+                                            minute: "numeric",
+                                            hour12: true,
+                                        }
+                                    )}
+                                </td>
+                                <td className="px-4 py-3">
+                                    {item.withdrawal_type.name}
+                                </td>
+                                <td className="px-4 py-3">
+                                    {item.withdrawal_type.type}
+                                </td>
+                                <td className="px-4 py-3 font-semibold text-gray-800">
+                                    {item.amount}
+                                </td>
+                                <td className="px-4 py-3">
+                                    {item.withdrawal_type.currency}
+                                </td>
+                                <td className="px-4 py-3">
+                                    {item.details.bank_name ||
+                                        item.details.network ||
+                                        item.details.paypal_email}
+                                </td>
+
+                                <td className="px-4 py-3">
+                                    {item.details.account_number ||
+                                        item.details.wallet_address ||
+                                        item.details.paypal_email}
+                                </td>
+
+                                <td className="px-4 py-3">
+                                    <select
+                                        name="status"
+                                        className="w-full border-gray-300 rounded-md text-sm px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        value={item.status}
+                                        onChange={(e) =>
+                                            handleToggle(item.id, e)
+                                        }
+                                    >
+                                        <option value="">Select Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="completed">
+                                            Completed
+                                        </option>
+                                        <option value="rejected">
+                                            Rejected
+                                        </option>
+                                        <option value="processing">
+                                            Processing
+                                        </option>
+                                    </select>
+                                </td>
+                                <td className="px-4 py-3">
+                                    <button
+                                        onClick={() => handleDelete(item.id)}
+                                        className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-md shadow-sm transition"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

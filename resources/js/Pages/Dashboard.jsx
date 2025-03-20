@@ -31,23 +31,41 @@ export default function Dashboard({ auth, users }) {
                         </InertiaLink>
                     </button>
 
-                    <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
+                    {/* <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
                         <InertiaLink
                             href={`/dashboard/wallet/edit`}
+                            method="get"
+                        >
+                            Edit Wallet Option
+                        </InertiaLink>
+                    </button> */}
+
+                    <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
+                        <InertiaLink
+                            href={`/dashboard/deposit_type/edit`}
                             method="get"
                         >
                             Edit Deposit Option
                         </InertiaLink>
                     </button>
 
-                    <button className=" m-4  px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring focus:border-blue-300">
+                    <button className=" m-4  px-4 py-2 bg-green-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
+                        <InertiaLink
+                            href={`/dashboard/account_type/edit`}
+                            method="get"
+                        >
+                            Edit Account Type
+                        </InertiaLink>
+                    </button>
+
+                    {/* <button className=" m-4  px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring focus:border-blue-300">
                         <InertiaLink
                             href={`/dashboard/trader/edit`}
                             method="get"
                         >
                             Edit Traders
                         </InertiaLink>
-                    </button>
+                    </button> */}
                 </div>
 
                 <ListUsers users={users.data} />

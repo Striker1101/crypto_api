@@ -7,7 +7,9 @@ use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Resources\AccountResource;
 use App\Models\Account;
+use App\Models\AccountType;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AccountController extends Controller
 {
@@ -32,7 +34,8 @@ class AccountController extends Controller
 
     public function create()
     {
-        if (request()->wantsJson()) {
+        if (request()->wantsJson())
+        {
             // Return JSON response for API requests
             return response()->json(['message' => 'API create method']);
         }
@@ -49,7 +52,8 @@ class AccountController extends Controller
 
     public function edit(Account $account)
     {
-        if (request()->wantsJson()) {
+        if (request()->wantsJson())
+        {
             // Return JSON response for API requests
             return response()->json(['message' => 'API edit method']);
         }

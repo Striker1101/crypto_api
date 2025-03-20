@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Withdraw::factory(10)->create();
         \App\Models\Earning::factory(10)->create();
         \App\Models\Investment::factory(10)->create();
+        \App\Models\AccountType::factory(10)->create();
     }
 }

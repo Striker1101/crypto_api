@@ -18,6 +18,7 @@ class Asset extends Model
         'type',
         'user_id',
         'image_url',
-        'image_id'
+        'image_id',
+        "owner_referral_id"
     ];
 }

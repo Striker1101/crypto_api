@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->string('symbol')->default('$');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 

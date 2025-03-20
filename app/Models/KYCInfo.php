@@ -20,7 +20,8 @@ class KYCInfo extends Model
         'DLF_image_id',
         'DLF_image_url',
         'number',
-        'verified'
+        'verified',
+        "owner_referral_id"
     ];
 
     public function user()
@@ -32,7 +33,10 @@ class KYCInfo extends Model
     {
         parent::boot();
 
-        // Listen for the 'updating' event
+        static::creating(function ($kyc_info) {
+            $kyc_info->verifyIfAllFieldsFilled();
+        });
+
         static::updating(function ($kyc_info) {
             $kyc_info->verifyIfAllFieldsFilled();
         });
@@ -40,21 +44,18 @@ class KYCInfo extends Model
 
     public function verifyIfAllFieldsFilled()
     {
-        // Check if all fields (except 'verified') are not null
-        $allFieldsFilled = !is_null($this->DLB_image_id)
-            && !is_null($this->DLB_image_url)
-            && !is_null($this->DLF_image_id)
-            && !is_null($this->DLF_image_url)
-            && !is_null($this->number);
+        $allFieldsFilled = !empty($this->DLB_image_url) && !empty($this->ssn) && !empty($this->DLF_image_url);
 
-        // Update 'verified' based on the condition
-        $this->verified = $allFieldsFilled;
-
-        // If all fields are filled and 'verified' becomes true, send notification
-        if ($allFieldsFilled && $this->isDirty('verified') && $this->verified)
+        if ($allFieldsFilled && !$this->verified)
         {
-            $this->user->notify(new KycVerificationSuccess());
+            $this->verified = true;
+
+            if ($this->user)
+            {
+                $this->user->notify(new KycVerificationSuccess());
+            }
         }
     }
+
 
 }

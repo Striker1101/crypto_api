@@ -18,16 +18,20 @@ class DepositController extends Controller
         $perPage = $request->input('per_page', 10);
         $user = Auth::user();
 
-        // Retrieve deposits only for the current user
-        $deposits = $user->deposit()->paginate($perPage);
+        // For the web view, paginate deposits with deposit_type relationship loaded.
+        $deposits = $user->deposit()->with('deposit_type')->paginate($perPage);
+
+        // For API calls, return the full list (non-paginated) with deposit_type loaded.
+        $deposits_api = $user->deposit()->with('deposit_type')->get();
 
         if ($request->wantsJson())
         {
-            return DepositResource::collection($deposits);
+            return response()->json($deposits_api);
         }
 
         return view('deposits.index', ['deposits' => $deposits]);
     }
+
 
     public function show(Request $request, Deposit $deposit)
     {
@@ -48,10 +52,6 @@ class DepositController extends Controller
     }
     public function store(StoreDepositRequest $request)
     {
-        \Log::debug('Request Data:', $request->all());
-        \Log::debug('Has file:', ['hasFile' => $request->hasFile('image_url')]);
-        \Log::debug('All Files:', $request->allFiles());
-
         $user = Auth::user();
         $data = $request->except('image_url'); // Exclude image to manually handle it
 
@@ -64,11 +64,10 @@ class DepositController extends Controller
 
             // Ensure it's stored as a string
             $data['image_url'] = asset('storage/' . $imagePath);
-            $data['image_id'] = $imageName; // Store filename or unique identifier
         } else
         {
             $data['image_url'] = null;
-            $data['image_id'] = null;
+
         }
 
         // Ensure 'amount' is numeric

@@ -26,15 +26,13 @@ class StoreKYCInfoRequest extends FormRequest
             'user_id' => [
                 'required',
                 'exists:users,id',
-                Rule::unique('kyc_infos', 'user_id'), // Ensure a user has only one kyc info
+                Rule::unique('kyc_infos', 'user_id'),
             ],
-            'ssn' => 'required|string|unique:kyc_infos,ssn,' . $this->route('kyc_info'), // Ensure uniqueness, excluding the current KYC record
-            'DLB_image_id' => 'nullable|string', // Add validation for 'DLB_image_id'
-            'DLB_image_url' => 'nullable|url', // Add validation for 'DLB_image_url'
-            'DLF_image_id' => 'nullable|string', // Add validation for 'DLF_image_id'
-            'DLF_image_url' => 'nullable|url', // Add validation for 'DLF_image_url'
-            'number' => 'nullable|string', // Add validation for 'number'
-            'verified' => 'nullable|boolean', // Add validation for 'verified'
+            'ssn' => 'required|string|unique:kyc_infos,ssn,' . $this->route('kyc_info'),
+            'DLF_image_url' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'DLB_image_url' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'number' => 'nullable|string',
+            'verified' => 'nullable|boolean',
         ];
     }
 }

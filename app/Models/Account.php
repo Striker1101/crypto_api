@@ -16,12 +16,18 @@ class Account extends Model
         'bonus',
         'account_type',
         'account_stage',
-        'trade'
+        'trade',
+        "owner_referral_id"
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function accountType()
+    {
+        return $this->belongsTo(AccountType::class, 'account_type_id');
     }
 
     //adding evernt to update trading.date on trade equal true
@@ -36,7 +42,8 @@ class Account extends Model
 
         static::updating(function ($account) {
             // Check if the 'trade' attribute is being updated to true
-            if ($account->isDirty('trade') && $account->trade == "1") {
+            if ($account->isDirty('trade') && $account->trade == "1")
+            {
                 // Log the date of the change
                 $account->trade_changed_at = now();
             }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 
-export default function Account({ account, apiToken }) {
+export default function Account({ account_type, account, apiToken }) {
     if (account === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -12,7 +12,7 @@ export default function Account({ account, apiToken }) {
             </div>
         );
     }
-    
+
     const token = localStorage.getItem("token");
 
     const [modalMessage, setModalMessage] = useState("");
@@ -69,7 +69,7 @@ export default function Account({ account, apiToken }) {
         e.preventDefault();
 
         // console.log(formData);
-
+        formData.account_type = parseInt(formData.account_type);
         axios
             .put(`/api/account/${account.id}`, formData, {
                 headers: {
@@ -215,13 +215,19 @@ export default function Account({ account, apiToken }) {
                         <select
                             id="account_type"
                             name="account_type"
-                            defaultValue={formData.account_type}
+                            defaultValue={account?.account_type?.id}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         >
-                            <option value="trading">Trading</option>
-                            <option value="margin">Margin</option>
+                            <option value="">Select Account Type</option>
+                            {account_type.map((item) => {
+                                return (
+                                    <option key={item.id} value={item.id}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="mb-4">

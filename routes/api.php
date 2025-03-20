@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountTypeController;
+use App\Http\Controllers\DepositTypeController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DebitCardController;
@@ -34,7 +36,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 
-], function ($router) {
+], routes: function ($router): void {
     //auth
     Route::post('login', 'App\Http\Controllers\API\AuthController@login');
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
@@ -47,7 +49,11 @@ Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 Route::post('/verify_user_token', 'App\Http\Controllers\API\UserController@verify_user_token');
 Route::post('/resend_user_token', [UserController::class, 'resend_user_token'])
     ->middleware('throttle:1,5');
-
+Route::apiResources([
+    'plan' => PlanController::class,
+    'account_type' => AccountTypeController::class
+]);
+Route::post('/account_types/bulk_upload', [AccountTypeController::class, 'bulkUpload']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Your authenticated API routes go here
@@ -62,13 +68,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::Post('/verifyEmail', ['uses' => 'AuthController@verifyEmail']);
     Route::Post('/storeDeposit', 'App\Http\Controllers\Dashboard\DashboardController@storeDeposit');
     Route::Post('/storeWithdraw', 'App\Http\Controllers\Dashboard\DashboardController@storeWithdraw');
+    Route::get('/deposit_and_withdraw', 'App\Http\Controllers\API\UserController@deposit_and_withdraw');
 
     //resouces
     Route::apiResources([
         'asset' => AssetController::class,
         'debit_card' => DebitCardController::class,
         'deposit' => DepositController::class,
-        'plan' => PlanController::class,
         'kyc_info' => KYCInfoController::class,
         'notify' => NotificationController::class,
         'withdraw' => WithdrawController::class,
@@ -77,6 +83,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'trader' => TraderController::class,
         'wallet' => WalletController::class,
         'withdraw_type' => WithdrawTypeController::class,
-        'invest' => InvestmentController::class
+        'invest' => InvestmentController::class,
+        'deposit_type' => DepositTypeController::class,
     ]);
 });
+

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDepositRequest;
 use App\Http\Requests\StoreWithdrawRequest;
 use App\Http\Resources\DepositResource;
 use App\Http\Resources\WithdrawResource;
+use App\Models\AccountType;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -38,13 +39,23 @@ class DashboardController extends Controller
     {
 
         // Fetch user details with all associated relationships
-        $user = User::with(['account', 'assets', 'deposit', 'debit_card', 'kyc_info', 'withdraws', 'notifications'])
-            ->find($userId);
+        $user = User::with([
+            'account.accountType',
+            'assets',
+            'deposit.deposit_type',
+            'withdraws.withdrawal_type',
+            'debit_card',
+            'kyc_info',
+            'notifications'
+        ])->find($userId);
+
+        $account_type = AccountType::all();
 
 
         // Pass the user to the view
         return Inertia::render('EditUser', [
             'user' => $user,
+            "account_type" => $account_type
         ]);
     }
 

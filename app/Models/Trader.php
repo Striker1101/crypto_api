@@ -18,7 +18,8 @@ class Trader extends Model
         'investment',
         'ranking',
         "display",
-        "position"
+        "position",
+        "owner_referral_id"
     ];
 
 

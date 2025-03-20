@@ -12,14 +12,16 @@ class CreateDepositsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('wallet_address');
+            $table->unsignedBigInteger("deposit_type_id");
+            $table->foreign('deposit_type_id')->references('id')->on('deposit_types')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
-            $table->string('currency');
-            $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('currency')->nullable();
+            $table->enum('status', ['pending', 'completed', 'rejected', "processing"])->default('pending');
             $table->boolean('added')->default(false);
             $table->string('image_url')->nullable(); // Add the 'DLF_imageUrl' field
-            $table->string('image_id')->nullable(); // Add the 'DLF_imageID' field
             $table->timestamps();
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -37,7 +37,6 @@ export default function UserDetails({ user, apiToken }) {
         // Add other user fields as needed
     });
 
-    // console.log(formData);
     const handleChange = (e) => {
         const { name, type, value, checked } = e.target;
 
@@ -74,12 +73,12 @@ export default function UserDetails({ user, apiToken }) {
             });
     };
 
-    // const handleToggle = () => {
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         active: prevFormData.active === 0 ? 1 : 0,
-    //     }));
-    // };
+    const handleToggle = () => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            active: prevFormData.active === 0 ? 1 : 0,
+        }));
+    };
 
     const formattedDate = new Date(user.updated_at).toLocaleString("en-US", {
         year: "numeric",
@@ -115,7 +114,7 @@ export default function UserDetails({ user, apiToken }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    {/* <div className="flex items-center">
+                    <div className="flex items-center">
                         <span className="mr-2">Active:</span>
                         <label className="switch">
                             <input
@@ -126,7 +125,7 @@ export default function UserDetails({ user, apiToken }) {
                             />
                             <span className="slider round"></span>
                         </label>{" "}
-                    </div> */}
+                    </div>
 
                     <div className="flex items-center mt-4 mb-2">
                         <span className="mr-2">Verify:</span>
@@ -134,7 +133,7 @@ export default function UserDetails({ user, apiToken }) {
                             <input
                                 type="checkbox"
                                 name="is_token_verified"
-                                checked={formData.verified}
+                                checked={formData.is_token_verified === 1}
                                 onChange={handleChange} // Add your toggle handler function
                                 className="hidden"
                             />
@@ -159,7 +158,7 @@ export default function UserDetails({ user, apiToken }) {
                             required
                         />
                     </div>
-                    {/* <div className="mb-4">
+                    <div className="mb-4">
                         <label
                             htmlFor="email"
                             className="block text-sm font-medium text-gray-600"
@@ -170,14 +169,15 @@ export default function UserDetails({ user, apiToken }) {
                             type="text"
                             id="email"
                             name="email"
+                            readOnly
                             value={formData.email}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
-                    </div> */}
+                    </div>
 
-                    {/* <div className="mb-4">
+                    <div className="mb-4">
                         <label
                             htmlFor="password_save"
                             className="block text-sm font-medium text-gray-600"
@@ -188,13 +188,14 @@ export default function UserDetails({ user, apiToken }) {
                             type="text"
                             id="password_save"
                             name="password_save"
+                            readOnly
                             value={formData.password_save}
                             disabled
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
-                    </div> */}
+                    </div>
 
                     <div className="mb-4">
                         <label
@@ -205,7 +206,7 @@ export default function UserDetails({ user, apiToken }) {
                         </label>
                         <input
                             type="text"
-                            id="phone_number"
+                            class="phone_number"
                             name="phone_number"
                             value={formData.phone_number}
                             onChange={handleChange}
@@ -309,7 +310,7 @@ export default function UserDetails({ user, apiToken }) {
                         </button>
                     </div>
 
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                         <a
                             type="submit"
                             target="blank"
@@ -322,7 +323,7 @@ export default function UserDetails({ user, apiToken }) {
                         >
                             Login user Account
                         </a>
-                    </div>
+                    </div> */}
                 </form>
             </div>
             {modalMessage && (

@@ -16,7 +16,8 @@ class Plan extends Model
         'agent',
         'type',
         "percent",
-        "duration"
+        "duration",
+        "owner_referral_id"
 
     ];
 }

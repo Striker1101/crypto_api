@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountTypeController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\DepositTypeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TraderController;
@@ -47,6 +49,12 @@ Route::get('/dashboard/plan/edit', [PlanController::class, 'edit'])
 Route::get('/dashboard/withdraw_type/edit', [WithdrawTypeController::class, 'edit'])
     ->name('dashboard.withdraw_type');
 
+Route::get('/dashboard/deposit_type/edit', [DepositTypeController::class, 'edit'])
+    ->name('dashboard.deposit_type');
+
+Route::get('/dashboard/account_type/edit', [AccountTypeController::class, 'edit'])
+    ->name('dashboard.account_type');
+
 Route::get('/dashboard/wallet/edit', [WalletController::class, 'edit'])
     ->name('dashboard.wallet');
 
@@ -69,6 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/account_types/bulk_upload', [AccountTypeController::class, 'bulkUpload'])->name('account-types.bulk-upload');
+
 });
 
 require __DIR__ . '/auth.php';

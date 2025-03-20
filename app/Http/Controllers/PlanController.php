@@ -8,15 +8,14 @@ use Inertia\Inertia;
 
 class PlanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve all plans from the database
-        $plans = Plan::all();
+        $ownerId = $request->query('owner_id');
 
-        // Return the plans as JSON
+        $plans = $ownerId ? Plan::where('owner_referral_id', $ownerId)->get() : Plan::all();
+
         return response()->json($plans);
     }
-
     public function edit()
     {
         // Fetch all plans
