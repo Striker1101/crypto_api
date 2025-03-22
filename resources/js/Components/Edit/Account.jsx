@@ -123,7 +123,7 @@ export default function Account({ account_type, account, apiToken }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                         <span className="mr-2">Trade:</span>
                         <label className="switch">
                             <input
@@ -134,7 +134,7 @@ export default function Account({ account_type, account, apiToken }) {
                             />
                             <span className="slider round"></span>
                         </label>{" "}
-                    </div>
+                    </div> */}
                     <div className="mb-4">
                         <label
                             htmlFor="balance"
@@ -186,7 +186,7 @@ export default function Account({ account_type, account, apiToken }) {
                             required
                         />
                     </div>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <label
                             htmlFor="trade_timer"
                             className="block text-sm font-medium text-gray-600"
@@ -203,7 +203,7 @@ export default function Account({ account_type, account, apiToken }) {
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
-                    </div>
+                    </div> */}
 
                     <div className="mb-4">
                         <label

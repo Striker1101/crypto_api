@@ -114,7 +114,7 @@ export default function UserDetails({ user, apiToken }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                         <span className="mr-2">Active:</span>
                         <label className="switch">
                             <input
@@ -125,10 +125,13 @@ export default function UserDetails({ user, apiToken }) {
                             />
                             <span className="slider round"></span>
                         </label>{" "}
-                    </div>
+                    </div> */}
 
-                    <div className="flex items-center mt-4 mb-2">
-                        <span className="mr-2">Verify:</span>
+                    <div className=" items-center mt-4 mb-2">
+                        <span className="mr-2">
+                            Verify: (Show if user has verified account)
+                        </span>
+                        <br />
                         <label className="switch">
                             <input
                                 type="checkbox"
