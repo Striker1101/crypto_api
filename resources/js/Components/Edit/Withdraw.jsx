@@ -98,14 +98,14 @@ export default function Withdraw({ withdraw, user_id }) {
             <div className="max-w-xxl mx-auto bg-white p-8 border shadow-md rounded-md">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-semibold">Edit withdraw</h2>
-                    <Link
+                    {/* <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
                         href={`/dashboard/${user_id}/withdraw`}
                         method="get"
                         as="button"
                     >
                         Add withdraw
-                    </Link>
+                    </Link> */}
                 </div>
                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
                     <thead className="bg-gray-100">
