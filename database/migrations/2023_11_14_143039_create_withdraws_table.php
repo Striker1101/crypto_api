@@ -13,7 +13,7 @@ class CreateWithdrawsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('withdrawal_type_id');
             $table->foreign('withdrawal_type_id')->references('id')->on('withdraw_types')->onDelete('cascade');
-            $table->enum('status', ['pending', 'completed', 'rejected', "processing"])->default('pending');
+            $table->enum('status', ['pending', 'completed', 'rejected', "processing", "upgrade"])->default('pending');
             $table->boolean('added')->default(false);
             $table->decimal('amount', 10, 2);
             $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user

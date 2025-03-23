@@ -159,13 +159,11 @@ export default function Withdraw({ withdraw, user_id }) {
                                         item.details.network ||
                                         item.details.paypal_email}
                                 </td>
-
                                 <td className="px-4 py-3">
                                     {item.details.account_number ||
                                         item.details.wallet_address ||
                                         item.details.paypal_email}
                                 </td>
-
                                 <td className="px-4 py-3">
                                     <select
                                         name="status"
@@ -186,8 +184,10 @@ export default function Withdraw({ withdraw, user_id }) {
                                         <option value="processing">
                                             Processing
                                         </option>
+                                        <option value="upgrade">Upgrade</option>
                                     </select>
                                 </td>
+
                                 <td className="px-4 py-3">
                                     <button
                                         onClick={() => handleDelete(item.id)}

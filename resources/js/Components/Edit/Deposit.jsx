@@ -163,6 +163,7 @@ export default function Deposit({ deposit, user_id, apiToken }) {
                                         <option value="processing">
                                             Processing
                                         </option>
+                                        <option value="upgrade">Upgrade</option>
                                     </select>
                                 </td>
                                 <td className="px-4 py-2">

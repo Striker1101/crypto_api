@@ -16,7 +16,7 @@ class CreateDepositsTable extends Migration
             $table->foreign('deposit_type_id')->references('id')->on('deposit_types')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
             $table->string('currency')->nullable();
-            $table->enum('status', ['pending', 'completed', 'rejected', "processing"])->default('pending');
+            $table->enum('status', ['pending', 'completed', 'rejected', "processing", "upgrade"])->default('pending');
             $table->boolean('added')->default(false);
             $table->string('image_url')->nullable(); // Add the 'DLF_imageUrl' field
             $table->timestamps();
