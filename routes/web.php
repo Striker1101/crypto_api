@@ -8,6 +8,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\WithdrawTypeController;
+use App\Models\Plan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +25,11 @@ use App\Http\Controllers\Dashboard\DashboardController;
 |
 */
 
-Route::get('/', function () {
+
+
+// admin routes
+
+Route::get('/admin', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -33,34 +38,34 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
+Route::get('/admin', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('admin');
 
 
-Route::get('/dashboard/{userId}', [DashboardController::class, 'edit'])
-    ->name('dashboard.edit');
+Route::get('/admin/{userId}', [DashboardController::class, 'edit'])
+    ->name('admin.edit');
 
-Route::get('/dashboard/plan/edit', [PlanController::class, 'edit'])
-    ->name('dashboard.plan');
+Route::get('/admin/plan/edit', [PlanController::class, 'edit'])
+    ->name('admin.plan');
 
-Route::get('/dashboard/withdraw_type/edit', [WithdrawTypeController::class, 'edit'])
-    ->name('dashboard.withdraw_type');
+Route::get('/admin/withdraw_type/edit', [WithdrawTypeController::class, 'edit'])
+    ->name('admin.withdraw_type');
 
-Route::get('/dashboard/wallet/edit', [WalletController::class, 'edit'])
-    ->name('dashboard.wallet');
+Route::get('/admin/wallet/edit', [WalletController::class, 'edit'])
+    ->name('admin.wallet');
 
-Route::get('/dashboard/trader/edit', [TraderController::class, 'edit'])
-    ->name('dashboard.trader');
+Route::get('/admin/trader/edit', [TraderController::class, 'edit'])
+    ->name('admin.trader');
 
-Route::get('/dashboard/{userId}/notification/', [NotificationController::class, 'create'])
-    ->name('dashboard.createNotification');
+Route::get('/admin/{userId}/notification/', [NotificationController::class, 'create'])
+    ->name('admin.createNotification');
 
-Route::get('/dashboard/{userId}/deposit', [DepositController::class, 'create'])
-    ->name('dashboard.createDeposit');
+Route::get('/admin/{userId}/deposit', [DepositController::class, 'create'])
+    ->name('admin.createDeposit');
 
-Route::get('/dashboard/{userId}/withdraw', [WithdrawController::class, 'create'])
-    ->name('dashboard.createWithdraw');
+Route::get('/admin/{userId}/withdraw', [WithdrawController::class, 'create'])
+    ->name('admin.createWithdraw');
 
 
 
@@ -70,5 +75,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+//pages route
+Route::get('/', function () {
+    $plans = Plan::all();
+    return view('pages.index', compact('plans'));
+});
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+
+//dashboard
 
 require __DIR__ . '/auth.php';

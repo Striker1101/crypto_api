@@ -45,8 +45,8 @@ Route::group([
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');
 
 Route::post('/verify_user_token', 'App\Http\Controllers\API\UserController@verify_user_token');
-Route::post('/resend_user_token', [UserController::class, 'resend_user_token'])
-    ->middleware('throttle:1,5');
+Route::post('/resend_user_token', [UserController::class, 'resend_user_token']);
+// ->middleware('throttle:1,5');
 
 
 Route::middleware('auth:sanctum')->group(function () {

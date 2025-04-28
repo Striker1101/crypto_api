@@ -59,7 +59,7 @@ export default function UserDetails({ user, apiToken }) {
             .then((res) => {
                 setModalMessage("user was updated successfully");
                 // Redirect to user details page after successful update
-                Inertia.visit(`/dashboard/${user.id}`);
+                Inertia.visit(`/admin/${user.id}`);
 
                 setTimeout(() => {
                     setModalMessage("");

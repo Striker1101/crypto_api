@@ -137,7 +137,7 @@
 
 ### Dashboard:
 
--   _Define dashboard-related endpoints here._
+-   _Define admin-related endpoints here._
 
 # Crypto_app Project Deployment Guide
 

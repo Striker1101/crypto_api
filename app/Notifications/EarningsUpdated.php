@@ -38,7 +38,7 @@ class EarningsUpdated extends Notification
         return (new MailMessage)
             ->line('Your earnings have been updated!')
             ->line('Total Earnings: $' . $this->total_earning)
-            ->action('View Details', url(config('app.frontend_url') . '/dashboard'))
+            ->action('View Details', url(config('app.frontend_url') . '/admin'))
             ->line('Thank you for using our application!');
     }
 

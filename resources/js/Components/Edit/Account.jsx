@@ -12,7 +12,7 @@ export default function Account({ account, apiToken }) {
             </div>
         );
     }
-    
+
     const token = localStorage.getItem("token");
 
     const [modalMessage, setModalMessage] = useState("");
@@ -81,7 +81,7 @@ export default function Account({ account, apiToken }) {
             .then((res) => {
                 setModalMessage("Account was updated successfully");
                 // Redirect to account details page after successful update
-                Inertia.visit(`/dashboard/${account.user_id}`);
+                Inertia.visit(`/admin/${account.user_id}`);
 
                 setTimeout(() => {
                     setModalMessage("");

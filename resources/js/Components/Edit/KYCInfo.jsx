@@ -39,7 +39,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
 
                 setModalMessage("kyc_info was updated successfully");
                 // Redirect to kyc_info details page after successful update
-                Inertia.visit(`/dashboard/${kyc_info.user_id}`);
+                Inertia.visit(`/admin/${kyc_info.user_id}`);
 
                 setTimeout(() => {
                     setModalMessage("");

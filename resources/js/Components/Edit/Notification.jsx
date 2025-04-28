@@ -21,7 +21,7 @@ export default function Notification({ notification, user_id }) {
                     </h2>
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-                        href={`/dashboard/${user_id}/notification`}
+                        href={`/admin/${user_id}/notification`}
                         as="button"
                     >
                         Add Notification

@@ -47,7 +47,7 @@ export default function Withdraw({ withdraw, user_id }) {
             .then((res) => {
                 setModalMessage("withdraw was updated successfully");
                 // Redirect to withdraw details page after successful update
-                Inertia.visit(`/dashboard/${formData.user_id}`);
+                Inertia.visit(`/admin/${formData.user_id}`);
 
                 setTimeout(() => {
                     setModalMessage("");
@@ -76,7 +76,7 @@ export default function Withdraw({ withdraw, user_id }) {
 
                     setModalMessage("withdraw was deleted successfully");
                     // Redirect to withdraw details page after successful update
-                    Inertia.visit(`/dashboard/${formData.user_id}`);
+                    Inertia.visit(`/admin/${formData.user_id}`);
 
                     setTimeout(() => {
                         setModalMessage("");
@@ -98,7 +98,7 @@ export default function Withdraw({ withdraw, user_id }) {
                     <h2 className="text-2xl font-semibold">Edit withdraw</h2>
                     <Link
                         className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-                        href={`/dashboard/${user_id}/withdraw`}
+                        href={`/admin/${user_id}/withdraw`}
                         method="get"
                         as="button"
                     >

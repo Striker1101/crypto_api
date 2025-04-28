@@ -133,7 +133,7 @@ class UserController extends Controller
         if ($user->token_sent_at && Carbon::parse($user->token_sent_at)->addMinutes(5)->isFuture())
         {
             return response()->json([
-                'message' => 'You can request a new token in a few minutes.',
+                'message' => 'You can request a new token in a few minutes. try again in 5 Minute',
                 'status' => false
             ], 429); // HTTP 429 Too Many Requests
         }

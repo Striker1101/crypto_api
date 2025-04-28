@@ -17,14 +17,14 @@ export default function Dashboard({ auth, users }) {
                 <Head title="Dashboard" />
                 <div className="flex flex-wrap">
                     <button className=" m-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-                        <InertiaLink href={`/dashboard/plan/edit`} method="get">
+                        <InertiaLink href={`/admin/plan/edit`} method="get">
                             Edit Plans Here
                         </InertiaLink>
                     </button>
 
                     <button className=" m-4  px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring focus:border-blue-300">
                         <InertiaLink
-                            href={`/dashboard/withdraw_type/edit`}
+                            href={`/admin/withdraw_type/edit`}
                             method="get"
                         >
                             Edit Withdraw Type
@@ -32,19 +32,13 @@ export default function Dashboard({ auth, users }) {
                     </button>
 
                     <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
-                        <InertiaLink
-                            href={`/dashboard/wallet/edit`}
-                            method="get"
-                        >
+                        <InertiaLink href={`/admin/wallet/edit`} method="get">
                             Edit Deposit Option
                         </InertiaLink>
                     </button>
 
                     <button className=" m-4  px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring focus:border-blue-300">
-                        <InertiaLink
-                            href={`/dashboard/trader/edit`}
-                            method="get"
-                        >
+                        <InertiaLink href={`/admin/trader/edit`} method="get">
                             Edit Traders
                         </InertiaLink>
                     </button>

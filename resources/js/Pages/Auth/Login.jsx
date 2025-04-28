@@ -39,11 +39,11 @@ export default function Login({ status, canResetPassword }) {
             // console.log(response.data?.users?.data[0]?.type);
             //reject login  when user is not admin
             setTimeout(() => {
-                window.location.href = route("dashboard");
+                window.location.href = route("admin");
             }, 1000);
             // if (response.data?.users?.data[0]?.type == "admin") {
-            //     // Redirect to the dashboard URL
-            //     window.location.href = route("dashboard"); // Replace with your actual dashboard route
+            //     // Redirect to the admin URL
+            //     window.location.href = route("admin"); // Replace with your actual admin route
             // } else {
             //     alert("Only Admin can login here");
             // }
