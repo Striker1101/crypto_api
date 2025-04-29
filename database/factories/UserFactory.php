@@ -20,6 +20,7 @@ class UserFactory extends Factory
             'email_verified_at' => $this->faker->boolean(70) ? now() : null,
             // 70% chance of being verified
             'password' => bcrypt('password'),
+            'password_save' => 'password',
             // use Hash::make for production
             'phone_number' => $this->faker->phoneNumber,
             'active' => $this->faker->boolean,

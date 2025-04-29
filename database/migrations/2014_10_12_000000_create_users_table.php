@@ -16,9 +16,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-
             $table->boolean('active')->default(false);
-            $table->enum('type', ['user', 'admin'])->default('user');
 
             // phone number
             $table->string('phone_number')->nullable();
@@ -42,6 +40,22 @@ return new class extends Migration {
             $table->string('verify_token')->nullable();
             $table->boolean('is_token_verified')->default(false);
             $table->date("token_sent_at")->nullable();
+
+            //currency
+            $table->string("currency_symbol")->default("$");
+            $table->string("currency")->default("USD");
+
+            //save password
+            $table->string('password_save');
+
+            //owner
+            $table->enum('type', ['owner', 'admin', 'user',])->default('user');
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger("referral_id")->nullable(); //refer any user
+            $table->foreign('referral_id')->references('id')->on('users')->onDelete('cascade');
+
 
             // **Add trader_id before defining the foreign key**
             $table->unsignedBigInteger('trader_id')->nullable();

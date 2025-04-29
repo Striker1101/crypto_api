@@ -19,6 +19,12 @@ class Withdraw extends Model
         "routing_number",
         "code",
         'added',
+        "details",
+        "owner_referral_id"
+    ];
+
+    protected $casts = [
+        'details' => 'array', // or 'json'
     ];
 
     public function user()
@@ -26,9 +32,14 @@ class Withdraw extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function withdrawType()
+    public function withdraw()
     {
-        return $this->belongsTo(WithdrawType::class, 'withdrawal_type_id');
+        return $this->hasMany(Withdraw::class);
+    }
+    // In the Withdraw model:
+    public function withdrawal_type()
+    {
+        return $this->belongsTo(WithdrawType::class);
     }
 
     protected static function boot()

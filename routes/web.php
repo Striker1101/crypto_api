@@ -79,13 +79,42 @@ Route::middleware('auth')->group(function () {
 
 //pages route
 Route::get('/', function () {
-    $plans = Plan::all();
+    $plans = Plan::take(3)->get();
     return view('pages.index', compact('plans'));
+})->name('homepage');
+
+Route::get('/about-us', function () {
+    return view('pages.about');
+})->name('about-us');
+
+Route::get('/product', function () {
+    return view('pages.product');
+})->name('product');
+
+Route::get('/membership', function () {
+    return view('pages.membership');
+})->name('membership');
+
+Route::get('/contact-us', function () {
+    return view('pages.contact');
+})->name('contact-us');
+
+Route::get('/membership', function () {
+    return view('pages.membership');
+})->name('membership');
+
+Route::get('/faq', function () {
+    return view('pages.faq');
+})->name('faq');
+
+Route::get('/blog', function () {
+    return view('pages.blog');
+})->name('blog');
+
+Route::fallback(function () {
+    return response()->view('pages.404', [], 404);
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
 
 //dashboard

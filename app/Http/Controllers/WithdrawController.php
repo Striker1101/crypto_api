@@ -16,7 +16,7 @@ class WithdrawController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $withdraws = $user->withdraws()->with('withdrawType')->paginate($request->input('per_page', 20));
+        $withdraws = $user->withdraws()->with('withdrawal_type')->paginate($request->input('per_page', 20));
 
         if ($request->wantsJson())
         {

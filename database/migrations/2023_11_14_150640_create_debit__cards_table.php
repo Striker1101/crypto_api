@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,10 +17,13 @@ return new class extends Migration
             $table->string('card_number');
             $table->date('expiration_date');
             $table->string('cvv');
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
             //type of card
-            $table->enum('type', ['verve', 'master','visa','black'])->default('verve');
+            $table->enum('type', ['verve', 'master', 'visa', 'black'])->default('verve');
             // Add other card-related fields as needed
             $table->timestamps();
+
         });
     }
 

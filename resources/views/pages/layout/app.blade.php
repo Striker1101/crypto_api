@@ -6,13 +6,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name='robots' content='max-image-preview:large' />
-    <script src="{{ asset('css/custom.css') }}"></script>
+    <link rel='stylesheet' href="{{ asset('css/custom.css') }}" />
     <script src="{{ asset('js/custom.js') }}"></script>
     <link rel='stylesheet' id='jkit-elements-main-css' href='{{ asset('css/elements/main.css') }}' media='all' />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel='stylesheet' id='wp-block-library-css' href='{{ asset('css/dist/block-library/style.min.css') }}'
         media='all' />
-
     <link rel='stylesheet' id='allow-webp-image-css' href='{{ asset('css/plugins/allow-webp-image-public.css') }}'
         media='all' />
     <link rel='stylesheet' id='template-kit-export-css'
@@ -56,7 +55,7 @@
 </head>
 
 <body
-    class="home page-template page-template-elementor_header_footer page page-id-8 jkit-color-scheme elementor-default elementor-template-full-width elementor-kit-3 elementor-page elementor-page-8">
+    class="home  page-template-elementor_header_footer page  jkit-color-scheme elementor-default elementor-template-full-width elementor-kit-3 elementor-page elementor-page-8">
     <div id="page" class="jkit-template  site">
 
         @include('partials.navbar') <!-- Optional -->
@@ -78,23 +77,21 @@
         media='all' />
     <link rel='stylesheet' id='e-animations-css' href='{{ asset('css/dist/animation/animations.min.css') }}'
         media='all' />
+
     <script src="{{ asset('js/hello-frontend.min.js') }}" id="hello-theme-frontend-js"></script>
     <script src="{{ asset('js/webpack.runtime.min.js') }}" id="elementor-webpack-runtime-js"></script>
     <script src="{{ asset('js/frontend-modules.min.js') }}" id="elementor-frontend-modules-js"></script>
     <script src="{{ asset('js/waypoints.min.js') }}" id="elementor-waypoints-js"></script>
     <script src="{{ asset('js/core.min.js') }}" id="jquery-ui-core-js"></script>
-
     <script src="{{ asset('js/frontend.min.js') }}" id="elementor-frontend-js"></script>
     <script src="{{ asset('js/sticky-element.js') }}" id="jkit-sticky-element-js"></script>
     <script src="{{ asset('js/nav-menu.js') }}" id="jkit-element-navmenu-js"></script>
-    <script script src="{{ asset('js/video-button.js') }}" id="jkit-element-videobutton-js"></script>
+    <script src="{{ asset('js/video-button.js') }}" id="jkit-element-videobutton-js"></script>
     <script src="{{ asset('js/sweetalert2.min.js') }}" id="sweetalert2-js"></script>
     <script src="{{ asset('js/testimonials.js') }}" id="jkit-element-testimonials-js"></script>
     <script src="{{ asset('js/tiny-slider.js') }}" id="tiny-slider-js"></script>
-
     <script src="{{ asset('js/post-pagination.js') }}" id="jkit-element-pagination-js"></script>
     <script src="{{ asset('js/accordion.js') }}" id="jkit-element-accordion-js"></script>
-
 </body>
 
 </html>

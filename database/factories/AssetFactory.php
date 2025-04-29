@@ -12,15 +12,15 @@ class AssetFactory extends Factory
 
     public function definition()
     {
-        $user = User::inRandomOrder()->first(); // Get a random existing user
+        $user = User::inRandomOrder()->first();
 
         return [
             'user_id' => $user->id,
-            'name' => $this->faker->word,
+            'name' => $this->faker->word(),
             'type' => $this->faker->randomElement(['stock', 'cryptocurrency', 'commodity']),
             'image_url' => $this->faker->imageUrl(),
-            'image_id' => $this->faker->numberBetween(1, 100),
+            'amount' => $this->faker->randomFloat(2, 100, 10000),
+            'owner_referral_id' => User::inRandomOrder()->value('id'), // Random user as referral, nullable by chance
         ];
     }
 }
-

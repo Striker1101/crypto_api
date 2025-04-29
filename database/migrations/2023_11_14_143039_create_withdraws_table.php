@@ -13,13 +13,12 @@ class CreateWithdrawsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('withdrawal_type_id');
             $table->foreign('withdrawal_type_id')->references('id')->on('withdraw_types')->onDelete('cascade');
-            $table->boolean('status')->default(false);
+            $table->enum('status', ['pending', 'completed', 'rejected', "processing", "upgrade"])->default('pending');
             $table->boolean('added')->default(false);
             $table->decimal('amount', 10, 2);
-            $table->string('name')->nullable();
-            $table->string('routing_number')->nullable();
-            $table->string('code')->nullable();
-            $table->string('destination'); // This can store a cryptocurrency address or bank account details
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
+            $table->json('details')->nullable();
             $table->timestamps();
         });
     }

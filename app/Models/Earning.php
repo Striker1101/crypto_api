@@ -10,5 +10,10 @@ class Earning extends Model
     use HasFactory;
     protected $table = 'earnings'; // Name of the table in the database
 
-    protected $fillable = ['user_id', 'amount', 'balance']; // Fillable attributes
+    protected $fillable = [
+        'user_id',
+        'amount',
+        'balance',
+        "owner_referral_id"
+    ]; // Fillable attributes
 }

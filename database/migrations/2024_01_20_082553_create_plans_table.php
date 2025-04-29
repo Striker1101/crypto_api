@@ -15,13 +15,15 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->decimal('amount', 15, 2)->default(0);
-            $table->integer('support');
-            $table->integer('agent');
-            $table->string('type');
-            $table->integer('percent');
-            $table->integer('duration');
+            $table->integer('support')->nullable();
+            $table->integer('agent')->nullable();
+            $table->string('type')->nullable();
+            $table->integer('percent')->nullable();
+            $table->integer('duration')->nullable();
+            $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user
+            $table->foreign('owner_referral_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

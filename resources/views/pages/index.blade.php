@@ -25,41 +25,6 @@
                                         <div class="elementor-element elementor-element-19a444c elementor-widget elementor-widget-heading"
                                             data-id="19a444c" data-element_type="widget" data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.17.0 - 08-11-2023 */
-
-                                                    .elementor-heading-title {
-                                                        padding: 0;
-                                                        margin: 0;
-                                                        line-height: 1
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a {
-                                                        color: inherit;
-                                                        font-size: inherit;
-                                                        line-height: inherit
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-small {
-                                                        font-size: 15px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-medium {
-                                                        font-size: 19px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-large {
-                                                        font-size: 29px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-xl {
-                                                        font-size: 39px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-xxl {
-                                                        font-size: 59px
-                                                    }
-                                                </style>
                                                 <h2 class="elementor-heading-title elementor-size-default">Your Partner in
                                                     Profitable Trading.</h2>
                                             </div>
@@ -68,41 +33,9 @@
                                             data-id="d5ef75d" data-element_type="widget"
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.17.0 - 08-11-2023 */
-
-                                                    .elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap {
-                                                        background-color: #69727d;
-                                                        color: #fff
-                                                    }
-
-                                                    .elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap {
-                                                        color: #69727d;
-                                                        border: 3px solid;
-                                                        background-color: transparent
-                                                    }
-
-                                                    .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap {
-                                                        margin-top: 8px
-                                                    }
-
-                                                    .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter {
-                                                        width: 1em;
-                                                        height: 1em
-                                                    }
-
-                                                    .elementor-widget-text-editor .elementor-drop-cap {
-                                                        float: left;
-                                                        text-align: center;
-                                                        line-height: 1;
-                                                        font-size: 50px
-                                                    }
-
-                                                    .elementor-widget-text-editor .elementor-drop-cap-letter {
-                                                        display: inline-block
-                                                    }
-                                                </style> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                                                commodo ligula eget dolor. Aenean massa. Cum sociis.
+                                                A true partner in trading provides insights, strategies, and resources,
+                                                helping traders grow smarter, minimize risks, and capitalize on
+                                                opportunities. Success is shared, not solo.
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-f8fa1d2 elementor-widget__width-auto elementor-widget elementor-widget-jkit_heading"
@@ -124,9 +57,10 @@
                                             data-id="d79b93b" data-element_type="widget" data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img decoding="async" width="1460" height="1460"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis.jpg"
+                                                    src="{{ asset('images/man-smile-portrait-and-fitness-in-gym-for-exercis.jpg') }}"
                                                     class="attachment-full size-full wp-image-1144" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis.jpg 1460w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis-300x300.jpg 300w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis-1024x1024.jpg 1024w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis-150x150.jpg 150w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis-768x768.jpg 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/man-smile-portrait-and-fitness-in-gym-for-exercis-800x800.jpg 800w"
+                                                    srcset="{{ asset('images/man-smile-portrait-and-fitness-in-gym-for-exercis.jpg') }} 1460w,
+                                                    {{ asset('images/man-smile-portrait-and-fitness-in-gym-for-exercis-1024x1024.jpg') }} 800w"
                                                     sizes="(max-width: 1460px) 100vw, 1460px" />
                                             </div>
                                         </div>
@@ -134,9 +68,14 @@
                                             data-id="c91e78e" data-element_type="widget" data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img decoding="async" width="1440" height="1440"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand.jpg"
+                                                    src="{{ asset('images/confident-smiling-young-asian-business-woman-stand.jpg') }}"
                                                     class="attachment-full size-full wp-image-103" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand.jpg 1440w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand-300x300.jpg 300w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand-1024x1024.jpg 1024w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand-150x150.jpg 150w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand-768x768.jpg 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/confident-smiling-young-asian-business-woman-stand-800x800.jpg 800w"
+                                                    srcset="{{ asset('images/confident-smiling-young-asian-business-woman-stand.jpg') }} 1440w,
+                                                    {{ asset('images/confident-smiling-young-asian-business-woman-stand-300x300.jpg') }} 300w,
+                                                     {{ asset('images/confident-smiling-young-asian-business-woman-stand-1024x1024.jpg') }} 1024w,
+                                                      {{ asset('images/confident-smiling-young-asian-business-woman-stand-150x150.jpg') }} 150w,
+                                                       {{ asset('images/confident-smiling-young-asian-business-woman-stand-768x768.jpg') }} 768w,
+                                                       {{ asset('images/confident-smiling-young-asian-business-woman-stand-800x800.jpg') }} 800w"
                                                     sizes="(max-width: 1440px) 100vw, 1440px" />
                                             </div>
                                         </div>
@@ -144,9 +83,14 @@
                                             data-id="3e8545b" data-element_type="widget" data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img loading="lazy" decoding="async" width="1440" height="1440"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i.jpg"
+                                                    src="{{ asset('images/portrait-of-successful-business-man-businessman-i.jpg') }}"
                                                     class="attachment-full size-full wp-image-1143" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i.jpg 1440w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i-300x300.jpg 300w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i-1024x1024.jpg 1024w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i-150x150.jpg 150w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i-768x768.jpg 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/portrait-of-successful-business-man-businessman-i-800x800.jpg 800w"
+                                                    srcset="{{ asset('images/portrait-of-successful-business-man-businessman-i.jpg') }} 1440w,
+                                                     {{ asset('images/portrait-of-successful-business-man-businessman-i-300x300.jpg') }}  300w,
+                                                      {{ asset('images/portrait-of-successful-business-man-businessman-i-1024x1024.jpg') }}  1024w,
+                                                       {{ asset('images/portrait-of-successful-business-man-businessman-i-150x150.jpg') }}  150w,
+                                                        {{ asset('images/portrait-of-successful-business-man-businessman-i-768x768.jpg') }}  768w,
+                                                        {{ asset('images/portrait-of-successful-business-man-businessman-i-800x800.jpg') }}  800w"
                                                     sizes="(max-width: 1440px) 100vw, 1440px" />
                                             </div>
                                         </div>
@@ -157,60 +101,6 @@
                         <div class="elementor-element elementor-element-43365da elementor-widget elementor-widget-spacer"
                             data-id="43365da" data-element_type="widget" data-widget_type="spacer.default">
                             <div class="elementor-widget-container">
-                                <style>
-                                    /*! elementor - v3.17.0 - 08-11-2023 */
-
-                                    .elementor-column .elementor-spacer-inner {
-                                        height: var(--spacer-size)
-                                    }
-
-                                    .e-con {
-                                        --container-widget-width: 100%
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer,
-                                    .e-con>.elementor-widget-spacer {
-                                        width: var(--container-widget-width, var(--spacer-size));
-                                        --align-self: var(--container-widget-align-self, initial);
-                                        --flex-shrink: 0
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container,
-                                    .e-con>.elementor-widget-spacer>.elementor-widget-container {
-                                        height: 100%;
-                                        width: 100%
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer,
-                                    .e-con>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer {
-                                        height: 100%
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer>.elementor-spacer-inner,
-                                    .e-con>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer>.elementor-spacer-inner {
-                                        height: var(--container-widget-height, var(--spacer-size))
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer.elementor-widget-empty,
-                                    .e-con>.elementor-widget-spacer.elementor-widget-empty {
-                                        position: relative;
-                                        min-height: 22px;
-                                        min-width: 22px
-                                    }
-
-                                    .e-con-inner>.elementor-widget-spacer.elementor-widget-empty .elementor-widget-empty-icon,
-                                    .e-con>.elementor-widget-spacer.elementor-widget-empty .elementor-widget-empty-icon {
-                                        position: absolute;
-                                        top: 0;
-                                        bottom: 0;
-                                        left: 0;
-                                        right: 0;
-                                        margin: auto;
-                                        padding: 0;
-                                        width: 22px;
-                                        height: 22px
-                                    }
-                                </style>
                                 <div class="elementor-spacer">
                                     <div class="elementor-spacer-inner"></div>
                                 </div>
@@ -237,7 +127,7 @@
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-button-wrapper">
                                                     <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
+                                                        href="{{ route('register') }}">
                                                         <span class="elementor-button-content-wrapper">
                                                             <span class="elementor-button-text">Open Account</span>
                                                         </span>
@@ -251,9 +141,9 @@
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-button-wrapper">
                                                     <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
+                                                        href="{{ route('login') }}">
                                                         <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Open Demo Account</span>
+                                                            <span class="elementor-button-text">Get Started</span>
                                                         </span>
                                                     </a>
                                                 </div>
@@ -302,8 +192,10 @@
                                             data-id="07b14a6" data-element_type="widget"
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                                ligula eget dolor. Aenean massa. </div>
+                                                financial instruments like stocks, currencies, or commodities bought for
+                                                short-term profit.
+                                                They are highly liquid and traded actively in markets to capitalize on price
+                                                changes. </div>
                                         </div>
                                     </div>
                                 </div>
@@ -323,13 +215,14 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_2_680d1d11cc207">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/stocks.png">
+                                                            decoding="async" src="{{ asset('images/stocks.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Stocks Trading</h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">
+                                                                Trade stocks easily and grow your wealth — start your
+                                                                journey with us today!</div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -349,13 +242,14 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_3_680d1d11cddda">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/forex.png">
+                                                            decoding="async" src="{{ asset('images/forex.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Forexs Trading</h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">Trade forex effortlessly with us
+                                                                — access global currencies and maximize your profit
+                                                                potential today!</div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -375,14 +269,15 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_4_680d1d11cf83e">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/gold-1.png">
+                                                            decoding="async" src="{{ asset('images/gold-1.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Commodities Trading
                                                             </h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">Invest in commodities like gold,
+                                                                oil, and agriculture — diversify your portfolio and secure
+                                                                lasting wealth!</div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -408,13 +303,14 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_5_680d1d11d1c6d">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/indices.png">
+                                                            decoding="async" src="{{ asset('images/indices.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Stocks Indices</h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">Stocks indices track the
+                                                                performance of a group of stocks, reflecting the overall
+                                                                market or sector trends.</div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -434,14 +330,16 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_6_680d1d11d381f">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/crypto.png">
+                                                            decoding="async" src="{{ asset('images/crypto.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Cryptos Trading
                                                             </h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">Cryptocurrency trading involves
+                                                                buying, selling, and exchanging digital currencies like
+                                                                Bitcoin and Ethereum, often through online platforms or
+                                                                exchanges.</div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -461,13 +359,14 @@
                                                 <div
                                                     class="jeg-elementor-kit jkit-image-box style-default elementor-animation- jeg_module_8_7_680d1d11d54af">
                                                     <div class="image-box-header elementor-animation-"><img
-                                                            decoding="async"
-                                                            src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/Group-420.png">
+                                                            decoding="async" src="{{ asset('images/Group-420.png') }}">
                                                     </div>
                                                     <div class="image-box-body">
                                                         <div class="body-inner">
                                                             <h2 class="body-title icon-position-before">Bonds Trading</h2>
-                                                            <div class="body-description">Lorem ipsum dolor sit</div>
+                                                            <div class="body-description">Bonds trading involves buying and
+                                                                selling debt securities to earn interest or capital gains.
+                                                            </div>
                                                             <div class="body-button"></div>
 
                                                         </div>
@@ -505,9 +404,12 @@
                                             data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img loading="lazy" decoding="async" width="824" height="912"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/trading-chart1.png"
+                                                    src="{{ asset('images/trading-chart1.png') }}"
                                                     class="attachment-full size-full wp-image-1047" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/trading-chart1.png 824w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/trading-chart1-271x300.png 271w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/trading-chart1-768x850.png 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/trading-chart1-800x885.png 800w"
+                                                    srcset="{{ asset('images/trading-chart1.png') }} 824w,
+                                                     {{ asset('images/trading-chart1-271x300.png') }} 271w,
+                                                     {{ asset('images/trading-chart1-768x850.png') }} 768w,
+                                                     {{ asset('images/trading-chart1-768x850.png') }} 800w"
                                                     sizes="(max-width: 824px) 100vw, 824px" />
                                             </div>
                                         </div>
@@ -516,10 +418,8 @@
                                             data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img loading="lazy" decoding="async" width="808" height="1000"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/happy-mature-business-man-manager-standing-in-office.png"
-                                                    class="attachment-full size-full wp-image-1158" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/happy-mature-business-man-manager-standing-in-office.png 808w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/happy-mature-business-man-manager-standing-in-office-242x300.png 242w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/happy-mature-business-man-manager-standing-in-office-768x950.png 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/happy-mature-business-man-manager-standing-in-office-800x990.png 800w"
-                                                    sizes="(max-width: 808px) 100vw, 808px" />
+                                                    src="{{ asset('images/happy-mature-business-man-manager-standing-in-office.png') }}"
+                                                    class="attachment-full size-full wp-image-1158" alt="" />
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-c659e9d elementor-widget__width-initial elementor-absolute elementor-hidden-mobile elementor-widget elementor-widget-image"
@@ -528,10 +428,8 @@
                                             data-widget_type="image.default">
                                             <div class="elementor-widget-container">
                                                 <img loading="lazy" decoding="async" width="488" height="274"
-                                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/card-1b.png"
-                                                    class="attachment-full size-full wp-image-1037" alt=""
-                                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/card-1b.png 488w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/card-1b-300x168.png 300w"
-                                                    sizes="(max-width: 488px) 100vw, 488px" />
+                                                    src="{{ asset('images/card-1b.png') }}"
+                                                    class="attachment-full size-full wp-image-1037" alt="" />
                                             </div>
                                         </div>
                                     </div>
@@ -559,9 +457,8 @@
                         <div class="elementor-element elementor-element-9142866 elementor-widget elementor-widget-text-editor"
                             data-id="9142866" data-element_type="widget" data-widget_type="text-editor.default">
                             <div class="elementor-widget-container">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                                ridiculus mus. </div>
+                                Our platform offers maximum profit potential with advanced tools for strategic trading.
+                                Enjoy a secure, user-friendly environment to trade with confidence and peace of mind.</div>
                         </div>
                         <section
                             class="elementor-section elementor-inner-section elementor-element elementor-element-16aee54 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
@@ -583,8 +480,10 @@
                                                         </div>
                                                         <div class="icon-box icon-box-body">
                                                             <h2 class="title">Secure Transaction</h2>
-                                                            <p class="icon-box-description">Lorem ipsum dolor sit amet,
-                                                                consectetur adipiscing elit.</p>
+                                                            <p class="icon-box-description">Experience seamless and secure
+                                                                transactions with top-tier encryption technology. Your funds
+                                                                and personal data are protected with the highest security
+                                                                standards.</p>
                                                         </div>
 
                                                     </div>
@@ -609,8 +508,9 @@
                                                         </div>
                                                         <div class="icon-box icon-box-body">
                                                             <h2 class="title">Global Services</h2>
-                                                            <p class="icon-box-description">Lorem ipsum dolor sit amet,
-                                                                consectetur adipiscing elit.</p>
+                                                            <p class="icon-box-description">Providing reliable and
+                                                                efficient trading services to clients worldwide, anytime,
+                                                                anywhere.</p>
                                                         </div>
 
                                                     </div>
@@ -625,7 +525,8 @@
                             data-id="2b8d6f2" data-element_type="widget" data-widget_type="button.default">
                             <div class="elementor-widget-container">
                                 <div class="elementor-button-wrapper">
-                                    <a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+                                    <a class="elementor-button elementor-button-link elementor-size-sm"
+                                        href="{{ route('about-us') }}">
                                         <span class="elementor-button-content-wrapper">
                                             <span class="elementor-button-text">More About Us</span>
                                         </span>
@@ -668,7 +569,7 @@
                             data-id="f8379be" data-element_type="widget" data-widget_type="image.default">
                             <div class="elementor-widget-container">
                                 <img loading="lazy" decoding="async" width="270" height="80"
-                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/gplay.png"
+                                    src="{{ asset('images/gplay.png') }}"
                                     class="elementor-animation-float attachment-full size-full wp-image-710"
                                     alt="" />
                             </div>
@@ -677,7 +578,7 @@
                             data-id="e592c81" data-element_type="widget" data-widget_type="image.default">
                             <div class="elementor-widget-container">
                                 <img loading="lazy" decoding="async" width="270" height="80"
-                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/appstore.png"
+                                    src="{{ asset('images/appstore.png') }}"
                                     class="elementor-animation-float attachment-full size-full wp-image-709"
                                     alt="" />
                             </div>
@@ -691,10 +592,8 @@
                             data-id="3221829" data-element_type="widget" data-widget_type="image.default">
                             <div class="elementor-widget-container">
                                 <img loading="lazy" decoding="async" width="800" height="971"
-                                    src="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1-844x1024.png"
-                                    class="attachment-large size-large wp-image-1300" alt=""
-                                    srcset="https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1-844x1024.png 844w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1-247x300.png 247w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1-768x932.png 768w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1-800x971.png 800w, https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/07/iphonemockup1.png 1189w"
-                                    sizes="(max-width: 800px) 100vw, 800px" />
+                                    src="{{ asset('images/iphonemockup1-844x1024.png') }}"
+                                    class="attachment-large size-large wp-image-1300" alt="" />
                             </div>
                         </div>
                     </div>
@@ -740,9 +639,9 @@
                                             data-id="383faeb" data-element_type="widget"
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-                                                parturient montes, nascetur ridiculus mus. </div>
+                                                Our platform offers seamless trading, advanced security, real-time data
+                                                analysis, and user-friendly navigation for an optimized trading experience.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -812,8 +711,10 @@
                                             data-id="8428566" data-element_type="widget"
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                                ligula eget dolor. Aenean massa. </div>
+                                                Access over 600+ diverse trading instruments across multiple markets,
+                                                including stocks, commodities, forex, and cryptocurrencies. Enjoy a broad
+                                                range of options to diversify your investment portfolio and maximize your
+                                                trading potential. </div>
                                         </div>
                                         <div class="elementor-element elementor-element-fb86f86 elementor-align-left elementor-widget elementor-widget-button"
                                             data-id="fb86f86" data-element_type="widget"
@@ -821,7 +722,7 @@
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-button-wrapper">
                                                     <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
+                                                        href="{{ route('product') }}">
                                                         <span class="elementor-button-content-wrapper">
                                                             <span class="elementor-button-icon elementor-align-icon-right">
                                                                 <i aria-hidden="true"
@@ -981,420 +882,7 @@
                 </div>
             </div>
         </section>
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-4fd0bb1 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="4fd0bb1" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-bbbdd49"
-                    data-id="bbbdd49" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-2f07b72 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="2f07b72" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-c1cb801"
-                                    data-id="c1cb801" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-037f5cb elementor-widget__width-auto elementor-widget elementor-widget-heading"
-                                            data-id="037f5cb" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">OPEN ACCOUNT
-                                                </h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-84c7659 elementor-widget elementor-widget-heading"
-                                            data-id="84c7659" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Choose The
-                                                    Variety of Trading Account</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-5fc563c elementor-widget elementor-widget-text-editor"
-                                            data-id="5fc563c" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                                ligula eget dolor. Aenean massa. </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-aa36abc elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="aa36abc" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-c51aaa9"
-                                    data-id="c51aaa9" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-0b7a53e elementor-widget elementor-widget-heading"
-                                            data-id="0b7a53e" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Classic Account
-                                                </h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-d409bc5 elementor-widget elementor-widget-text-editor"
-                                            data-id="d409bc5" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, Ut elit tellusconsectetur adipiscing elit.
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-6fe0658 elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
-                                            data-id="6fe0658" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                ALL LEVELS </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-3a1f8b1 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                                            data-id="3a1f8b1" data-element_type="widget"
-                                            data-widget_type="divider.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.17.0 - 08-11-2023 */
-
-                                                    .elementor-widget-divider {
-                                                        --divider-border-style: none;
-                                                        --divider-border-width: 1px;
-                                                        --divider-color: #0c0d0e;
-                                                        --divider-icon-size: 20px;
-                                                        --divider-element-spacing: 10px;
-                                                        --divider-pattern-height: 24px;
-                                                        --divider-pattern-size: 20px;
-                                                        --divider-pattern-url: none;
-                                                        --divider-pattern-repeat: repeat-x
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider {
-                                                        display: flex
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider__text {
-                                                        font-size: 15px;
-                                                        line-height: 1;
-                                                        max-width: 95%
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider__element {
-                                                        margin: 0 var(--divider-element-spacing);
-                                                        flex-shrink: 0
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-icon {
-                                                        font-size: var(--divider-icon-size)
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider-separator {
-                                                        display: flex;
-                                                        margin: 0;
-                                                        direction: ltr
-                                                    }
-
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator {
-                                                        align-items: center
-                                                    }
-
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator:before,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator:before {
-                                                        display: block;
-                                                        content: "";
-                                                        border-bottom: 0;
-                                                        flex-grow: 1;
-                                                        border-top: var(--divider-border-width) var(--divider-border-style) var(--divider-color)
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider .elementor-divider-separator>.elementor-divider__svg:first-of-type {
-                                                        flex-grow: 0;
-                                                        flex-shrink: 100
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider-separator:before {
-                                                        content: none
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider__element {
-                                                        margin-left: 0
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider .elementor-divider-separator>.elementor-divider__svg:last-of-type {
-                                                        flex-grow: 0;
-                                                        flex-shrink: 100
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider-separator:after {
-                                                        content: none
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider__element {
-                                                        margin-right: 0
-                                                    }
-
-                                                    .elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator {
-                                                        border-top: var(--divider-border-width) var(--divider-border-style) var(--divider-color)
-                                                    }
-
-                                                    .elementor-widget-divider--separator-type-pattern {
-                                                        --divider-border-style: none
-                                                    }
-
-                                                    .elementor-widget-divider--separator-type-pattern.elementor-widget-divider--view-line .elementor-divider-separator,
-                                                    .elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:before,
-                                                    .elementor-widget-divider--separator-type-pattern:not([class*=elementor-widget-divider--view]) .elementor-divider-separator {
-                                                        width: 100%;
-                                                        min-height: var(--divider-pattern-height);
-                                                        -webkit-mask-size: var(--divider-pattern-size) 100%;
-                                                        mask-size: var(--divider-pattern-size) 100%;
-                                                        -webkit-mask-repeat: var(--divider-pattern-repeat);
-                                                        mask-repeat: var(--divider-pattern-repeat);
-                                                        background-color: var(--divider-color);
-                                                        -webkit-mask-image: var(--divider-pattern-url);
-                                                        mask-image: var(--divider-pattern-url)
-                                                    }
-
-                                                    .elementor-widget-divider--no-spacing {
-                                                        --divider-pattern-size: auto
-                                                    }
-
-                                                    .elementor-widget-divider--bg-round {
-                                                        --divider-pattern-repeat: round
-                                                    }
-
-                                                    .rtl .elementor-widget-divider .elementor-divider__text {
-                                                        direction: rtl
-                                                    }
-
-                                                    .e-con-inner>.elementor-widget-divider,
-                                                    .e-con>.elementor-widget-divider {
-                                                        width: var(--container-widget-width, 100%);
-                                                        --flex-grow: var(--container-widget-flex-grow)
-                                                    }
-                                                </style>
-                                                <div class="elementor-divider">
-                                                    <span class="elementor-divider-separator">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-05e48b4 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-                                            data-id="05e48b4" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <link rel="stylesheet"
-                                                    href="https://templatekit.jegtheme.com/tradiz/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Up to 1:3000 Leverage</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">From 0.7 pips Spread</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Commission $0</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">$10 Minimum Deposit</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-4e8a787 elementor-align-justify elementor-widget elementor-widget-button"
-                                            data-id="4e8a787" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Open Account</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-f9b27b5"
-                                    data-id="f9b27b5" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-c7fe97b elementor-widget elementor-widget-heading"
-                                            data-id="c7fe97b" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Pro Account</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-85d5dbf elementor-widget elementor-widget-text-editor"
-                                            data-id="85d5dbf" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, Ut elit tellusconsectetur adipiscing elit.
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-a1edb10 elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
-                                            data-id="a1edb10" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                BEGINNER </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-6751884 elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
-                                            data-id="6751884" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                MIDDLE </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-2a9c3bd elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                                            data-id="2a9c3bd" data-element_type="widget"
-                                            data-widget_type="divider.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-divider">
-                                                    <span class="elementor-divider-separator">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-f0dacb2 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-                                            data-id="f0dacb2" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Up to 1:1000 Leverage</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">From 0.7 pips Spread</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Commission $0</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">$50 Minimum Deposit</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-886c76b elementor-align-justify elementor-widget elementor-widget-button"
-                                            data-id="886c76b" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Open Account</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-be8257f"
-                                    data-id="be8257f" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-b4c200c elementor-widget elementor-widget-heading"
-                                            data-id="b4c200c" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">VIP Account</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-912b105 elementor-widget elementor-widget-text-editor"
-                                            data-id="912b105" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                Lorem ipsum dolor sit amet, Ut elit tellusconsectetur adipiscing elit.
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-aaf145c elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
-                                            data-id="aaf145c" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                EXPERT </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-20a3255 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                                            data-id="20a3255" data-element_type="widget"
-                                            data-widget_type="divider.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-divider">
-                                                    <span class="elementor-divider-separator">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-6ef3799 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-                                            data-id="6ef3799" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Up to 1:2000 Leverage</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">From 0.5 pips Spread</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">Commission $0</span>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <span class="elementor-icon-list-icon">
-                                                            <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                        <span class="elementor-icon-list-text">$100 Minimum Deposit</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-7762c56 elementor-align-justify elementor-widget elementor-widget-button"
-                                            data-id="7762c56" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm"
-                                                        href="#">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Open Account</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <x-plan :plans="$plans" />
         <section
             class="elementor-section elementor-top-section elementor-element elementor-element-5f42d74 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
             data-id="5f42d74" data-element_type="section"

@@ -22,21 +22,21 @@ class UpdateDepositRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if ($method == 'PUT') {
+        if ($method == 'PUT')
+        {
             return [
                 'user_id' => 'required|exists:users,id',
-                'wallet_address' => 'required', // Unique wallet address for each deposit
                 'amount' => 'required|numeric|min:0.01', // Example validation for deposit amount
                 'currency' => 'required|string|max:255',
-                'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+                'status' => 'in:pending,completed,rejected,processing', // Validate that status is one of 'pending' or 'completed'
             ];
-        } else {
+        } else
+        {
             return [
                 'user_id' => 'sometimes|exists:users,id',
-                'wallet_address' => 'sometimes', // Unique wallet address for each deposit
                 'amount' => 'sometimes|numeric|min:0.01', // Example validation for deposit amount
                 'currency' => 'sometimes|string|max:255',
-                'status' => 'in:pending,completed', // Validate that status is one of 'pending' or 'completed'
+                'status' => 'in:pending,completed,rejected,processing', // Validate that status is one of 'pending' or 'completed'
             ];
         }
     }

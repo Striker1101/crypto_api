@@ -25,8 +25,6 @@ class StoreWithdrawRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'withdrawal_type_id' => 'required|exists:withdraw_types,id', // Ensure it references the correct table
             'amount' => 'required|numeric|min:0.01',
-            'name' => 'nullable|string|max:255',
-            'destination' => 'required|string|max:255',
         ];
     }
 }

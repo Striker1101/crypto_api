@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateKYCInfoRequest;
 use App\Http\Resources\KYCInfoResource;
 use App\Models\KYCInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class KYCInfoController extends Controller
@@ -40,12 +42,28 @@ class KYCInfoController extends Controller
     public function store(StoreKYCInfoRequest $request)
     {
         $user = Auth::user();
+        $data = $request->except(['DLF_image_url', 'DLB_image_url']);
 
-        // Associate the KYCInfo data with the current user
-        $kyc_info = $user->kyc_info()->create($request->all());
+        if ($request->hasFile('DLF_image_url'))
+        {
+            $DLF_path = $request->file('DLF_image_url')->store('kyc', 'public');
+            $data['DLF_image_url'] = asset(Storage::url($DLF_path)); // Full http URL
+        }
+
+        if ($request->hasFile('DLB_image_url'))
+        {
+            $DLB_path = $request->file('DLB_image_url')->store('kyc', 'public');
+            $data['DLB_image_url'] = asset(Storage::url($DLB_path)); // Full http URL
+        }
+
+        $kyc_info = $user->kyc_info()->create($data);
 
         return new KYCInfoResource($kyc_info);
     }
+
+
+
+
 
     public function edit(KYCInfo $kyc_info)
     {

@@ -11,17 +11,32 @@ class Deposit extends Model
 
     protected $fillable = [
         'user_id',
-        'wallet_address',
         'amount',
         'currency',
         'status',
         'added',
-        'image_url'
+        'image_url',
+        "owner_referral_id",
+        "deposit_type_id"
     ];
+
+    protected $casts = [
+        'details' => 'array',
+    ];
+
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function deposit()
+    {
+        return $this->hasMany(Deposit::class); // or belongsToMany depending on your schema
+    }
+    // In the Deposit model:
+    public function deposit_type()
+    {
+        return $this->belongsTo(DepositType::class);
     }
 
     protected static function boot()

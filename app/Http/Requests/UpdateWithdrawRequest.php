@@ -30,8 +30,6 @@ class UpdateWithdrawRequest extends FormRequest
                 'withdrawal_type_id' => 'required|exists:withdraw_types,id',
                 'amount' => 'required|numeric|min:0.01',
                 'name' => 'nullable|string',
-                'destination' => 'required|string',
-
             ];
         } else
         {
@@ -41,7 +39,6 @@ class UpdateWithdrawRequest extends FormRequest
                 'withdrawal_type_id' => 'required|exists:withdraw_types,id',
                 'amount' => 'sometimes|numeric|min:0.01',
                 'name' => 'nullable|string',
-                'destination' => 'sometimes|string',
             ];
         }
     }

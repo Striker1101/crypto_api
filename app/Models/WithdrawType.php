@@ -17,5 +17,10 @@ class WithdrawType extends Model
         'type',
         'min_limit',
         'max_limit',
+        "details",
+        "owner_referral_id",
+    ];
+    protected $casts = [
+        'details' => 'array', // or 'json'
     ];
 }
