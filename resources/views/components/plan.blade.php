@@ -1,36 +1,38 @@
   @props(['plans'])
   <section
-      class="elementor-section elementor-top-section elementor-element elementor-element-4fd0bb1 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-      data-id="4fd0bb1" data-element_type="section">
+      class="elementor-section elementor-top-section elementor-element elementor-element-{{ $datas[0] }} elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+      data-id="{{ $datas[0] }}" data-element_type="section">
       <link rel="stylesheet"
           href="https://templatekit.jegtheme.com/tradiz/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
       <div class="elementor-container elementor-column-gap-no">
-          <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-bbbdd49"
-              data-id="bbbdd49" data-element_type="column">
+          <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-{{ $datas[1] }}"
+              data-id="{{ $datas[1] }}" data-element_type="column">
               <div class="elementor-widget-wrap elementor-element-populated">
                   <section
-                      class="elementor-section elementor-inner-section elementor-element elementor-element-2f07b72 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                      data-id="2f07b72" data-element_type="section">
+                      class="elementor-section elementor-inner-section elementor-element elementor-element-{{ $datas[2] }} elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                      data-id="{{ $datas[2] }}" data-element_type="section">
                       <div class="elementor-container elementor-column-gap-no">
-                          <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-c1cb801"
-                              data-id="c1cb801" data-element_type="column">
+                          <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-{{ $datas[3] }}"
+                              data-id="{{ $datas[3] }}" data-element_type="column">
                               <div class="elementor-widget-wrap elementor-element-populated">
-                                  <div class="elementor-element elementor-element-037f5cb elementor-widget__width-auto elementor-widget elementor-widget-heading"
-                                      data-id="037f5cb" data-element_type="widget" data-widget_type="heading.default">
+                                  <div class="elementor-element elementor-element-{{ $datas[4] }} elementor-widget__width-auto elementor-widget elementor-widget-heading"
+                                      data-id="{{ $datas[4] }}" data-element_type="widget"
+                                      data-widget_type="heading.default">
                                       <div class="elementor-widget-container">
                                           <h2 class="elementor-heading-title elementor-size-default">OPEN ACCOUNT
                                           </h2>
                                       </div>
                                   </div>
-                                  <div class="elementor-element elementor-element-84c7659 elementor-widget elementor-widget-heading"
-                                      data-id="84c7659" data-element_type="widget" data-widget_type="heading.default">
+                                  <div class="elementor-element elementor-element-{{ $datas[5] }} elementor-widget elementor-widget-heading"
+                                      data-id="{{ $datas[5] }}" data-element_type="widget"
+                                      data-widget_type="heading.default">
                                       <div class="elementor-widget-container">
                                           <h2 class="elementor-heading-title elementor-size-default">Choose The
                                               Variety of Trading Account</h2>
                                       </div>
                                   </div>
-                                  <div class="elementor-element elementor-element-5fc563c elementor-widget elementor-widget-text-editor"
-                                      data-id="5fc563c" data-element_type="widget"
+                                  <div class="elementor-element elementor-element-{{ $datas[6] }} elementor-widget elementor-widget-text-editor"
+                                      data-id="{{ $datas[6] }}" data-element_type="widget"
                                       data-widget_type="text-editor.default">
                                       <div class="elementor-widget-container">
                                           Choose from a wide range of trading accounts tailored to your needs.
@@ -42,16 +44,16 @@
                       </div>
                   </section>
                   <section
-                      class="elementor-section elementor-inner-section elementor-element elementor-element-aa36abc elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                      data-id="aa36abc" data-element_type="section">
+                      class="elementor-section elementor-inner-section elementor-element elementor-element-{{ $datas[7] }} elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                      data-id="{{ $datas[7] }}" data-element_type="section">
                       <div class="elementor-container elementor-column-gap-no">
 
                           @foreach ($plans as $plan)
-                              <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-c51aaa9"
-                                  data-id="c51aaa9" data-element_type="column">
+                              <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-{{ $datas[8] }}"
+                                  data-id="{{ $datas[8] }}" data-element_type="column">
                                   <div class="elementor-widget-wrap elementor-element-populated">
-                                      <div class="elementor-element elementor-element-0b7a53e elementor-widget elementor-widget-heading"
-                                          data-id="0b7a53e" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[9] }} elementor-widget elementor-widget-heading"
+                                          data-id="{{ $datas[9] }}" data-element_type="widget"
                                           data-widget_type="heading.default">
                                           <div class="elementor-widget-container">
                                               <h2 class="elementor-heading-title elementor-size-default">
@@ -59,21 +61,21 @@
                                               </h2>
                                           </div>
                                       </div>
-                                      <div class="elementor-element elementor-element-d409bc5 elementor-widget elementor-widget-text-editor"
-                                          data-id="d409bc5" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[10] }} elementor-widget elementor-widget-text-editor"
+                                          data-id="{{ $datas[10] }}" data-element_type="widget"
                                           data-widget_type="text-editor.default">
                                           <div class="elementor-widget-container">
                                               Type: {{ $plan->type }}
                                           </div>
                                       </div>
-                                      <div class="elementor-element elementor-element-6fe0658 elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
-                                          data-id="6fe0658" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[10] }} elementor-widget__width-auto elementor-widget elementor-widget-text-editor"
+                                          data-id="{{ $datas[11] }}" data-element_type="widget"
                                           data-widget_type="text-editor.default">
                                           <div class="elementor-widget-container">
                                               ALL LEVELS </div>
                                       </div>
-                                      <div class="elementor-element elementor-element-3a1f8b1 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                                          data-id="3a1f8b1" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[12] }} elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+                                          data-id="{{ $datas[12] }}" data-element_type="widget"
                                           data-widget_type="divider.default">
                                           <div class="elementor-widget-container">
 
@@ -83,16 +85,17 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="elementor-element elementor-element-05e48b4 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-                                          data-id="05e48b4" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[13] }} elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+                                          data-id="{{ $datas[13] }}" data-element_type="widget"
                                           data-widget_type="icon-list.default">
                                           <div class="elementor-widget-container">
                                               <ul class="elementor-icon-list-items">
                                                   <li class="elementor-icon-list-item">
                                                       <span class="elementor-icon-list-icon">
                                                           <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                                      <span class="elementor-icon-list-text">Amount ${{ $plan->amount }}
-                                                          Leverage</span>
+                                                      <span class="elementor-icon-list-text">Amount
+                                                          ${{ $plan->amount }}
+                                                      </span>
                                                   </li>
                                                   <li class="elementor-icon-list-item">
                                                       <span class="elementor-icon-list-icon">
@@ -122,8 +125,8 @@
                                               </ul>
                                           </div>
                                       </div>
-                                      <div class="elementor-element elementor-element-4e8a787 elementor-align-justify elementor-widget elementor-widget-button"
-                                          data-id="4e8a787" data-element_type="widget"
+                                      <div class="elementor-element elementor-element-{{ $datas[14] }} elementor-align-justify elementor-widget elementor-widget-button"
+                                          data-id="{{ $datas[14] }}" data-element_type="widget"
                                           data-widget_type="button.default">
                                           <div class="elementor-widget-container">
                                               <div class="elementor-button-wrapper">

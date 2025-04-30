@@ -1,0 +1,180 @@
+.elementor-7 .elementor-element.elementor-element-61182e1>.elementor-container {
+    max-width: 560px;
+}
+
+.elementor-7 .elementor-element.elementor-element-61182e1:not(.elementor-motion-effects-element-type-background),
+.elementor-7 .elementor-element.elementor-element-61182e1>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+    background-image: url("https://templatekit.jegtheme.com/tradiz/wp-content/uploads/sites/398/2023/08/close-up-led-charts-and-summary-info-for-making-stock-trading-graph-1.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.elementor-7 .elementor-element.elementor-element-61182e1>.elementor-background-overlay {
+    background-color: var( --e-global-color-f25bc9d);
+    opacity: 0.8;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+.elementor-7 .elementor-element.elementor-element-61182e1 {
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    padding: 270px 0px 190px 0px;
+}
+
+.elementor-7 .elementor-element.elementor-element-6854381.elementor-column>.elementor-widget-wrap {
+    justify-content: center;
+}
+
+.elementor-7 .elementor-element.elementor-element-d3201ec .elementor-heading-title {
+    color: #FFFFFF;
+    font-family: var( --e-global-typography-ee383e6-font-family), Sans-serif;
+    font-size: var( --e-global-typography-ee383e6-font-size);
+    font-weight: var( --e-global-typography-ee383e6-font-weight);
+    line-height: var( --e-global-typography-ee383e6-line-height);
+    letter-spacing: var( --e-global-typography-ee383e6-letter-spacing);
+    word-spacing: var( --e-global-typography-ee383e6-word-spacing);
+}
+
+.elementor-7 .elementor-element.elementor-element-d3201ec>.elementor-widget-container {
+    margin: 0px 0px 30px 0px;
+    padding: 10px 20px 10px 20px;
+    background-color: #F5F7FA29;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #E2E8F138;
+    border-radius: 50px 50px 50px 50px;
+}
+
+.elementor-7 .elementor-element.elementor-element-d3201ec {
+    width: auto;
+    max-width: auto;
+}
+
+.elementor-7 .elementor-element.elementor-element-827bfbe {
+    text-align: center;
+}
+
+.elementor-7 .elementor-element.elementor-element-827bfbe .elementor-heading-title {
+    color: #FFFFFF;
+    font-family: var( --e-global-typography-35d8611-font-family), Sans-serif;
+    font-size: var( --e-global-typography-35d8611-font-size);
+    font-weight: var( --e-global-typography-35d8611-font-weight);
+    line-height: var( --e-global-typography-35d8611-line-height);
+    letter-spacing: var( --e-global-typography-35d8611-letter-spacing);
+    word-spacing: var( --e-global-typography-35d8611-word-spacing);
+}
+
+.elementor-7 .elementor-element.elementor-element-827bfbe>.elementor-widget-container {
+    margin: -25px 0px -25px 0px;
+}
+
+.elementor-7 .elementor-element.elementor-element-3f140eb {
+    text-align: center;
+}
+
+.elementor-7 .elementor-element.elementor-element-3f140eb .elementor-heading-title {
+    color: #FFFFFF;
+    font-family: var( --e-global-typography-984529d-font-family), Sans-serif;
+    font-size: var( --e-global-typography-984529d-font-size);
+    font-weight: var( --e-global-typography-984529d-font-weight);
+    line-height: var( --e-global-typography-984529d-line-height);
+    letter-spacing: var( --e-global-typography-984529d-letter-spacing);
+    word-spacing: var( --e-global-typography-984529d-word-spacing);
+}
+
+.elementor-7 .elementor-element.elementor-element-b9f2619 {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.elementor-7 .elementor-element.elementor-element-085d482 .elementor-button {
+    font-family: var( --e-global-typography-0cc180d-font-family), Sans-serif;
+    font-size: var( --e-global-typography-0cc180d-font-size);
+    font-weight: var( --e-global-typography-0cc180d-font-weight);
+    line-height: var( --e-global-typography-0cc180d-line-height);
+    letter-spacing: var( --e-global-typography-0cc180d-letter-spacing);
+    word-spacing: var( --e-global-typography-0cc180d-word-spacing);
+    fill: #0B0B0B;
+    color: #0B0B0B;
+    background-color: var( --e-global-color-accent);
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #0B0B0B00;
+    border-radius: 100px 100px 100px 100px;
+    padding: 18px 38px 18px 38px;
+}
+
+.elementor-7 .elementor-element.elementor-element-085d482 .elementor-button:hover,
+.elementor-7 .elementor-element.elementor-element-085d482 .elementor-button:focus {
+    color: var( --e-global-color-f25bc9d);
+    background-color: var( --e-global-color-fc85162);
+}
+
+.elementor-7 .elementor-element.elementor-element-085d482 .elementor-button:hover svg,
+.elementor-7 .elementor-element.elementor-element-085d482 .elementor-button:focus svg {
+    fill: var( --e-global-color-f25bc9d);
+}
+
+.elementor-7 .elementor-element.elementor-element-085d482>.elementor-widget-container {
+    margin: 10px 0px 0px 0px;
+}
+
+@media(max-width:1024px) {
+    .elementor-7 .elementor-element.elementor-element-d3201ec .elementor-heading-title {
+        font-size: var( --e-global-typography-ee383e6-font-size);
+        line-height: var( --e-global-typography-ee383e6-line-height);
+        letter-spacing: var( --e-global-typography-ee383e6-letter-spacing);
+        word-spacing: var( --e-global-typography-ee383e6-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-827bfbe .elementor-heading-title {
+        font-size: var( --e-global-typography-35d8611-font-size);
+        line-height: var( --e-global-typography-35d8611-line-height);
+        letter-spacing: var( --e-global-typography-35d8611-letter-spacing);
+        word-spacing: var( --e-global-typography-35d8611-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-3f140eb .elementor-heading-title {
+        font-size: var( --e-global-typography-984529d-font-size);
+        line-height: var( --e-global-typography-984529d-line-height);
+        letter-spacing: var( --e-global-typography-984529d-letter-spacing);
+        word-spacing: var( --e-global-typography-984529d-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-085d482 .elementor-button {
+        font-size: var( --e-global-typography-0cc180d-font-size);
+        line-height: var( --e-global-typography-0cc180d-line-height);
+        letter-spacing: var( --e-global-typography-0cc180d-letter-spacing);
+        word-spacing: var( --e-global-typography-0cc180d-word-spacing);
+    }
+}
+
+@media(max-width:767px) {
+    .elementor-7 .elementor-element.elementor-element-61182e1 {
+        padding: 200px 10px 150px 10px;
+    }
+    .elementor-7 .elementor-element.elementor-element-d3201ec .elementor-heading-title {
+        font-size: var( --e-global-typography-ee383e6-font-size);
+        line-height: var( --e-global-typography-ee383e6-line-height);
+        letter-spacing: var( --e-global-typography-ee383e6-letter-spacing);
+        word-spacing: var( --e-global-typography-ee383e6-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-d3201ec>.elementor-widget-container {
+        margin: 0px 0px 40px 0px;
+    }
+    .elementor-7 .elementor-element.elementor-element-827bfbe .elementor-heading-title {
+        font-size: var( --e-global-typography-35d8611-font-size);
+        line-height: var( --e-global-typography-35d8611-line-height);
+        letter-spacing: var( --e-global-typography-35d8611-letter-spacing);
+        word-spacing: var( --e-global-typography-35d8611-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-3f140eb .elementor-heading-title {
+        font-size: var( --e-global-typography-984529d-font-size);
+        line-height: var( --e-global-typography-984529d-line-height);
+        letter-spacing: var( --e-global-typography-984529d-letter-spacing);
+        word-spacing: var( --e-global-typography-984529d-word-spacing);
+    }
+    .elementor-7 .elementor-element.elementor-element-085d482 .elementor-button {
+        font-size: var( --e-global-typography-0cc180d-font-size);
+        line-height: var( --e-global-typography-0cc180d-line-height);
+        letter-spacing: var( --e-global-typography-0cc180d-letter-spacing);
+        word-spacing: var( --e-global-typography-0cc180d-word-spacing);
+    }
+}

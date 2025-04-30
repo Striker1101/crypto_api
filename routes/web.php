@@ -88,11 +88,14 @@ Route::get('/about-us', function () {
 })->name('about-us');
 
 Route::get('/product', function () {
-    return view('pages.product');
+    $plans = Plan::take(3)->get();
+    return view('pages.product', compact('plans'));
 })->name('product');
 
 Route::get('/membership', function () {
-    return view('pages.membership');
+    $plans = Plan::take(3)->get();
+    dd($plans);
+    return view('pages.membership', compact('plans'));
 })->name('membership');
 
 Route::get('/contact-us', function () {

@@ -13,15 +13,17 @@ class Plan extends Component
      * @var mixed
      */
     public $plans;
+    public array $datas;
 
     /**
      * Create a new component instance.
      *
      * @param mixed $plans
      */
-    public function __construct($plans)
+    public function __construct($plans, array $datas)
     {
         $this->plans = $plans;  // Correctly assign the passed value to the plans property
+        $this->datas = $datas;
     }
 
     /**

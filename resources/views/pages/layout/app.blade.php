@@ -24,18 +24,29 @@
     <link rel='stylesheet' id='elementor-post-3-css' href='{{ asset('css/elements/post-3.css') }}' media='all' />
     <link rel='stylesheet' id='elementor-global-css' href='{{ asset('css/elements/global.css') }}' media='all' />
     <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-8.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-9.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-1075.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-1078.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-13.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-1371.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-14.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-17.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-218.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-220.css') }}' media='all' />
+    <link rel='stylesheet' id='elementor-post-8-css' href='{{ asset('css/elements/post-7.css') }}' media='all' />
     <link rel='stylesheet' id='font-awesome-5-all-css' href='{{ asset('css/font-awesome/all.min.css') }}'
         media='all' />
     <link rel='stylesheet' id='font-awesome-4-shim-css' href='{{ asset('css/font-awesome/v4-shims.min.css') }}'
         media='all' />
     <link rel='stylesheet' id='text-editor-style-css' href='{{ asset('css/text-editor.css') }}' media='all' />
-    <link rel='stylesheet' id='hello-elementor-css' href='{{ asset('css/elements/style.min.css') }}' media='all' />
+    <link rel='stylesheet' id='hello-elementor-css' href='{{ asset('css/elements/style.min.css') }}'
+        media='all' />
     <link rel='stylesheet' id='hello-elementor-theme-style-css' href='{{ asset('css/elements/theme.min.css') }}'
         media='all' />
     <link rel='stylesheet' id='google-fonts-1-css' href='{{ asset('css/plugins/google-fonts-1-css.css') }}'
         media='all' />
-    <link rel='stylesheet' id='elementor-icons-shared-0-css' href='{{ asset('css/font-awesome/fontawesome.min.css') }}'
-        media='all' />
+    <link rel='stylesheet' id='elementor-icons-shared-0-css'
+        href='{{ asset('css/font-awesome/fontawesome.min.css') }}' media='all' />
     <link rel='stylesheet' id='elementor-icons-fa-solid-css' href='{{ asset('css/font-awesome/solid.min.css') }}'
         media='all' />
     <link rel='stylesheet' id='elementor-icons-jkiticon-css' href='{{ asset('css/plugins/jkiticon.css') }}'
