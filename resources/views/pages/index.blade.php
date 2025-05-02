@@ -342,8 +342,47 @@
                 </div>
             </div>
         </section>
-        <x-download-our-app :datas="[]" />
-        <x-features :datas="[]" />
+
+        <x-download-our-app :datas="['d03aba5', '23ce267', 'b6ca6e8', '19cfc51', '128e8d7', 'f8379be', 'e592c81', '9b5cbd0', '3221829']" />
+
+        <x-features :datas="[
+            '122bb4d',
+            '632add9',
+            '4adeee7',
+            '98211f6',
+            '59642f1',
+            'c1a66a0',
+            'a532187',
+            '383faeb',
+            'd50c209',
+            '268feb9',
+            '293fb7b',
+            'b4e4c77',
+            'jeg_module_8_10_68103fd210415',
+            '7bb37fc',
+            'ffcdae6',
+            '4fedfd9',
+            '8428566',
+            'fb86f86',
+            'ce1a9d6',
+            '19633bc',
+            'c77e63c',
+            'ddadfc0',
+            '7bb36cc',
+            'b4c0ee2',
+            '373877f',
+            'jeg_module_8_11_68103fd2171e8',
+            'c6c7a08',
+            'jeg_module_8_12_68103fd21857a',
+            'a40c9ca',
+            'jeg_module_8_13_68103fd2197ed',
+            '65940e0',
+            'jeg_module_8_14_68103fd21ac19',
+            '2fbf1fd',
+            '26f60ad',
+            'jeg_module_8_15_68103fd21d2f2',
+        ]" />
+
         <x-plan :plans="$plans" :datas="[
             '4fd0bb1',
             'bbbdd49',
@@ -397,183 +436,18 @@
             '410caec',
             'jeg_module_8_19_680d1d122b955',
         ]" />
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-3461faf elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="3461faf" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-977f8a0"
-                    data-id="977f8a0" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-13750dc elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="13750dc" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7cbe724"
-                                    data-id="7cbe724" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-e45dd51 elementor-widget__width-auto elementor-widget elementor-widget-heading"
-                                            data-id="e45dd51" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">FAQ's</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-86a47c3 elementor-widget elementor-widget-heading"
-                                            data-id="86a47c3" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">User Questions
-                                                </h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-6689c00 elementor-widget elementor-widget-text-editor"
-                                            data-id="6689c00" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                Got questions about trading, strategies, or tools we use?
-                                                Explore answers to common queries from new and pro traders
-                                                Your concerns matter — get clarity and trade with confidence. </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-1941d2e elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="1941d2e" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7c2c533"
-                                    data-id="7c2c533" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-6d13002 elementor-widget elementor-widget-jkit_accordion"
-                                            data-id="6d13002" data-element_type="widget"
-                                            data-widget_type="jkit_accordion.default">
-                                            <div class="elementor-widget-container">
-                                                <div
-                                                    class="jeg-elementor-kit jkit-accordion style-default jeg_module_8_20_680d1d12362dc">
-                                                    <div class="card-wrapper expand">
-                                                        <div class="card-header">
-                                                            <a href="#expand-1bd0607" class="card-header-button"
-                                                                aria-expanded="false" data-target="#expand-1bd0607"
-                                                                aria-controls="expand-1bd0607">
-                                                                <span class="title">How do I create an account on the
-                                                                    trading app?</span>
-                                                                <div class="right-icon-group">
-                                                                    <div class="normal-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-down"></i></div>
-                                                                    <div class="active-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-up"></i></div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-expand" id="expand-1bd0607"
-                                                            style="display:block">
-                                                            <ul class="card-body">
-                                                                <li> Sign Up: Register with your name, email, and password;
-                                                                    verify your account.</li>
-                                                                <li>Login: Enter your credentials to access your dashboard.
-                                                                </li>
-                                                                <li>KYC: Complete profile by submitting ID and necessary
-                                                                    documents.</li>
-                                                                <li>Fund Account: Deposit money using card, bank transfer,
-                                                                    or crypto.</li>
-                                                                <li>Start Trading: Choose a market, set your trade, and
-                                                                    execute.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-wrapper ">
-                                                        <div class="card-header">
-                                                            <a href="#expand-62f8b62" class="card-header-button"
-                                                                aria-expanded="false" data-target="#expand-62f8b62"
-                                                                aria-controls="expand-62f8b62">
-                                                                <span class="title">Can I have multiple trading accounts
-                                                                    under one profile?</span>
-                                                                <div class="right-icon-group">
-                                                                    <div class="normal-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-down"></i></div>
-                                                                    <div class="active-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-up"></i></div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-expand" id="expand-62f8b62"
-                                                            style="display:none">
-                                                            <div class="card-body">Yes, many trading platforms allow you
-                                                                to have multiple accounts under one profile.
-                                                                You can often open different accounts for various assets
-                                                                like stocks, forex, or crypto.
-                                                                Each account is typically managed separately but linked to
-                                                                your main profile.
-                                                                Check your platform's terms and conditions for any specific
-                                                                limitations or fees.</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-wrapper ">
-                                                        <div class="card-header">
-                                                            <a href="#expand-258feeb" class="card-header-button"
-                                                                aria-expanded="false" data-target="#expand-258feeb"
-                                                                aria-controls="expand-258feeb">
-                                                                <span class="title">Is two-factor authentication (2FA)
-                                                                    available for added security?</span>
-                                                                <div class="right-icon-group">
-                                                                    <div class="normal-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-down"></i></div>
-                                                                    <div class="active-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-up"></i></div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-expand" id="expand-258feeb"
-                                                            style="display:none">
-                                                            <div class="card-body">Yes, most trading platforms offer
-                                                                two-factor authentication (2FA) for added security.
-                                                                You can enable it using methods like SMS, email, or
-                                                                authentication apps (e.g., Google Authenticator).
-                                                                2FA adds an extra layer by requiring both your password and
-                                                                a one-time code.
-                                                                It's highly recommended to protect your account from
-                                                                unauthorized access..</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-wrapper ">
-                                                        <div class="card-header">
-                                                            <a href="#expand-ea80548" class="card-header-button"
-                                                                aria-expanded="false" data-target="#expand-ea80548"
-                                                                aria-controls="expand-ea80548">
-                                                                <span class="title">Are there any fees associated with
-                                                                    deposits or withdrawals?</span>
-                                                                <div class="right-icon-group">
-                                                                    <div class="normal-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-down"></i></div>
-                                                                    <div class="active-icon"><i aria-hidden="true"
-                                                                            class="fas fa-chevron-up"></i></div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-expand" id="expand-ea80548"
-                                                            style="display:none">
-                                                            <div class="card-body">Yes, many trading platforms charge fees
-                                                                for deposits and withdrawals.
-                                                                These fees are usually applied to cover transaction
-                                                                processing costs, especially for bank transfers, card
-                                                                payments, or crypto transfers.
-                                                                Fees may vary based on the payment method, currency type, or
-                                                                withdrawal method you choose.
-                                                                It's important to check the platform's fee structure to
-                                                                avoid unexpected costs.</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <x-f-a-q :datas="[
+            '3461faf',
+            '977f8a0',
+            '13750dc',
+            '7cbe724',
+            'e45dd51',
+            '86a47c3',
+            '6689c00',
+            '1941d2e',
+            '7c2c533',
+            '6d13002',
+            'jeg_module_8_20_680d1d12362dc',
+        ]" />
     </div>
 @endsection

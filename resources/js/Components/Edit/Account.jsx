@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 
-export default function Account({ account, apiToken }) {
+export default function Account({ account_type, account, apiToken }) {
     if (account === null) {
         return (
             <div className="container mx-auto mt-8">
@@ -69,7 +69,7 @@ export default function Account({ account, apiToken }) {
         e.preventDefault();
 
         // console.log(formData);
-
+        formData.account_type = parseInt(formData.account_type);
         axios
             .put(`/api/account/${account.id}`, formData, {
                 headers: {
@@ -81,7 +81,7 @@ export default function Account({ account, apiToken }) {
             .then((res) => {
                 setModalMessage("Account was updated successfully");
                 // Redirect to account details page after successful update
-                Inertia.visit(`/admin/${account.user_id}`);
+                Inertia.visit(`/dashboard/${account.user_id}`);
 
                 setTimeout(() => {
                     setModalMessage("");
@@ -123,7 +123,7 @@ export default function Account({ account, apiToken }) {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                         <span className="mr-2">Trade:</span>
                         <label className="switch">
                             <input
@@ -134,7 +134,7 @@ export default function Account({ account, apiToken }) {
                             />
                             <span className="slider round"></span>
                         </label>{" "}
-                    </div>
+                    </div> */}
                     <div className="mb-4">
                         <label
                             htmlFor="balance"
@@ -186,7 +186,7 @@ export default function Account({ account, apiToken }) {
                             required
                         />
                     </div>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <label
                             htmlFor="trade_timer"
                             className="block text-sm font-medium text-gray-600"
@@ -203,7 +203,7 @@ export default function Account({ account, apiToken }) {
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         />
-                    </div>
+                    </div> */}
 
                     <div className="mb-4">
                         <label
@@ -215,13 +215,19 @@ export default function Account({ account, apiToken }) {
                         <select
                             id="account_type"
                             name="account_type"
-                            defaultValue={formData.account_type}
+                            defaultValue={account?.account_type?.id}
                             onChange={handleChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             required
                         >
-                            <option value="trading">Trading</option>
-                            <option value="margin">Margin</option>
+                            <option value="">Select Account Type</option>
+                            {account_type.map((item) => {
+                                return (
+                                    <option key={item.id} value={item.id}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="mb-4">

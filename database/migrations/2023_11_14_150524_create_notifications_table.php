@@ -14,7 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('content');
+            $table->text('content');
+            $table->string('status');
+            $table->string('gene');
+            $table->string('title');
+            $table->string('tag');
             $table->boolean('read')->default(false);
             $table->timestamps();
             $table->unsignedBigInteger("owner_referral_id")->nullable(); // refer owner user

@@ -1,4 +1,5 @@
   @props(['plans'])
+
   <section
       class="elementor-section elementor-top-section elementor-element elementor-element-{{ $datas[0] }} elementor-section-boxed elementor-section-height-default elementor-section-height-default"
       data-id="{{ $datas[0] }}" data-element_type="section">

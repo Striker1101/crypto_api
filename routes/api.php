@@ -36,10 +36,10 @@ Route::group([
 
 ], function ($router) {
     //auth
-    Route::post('login', 'App\Http\Controllers\API\AuthController@login');
+    Route::post('login', 'App\Http\Controllers\API\AuthController@login')->name('api_login');
     Route::post('register', 'App\Http\Controllers\API\AuthController@register');
     Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.mail');
-    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('api_password.reset');
 });
 
 Route::post('sendEmail', 'App\Http\Controllers\API\MailController@sendEmail');

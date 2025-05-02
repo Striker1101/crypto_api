@@ -16,7 +16,6 @@ export default function Register() {
         zip_code: "",
         country: "",
         password: "",
-        password_save: password,
         password_confirmation: "",
     });
 

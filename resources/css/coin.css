@@ -1,0 +1,41 @@
+@keyframes fall {
+    0% {
+        transform: translateY(-100px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.coin {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.coin-wrapper {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.coin-spin {
+    width: 100%;
+    height: 100%;
+    animation: spin 3s linear infinite;
+}

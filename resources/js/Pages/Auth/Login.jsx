@@ -6,13 +6,13 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { toast } from "react-toastify";
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
         remember: false,
     });
-    const [modalMessage, setModalMessage] = useState("");
 
     useEffect(() => {
         return () => {
@@ -22,53 +22,7 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = async (e) => {
         e.preventDefault();
-        const { email, password } = data;
-
-        try {
-            const response = await axios.post(route("login"), {
-                email,
-                password,
-            });
-
-            // Access the token from the response if needed
-            const token = response.data.token;
-            console.log("token", response);
-            // Save the token to localStorage
-            localStorage.setItem("token", token);
-
-            // console.log(response.data?.users?.data[0]?.type);
-            //reject login  when user is not admin
-            setTimeout(() => {
-                window.location.href = route("admin");
-            }, 1000);
-            // if (response.data?.users?.data[0]?.type == "admin") {
-            //     // Redirect to the admin URL
-            //     window.location.href = route("admin"); // Replace with your actual admin route
-            // } else {
-            //     alert("Only Admin can login here");
-            // }
-        } catch (error) {
-            // Access error details if available
-            const errorData = error.response?.data;
-            const errorMessage = errorData?.message || "An error occurred";
-
-            // Handle specific error cases
-            if (error.response?.status === 422) {
-                // Validation error
-                const validationErrors = errorData.errors;
-                setModalMessage(validationErrors.email);
-                setTimeout(() => {
-                    setModalMessage("");
-                }, 2000);
-            } else {
-                // Other types of errors
-                console.error(errorMessage);
-                setModalMessage(errorMessage);
-                setTimeout(() => {
-                    setModalMessage("");
-                }, 2000);
-            }
-        }
+        post(route("login"));
     };
 
     return (
@@ -91,7 +45,7 @@ export default function Login({ status, canResetPassword }) {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         isFocused={true}
                         onChange={(e) => setData("email", e.target.value)}
                     />
@@ -145,14 +99,6 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
-
-            {modalMessage && (
-                <div
-                    className={`fixed bottom-0 right-0 p-4 ${"bg-red-500"} text-white`}
-                >
-                    {modalMessage}
-                </div>
-            )}
         </GuestLayout>
     );
 }

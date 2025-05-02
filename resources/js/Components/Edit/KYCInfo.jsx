@@ -23,6 +23,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
         });
     };
 
+    console.log(formData);
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -39,7 +40,7 @@ export default function KYCInfo({ kyc_info, apiToken }) {
 
                 setModalMessage("kyc_info was updated successfully");
                 // Redirect to kyc_info details page after successful update
-                Inertia.visit(`/admin/${kyc_info.user_id}`);
+                Inertia.visit(`/dashboard/${kyc_info.user_id}`);
 
                 setTimeout(() => {
                     setModalMessage("");
@@ -84,26 +85,28 @@ export default function KYCInfo({ kyc_info, apiToken }) {
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="verified"
-                                    className="block text-sm font-medium text-gray-600"
+                                    htmlFor={`verified`}
+                                    className="block text-sm font-medium text-gray-600 mb-1"
                                 >
-                                    Verified
+                                    Verified :
                                 </label>
-                                <input
-                                    style={{ border: "transparent" }}
-                                    type="text"
-                                    id="verified"
-                                    name="verified"
-                                    disabled
-                                    defaultValue={
-                                        formData.verified == 1
-                                            ? "true"
-                                            : "false"
-                                    }
-                                    onChange={handleChange}
-                                    className="mt-1 p-2 w-full border rounded-md"
-                                    required
-                                />
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        id="verified"
+                                        name="verified"
+                                        readOnly
+                                        checked={
+                                            formData.verified == 1
+                                                ? true
+                                                : false
+                                        }
+                                        onChange={handleChange}
+                                        className="sr-only peer"
+                                    />
+                                    <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-blue-600 transition-all duration-300"></div>
+                                    <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-full"></div>
+                                </label>
                             </div>
 
                             <div className="mb-4">

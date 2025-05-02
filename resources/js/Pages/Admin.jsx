@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import ListUsers from "@/Components/ListUsers";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import Pagination from "@/Components/Pagination";
-export default function Dashboard({ auth, users }) {
+export default function Admin({ auth, users }) {
     return (
         <div>
             <AuthenticatedLayout
@@ -14,7 +14,7 @@ export default function Dashboard({ auth, users }) {
                     </h2>
                 }
             >
-                <Head title="Dashboard" />
+                <Head title="Admin Dashboard" />
                 <div className="flex flex-wrap">
                     <button className=" m-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
                         <InertiaLink href={`/admin/plan/edit`} method="get">
@@ -31,17 +31,41 @@ export default function Dashboard({ auth, users }) {
                         </InertiaLink>
                     </button>
 
+                    {/* <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
+                        <InertiaLink
+                            href={`/admin/wallet/edit`}
+                            method="get"
+                        >
+                            Edit Wallet Option
+                        </InertiaLink>
+                    </button> */}
+
                     <button className=" m-4  px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
-                        <InertiaLink href={`/admin/wallet/edit`} method="get">
+                        <InertiaLink
+                            href={`/admin/deposit_type/edit`}
+                            method="get"
+                        >
                             Edit Deposit Option
                         </InertiaLink>
                     </button>
 
-                    <button className=" m-4  px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring focus:border-blue-300">
-                        <InertiaLink href={`/admin/trader/edit`} method="get">
-                            Edit Traders
+                    <button className=" m-4  px-4 py-2 bg-green-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring focus:border-blue-300">
+                        <InertiaLink
+                            href={`/admin/account_type/edit`}
+                            method="get"
+                        >
+                            Edit Account Type
                         </InertiaLink>
                     </button>
+
+                    {/* <button className=" m-4  px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring focus:border-blue-300">
+                        <InertiaLink
+                            href={`/admin/trader/edit`}
+                            method="get"
+                        >
+                            Edit Traders
+                        </InertiaLink>
+                    </button> */}
                 </div>
 
                 <ListUsers users={users.data} />

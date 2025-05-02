@@ -7,6 +7,7 @@ use App\Http\Requests\LoginUserRequest;
 use App\Models\Account;
 use App\Models\KYCInfo;
 use App\Notifications\VerifyTokenMail;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -73,27 +74,38 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
+
         if (Auth::attempt($request->validated()))
         {
-            // Authentication passed...
+
             $user = Auth::user()->load(['account.accountType', 'kyc_info']);
-            // Load both 'account' and 'kyc_infos' relationships
 
+            // If it's an API request (expects JSON)
+            if ($request->wantsJson())
+            {
+                return response()->json([
+                    'message' => 'Login successful',
+                    'user' => $user,
+                    'access_token' => $this->createNewToken(
+                        $user->createToken('API token of ' . $user->name)->plainTextToken
+                    )
+                ]);
+            }
+        }
 
-            return response()->json([
-                'message' => 'Login successful',
-                'user' => $user,
-                'access_token' => $this->createNewToken($user->createToken('API token of ' . $user->name)->plainTextToken)
-            ]);
-        } else
+        // Handle failed login
+        if ($request->wantsJson())
         {
-            // dd();
-            // Authentication failed...
             return response()->json([
                 'message' => 'Invalid credentials',
-            ], 401); // Unauthorized
+            ], 401);
         }
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
+        ]);
     }
+
 
     public function logout(Request $request)
     {

@@ -26,8 +26,8 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route("admin")}
-                                    active={route().current("admin")}
+                                    href={route("admin.index")}
+                                    active={route().current("admin.index")}
                                 >
                                     Dashboard
                                 </NavLink>
@@ -130,8 +130,8 @@ export default function Authenticated({ user, header, children }) {
                 >
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
-                            href={route("admin")}
-                            active={route().current("admin")}
+                            href={route("admin.index")}
+                            active={route().current("admin.index")}
                         >
                             Dashboard
                         </ResponsiveNavLink>
